@@ -34,6 +34,7 @@ import { LegalPage } from './LegalPage';
 import { NoticePage } from './NoticePage';
 import { OpenAccountPage } from './OpenAccount';
 import { InvestorPage } from './Investor';
+import { HomePage } from './Home';
 import { checkRole } from '../../access/rbac'
 
 export const Pages: CollectionConfig<'pages'> = {
@@ -147,6 +148,7 @@ export const Pages: CollectionConfig<'pages'> = {
         NoticePage,
         OpenAccountPage,
         InvestorPage,
+        HomePage,
         {
           name: 'meta',
           label: 'SEO',

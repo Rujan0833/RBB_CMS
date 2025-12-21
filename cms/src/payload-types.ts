@@ -602,6 +602,37 @@ export interface Page {
   investorCommitmentTitle?: string | null;
   investorCommitmentText1?: string | null;
   investorCommitmentText2?: string | null;
+  homeHeroBadge?: string | null;
+  homeHeroTitle: string;
+  homeHeroDescription: string;
+  homeHeroFeatures?:
+    | {
+        icon?: ('CheckCircle2' | 'Shield') | null;
+        title: string;
+        subtitle?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  homeTrustIndicators?:
+    | {
+        icon?: ('Shield' | 'TrendingUp' | 'Users' | 'Award') | null;
+        title: string;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  homeServicesTitle?: string | null;
+  homeServicesDescription?: string | null;
+  homeServicePreviews?:
+    | {
+        title: string;
+        description: string;
+        id?: string | null;
+      }[]
+    | null;
+  homeCtaTitle?: string | null;
+  homeCtaDescription?: string | null;
+  homeCtaButtonText?: string | null;
   meta?: {
     title?: string | null;
     /**
@@ -1867,6 +1898,37 @@ export interface PagesSelect<T extends boolean = true> {
   investorCommitmentTitle?: T;
   investorCommitmentText1?: T;
   investorCommitmentText2?: T;
+  homeHeroBadge?: T;
+  homeHeroTitle?: T;
+  homeHeroDescription?: T;
+  homeHeroFeatures?:
+    | T
+    | {
+        icon?: T;
+        title?: T;
+        subtitle?: T;
+        id?: T;
+      };
+  homeTrustIndicators?:
+    | T
+    | {
+        icon?: T;
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  homeServicesTitle?: T;
+  homeServicesDescription?: T;
+  homeServicePreviews?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  homeCtaTitle?: T;
+  homeCtaDescription?: T;
+  homeCtaButtonText?: T;
   meta?:
     | T
     | {

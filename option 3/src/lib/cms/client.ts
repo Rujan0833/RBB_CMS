@@ -1,4 +1,4 @@
-import { AboutPage, ServicesPageCmsResponse, CmsResponse, OpenAccountPage, InvestorPage, ContactPage } from './types';
+import { AboutPage, ServicesPageCmsResponse, CmsResponse, OpenAccountPage, InvestorPage, ContactPage, HomePage } from './types';
 
 export class CmsClient {
     private baseUrl: string;
@@ -135,6 +135,43 @@ export class CmsClient {
             };
         } catch (error) {
             console.error('Error fetching Investor page:', error);
+            return null;
+        }
+    }
+
+    public async getHomePage(): Promise<HomePage | null> {
+        try {
+            const page = await this.fetchCollection<any>('pages', '?where[slug][equals]=home&depth=2')
+                || await this.fetchCollection<any>('pages', '?where[template][equals]=home&depth=2');
+
+            if (!page) return null;
+
+            return {
+                heroBadge: page.homeHeroBadge,
+                heroTitle: page.homeHeroTitle,
+                heroDescription: page.homeHeroDescription,
+                heroFeatures: page.homeHeroFeatures?.map((f: any) => ({
+                    icon: f.icon,
+                    title: f.title,
+                    subtitle: f.subtitle
+                })) || [],
+                trustIndicators: page.homeTrustIndicators?.map((t: any) => ({
+                    icon: t.icon,
+                    title: t.title,
+                    description: t.description
+                })) || [],
+                servicesTitle: page.homeServicesTitle,
+                servicesDescription: page.homeServicesDescription,
+                servicePreviews: page.homeServicePreviews?.map((s: any) => ({
+                    title: s.title,
+                    description: s.description
+                })) || [],
+                ctaTitle: page.homeCtaTitle,
+                ctaDescription: page.homeCtaDescription,
+                ctaButtonText: page.homeCtaButtonText
+            };
+        } catch (error) {
+            console.error('Error fetching Home page:', error);
             return null;
         }
     }
