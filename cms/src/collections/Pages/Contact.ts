@@ -4,6 +4,7 @@ export const ContactPage: Tab = {
     label: 'Contact Page',
     admin: {
         condition: (data) => data?.template === 'contact',
+        group: 'Pages',
     },
     fields: [
         {
