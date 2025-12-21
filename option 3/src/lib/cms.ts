@@ -21,3 +21,7 @@ export const fetchOpenAccountPage = async () => {
 export const fetchInvestorPage = async () => {
     return cmsClient.getInvestorPage();
 };
+
+export const fetchContactPage = async () => {
+    return cmsClient.getContactPage();
+};

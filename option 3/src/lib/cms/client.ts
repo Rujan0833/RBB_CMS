@@ -1,4 +1,4 @@
-import { AboutPage, ServicesPageCmsResponse, CmsResponse, OpenAccountPage, InvestorPage } from './types';
+import { AboutPage, ServicesPageCmsResponse, CmsResponse, OpenAccountPage, InvestorPage, ContactPage } from './types';
 
 export class CmsClient {
     private baseUrl: string;
@@ -135,6 +135,35 @@ export class CmsClient {
             };
         } catch (error) {
             console.error('Error fetching Investor page:', error);
+            return null;
+        }
+    }
+
+    public async getContactPage(): Promise<ContactPage | null> {
+        try {
+            const page = await this.fetchCollection<any>('pages', '?where[slug][equals]=contact&depth=2')
+                || await this.fetchCollection<any>('pages', '?where[template][equals]=contact&depth=2');
+
+            if (!page) return null;
+
+            return {
+                heroTitle: page.contactHeroTitle,
+                heroDescription: page.contactHeroDescription,
+                formTitle: page.contactFormTitle,
+                contactInfoTitle: page.contactInfoTitle,
+                contactMethods: page.contactMethods?.map((m: any) => ({
+                    icon: m.icon,
+                    title: m.title,
+                    content: m.content
+                })) || [],
+                visitOfficeTitle: page.visitOfficeTitle,
+                visitOfficeDescription: page.visitOfficeDescription,
+                visitOfficeMapUrl: page.visitOfficeMapUrl,
+                responseTimeTitle: page.responseTimeTitle,
+                responseTimeDescription: page.responseTimeDescription
+            };
+        } catch (error) {
+            console.error('Error fetching Contact page:', error);
             return null;
         }
     }

@@ -432,29 +432,23 @@ export interface Page {
         id?: string | null;
       }[]
     | null;
-  contactHeaderTitle?: string | null;
-  contactHeaderSubtitle?: string | null;
+  contactHeroTitle: string;
+  contactHeroDescription: string;
+  contactFormTitle?: string | null;
+  contactInfoTitle?: string | null;
   contactMethods?:
     | {
-        icon?: ('Phone' | 'Mail' | 'MessageCircle' | 'MapPin' | 'Clock') | null;
+        icon?: ('MapPin' | 'Phone' | 'Mail' | 'Clock') | null;
         title: string;
-        description?: string | null;
-        contactInfo: string;
-        availability?: string | null;
+        content: string;
         id?: string | null;
       }[]
     | null;
-  contactForm: number | Form;
-  formTitle?: string | null;
-  businessHoursTitle?: string | null;
-  businessHours?:
-    | {
-        day: string;
-        time: string;
-        id?: string | null;
-      }[]
-    | null;
-  businessHoursNote?: string | null;
+  visitOfficeTitle?: string | null;
+  visitOfficeDescription?: string | null;
+  visitOfficeMapUrl?: string | null;
+  responseTimeTitle?: string | null;
+  responseTimeDescription?: string | null;
   legalHeaderTitle?: string | null;
   legalHeaderSubtitle?: string | null;
   regulatoryInfo?:
@@ -1713,29 +1707,23 @@ export interface PagesSelect<T extends boolean = true> {
             };
         id?: T;
       };
-  contactHeaderTitle?: T;
-  contactHeaderSubtitle?: T;
+  contactHeroTitle?: T;
+  contactHeroDescription?: T;
+  contactFormTitle?: T;
+  contactInfoTitle?: T;
   contactMethods?:
     | T
     | {
         icon?: T;
         title?: T;
-        description?: T;
-        contactInfo?: T;
-        availability?: T;
+        content?: T;
         id?: T;
       };
-  contactForm?: T;
-  formTitle?: T;
-  businessHoursTitle?: T;
-  businessHours?:
-    | T
-    | {
-        day?: T;
-        time?: T;
-        id?: T;
-      };
-  businessHoursNote?: T;
+  visitOfficeTitle?: T;
+  visitOfficeDescription?: T;
+  visitOfficeMapUrl?: T;
+  responseTimeTitle?: T;
+  responseTimeDescription?: T;
   legalHeaderTitle?: T;
   legalHeaderSubtitle?: T;
   regulatoryInfo?:

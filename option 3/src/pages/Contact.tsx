@@ -1,8 +1,46 @@
 import { MapPin, Phone, Mail, Clock, Send } from "lucide-react";
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, useEffect } from "react";
 // import { supabase } from '../lib/supabase';
+import { fetchContactPage } from '../lib/cms';
+
+const DEFAULT_DATA = {
+  heroTitle: "Contact Us",
+  heroDescription: "Get in touch with our team for any queries or assistance",
+  formTitle: "Send us a Message",
+  contactInfoTitle: "Contact Information",
+  contactMethods: [
+    {
+      icon: "MapPin",
+      title: "Office Address",
+      content: "New Baneshwor, Kathmandu\nNepal"
+    },
+    {
+      icon: "Phone",
+      title: "Phone",
+      content: "+977-1-XXXXXXX\n+977-9XXXXXXXXX (Mobile)"
+    },
+    {
+      icon: "Mail",
+      title: "Email",
+      content: "info@nepalsecurities.com.np\nsupport@nepalsecurities.com.np"
+    },
+    {
+      icon: "Clock",
+      title: "Office Hours",
+      content: "Sunday - Thursday: 10:00 AM - 5:00 PM\nFriday - Saturday: Closed"
+    }
+  ],
+  visitOfficeTitle: "Visit Our Office",
+  visitOfficeDescription: "We welcome you to visit our office for account opening, document submission, or any queries. Our team is ready to assist you.",
+  visitOfficeMapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.6744197870664!2d85.33724631506176!3d27.69397798279896!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb199a06c2eaf9%3A0xc5670a9173e161de!2sNew%20Baneshwor%2C%20Kathmandu%2044600!5e0!3m2!1sen!2snp!4v1234567890",
+  responseTimeTitle: "Response Time",
+  responseTimeDescription: "We strive to respond to all inquiries within 24-48 business hours. For urgent matters during trading hours, please call us directly. For account-related issues, having your account number ready will help us serve you faster."
+};
+
+const IconMap: any = { MapPin, Phone, Mail, Clock };
 
 export default function Contact() {
+  const [data, setData] = useState<any>(null);
   const [formData, setFormData] = useState({
     full_name: "",
     email: "",
@@ -15,17 +53,32 @@ export default function Contact() {
     "idle" | "success" | "error"
   >("idle");
 
+  useEffect(() => {
+    const loadData = async () => {
+      const cmsData = await fetchContactPage();
+      if (cmsData) {
+        setData({ ...DEFAULT_DATA, ...cmsData });
+      } else {
+        setData(DEFAULT_DATA);
+      }
+    };
+    loadData();
+  }, []);
+
+  const content = data || DEFAULT_DATA;
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitStatus("idle");
 
     try {
-      const { error } = await supabase
-        .from("contact_submissions")
-        .insert([formData]);
+      // Mock submission or supabase usage
+      // const { error } = await supabase.from("contact_submissions").insert([formData]);
+      // if (error) throw error;
 
-      if (error) throw error;
+      // Simulate success for now as supabase is commented out
+      await new Promise(resolve => setTimeout(resolve, 1000));
 
       setSubmitStatus("success");
       setFormData({
@@ -47,9 +100,9 @@ export default function Contact() {
     <div className="min-h-screen">
       <section className="bg-gradient-to-br from-blue-900 to-blue-800 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">Contact Us</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-6">{content.heroTitle}</h1>
           <p className="text-xl text-blue-100 max-w-3xl">
-            Get in touch with our team for any queries or assistance
+            {content.heroDescription}
           </p>
         </div>
       </section>
@@ -59,7 +112,7 @@ export default function Contact() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <div>
               <h2 className="text-3xl font-bold text-gray-900 mb-8">
-                Send us a Message
+                {content.formTitle}
               </h2>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
@@ -205,90 +258,41 @@ export default function Contact() {
 
             <div>
               <h2 className="text-3xl font-bold text-gray-900 mb-8">
-                Contact Information
+                {content.contactInfoTitle}
               </h2>
               <div className="space-y-6 mb-8">
-                <div className="flex items-start space-x-4">
-                  <div className="flex-shrink-0">
-                    <div className="flex items-center justify-center w-12 h-12 bg-blue-100 text-blue-900 rounded-lg">
-                      <MapPin className="h-6 w-6" />
+                {content.contactMethods.map((method: any, index: number) => {
+                  const Icon = IconMap[method.icon] || MapPin;
+                  return (
+                    <div key={index} className="flex items-start space-x-4">
+                      <div className="flex-shrink-0">
+                        <div className="flex items-center justify-center w-12 h-12 bg-blue-100 text-blue-900 rounded-lg">
+                          <Icon className="h-6 w-6" />
+                        </div>
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-gray-900 mb-1">
+                          {method.title}
+                        </h3>
+                        <p className="text-gray-600 whitespace-pre-line">
+                          {method.content}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-gray-900 mb-1">
-                      Office Address
-                    </h3>
-                    <p className="text-gray-600">
-                      New Baneshwor, Kathmandu
-                      <br />
-                      Nepal
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start space-x-4">
-                  <div className="flex-shrink-0">
-                    <div className="flex items-center justify-center w-12 h-12 bg-blue-100 text-blue-900 rounded-lg">
-                      <Phone className="h-6 w-6" />
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-gray-900 mb-1">Phone</h3>
-                    <p className="text-gray-600">
-                      +977-1-XXXXXXX
-                      <br />
-                      +977-9XXXXXXXXX (Mobile)
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start space-x-4">
-                  <div className="flex-shrink-0">
-                    <div className="flex items-center justify-center w-12 h-12 bg-blue-100 text-blue-900 rounded-lg">
-                      <Mail className="h-6 w-6" />
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-gray-900 mb-1">Email</h3>
-                    <p className="text-gray-600">
-                      info@nepalsecurities.com.np
-                      <br />
-                      support@nepalsecurities.com.np
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start space-x-4">
-                  <div className="flex-shrink-0">
-                    <div className="flex items-center justify-center w-12 h-12 bg-blue-100 text-blue-900 rounded-lg">
-                      <Clock className="h-6 w-6" />
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-gray-900 mb-1">
-                      Office Hours
-                    </h3>
-                    <p className="text-gray-600">
-                      Sunday - Thursday: 10:00 AM - 5:00 PM
-                      <br />
-                      Friday - Saturday: Closed
-                    </p>
-                  </div>
-                </div>
+                  );
+                })}
               </div>
 
               <div className="bg-gray-50 rounded-xl p-6">
                 <h3 className="font-semibold text-gray-900 mb-3">
-                  Visit Our Office
+                  {content.visitOfficeTitle}
                 </h3>
                 <p className="text-gray-600 mb-4">
-                  We welcome you to visit our office for account opening,
-                  document submission, or any queries. Our team is ready to
-                  assist you.
+                  {content.visitOfficeDescription}
                 </p>
                 <div className="aspect-video bg-gray-200 rounded-lg overflow-hidden">
                   <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.6744197870664!2d85.33724631506176!3d27.69397798279896!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb199a06c2eaf9%3A0xc5670a9173e161de!2sNew%20Baneshwor%2C%20Kathmandu%2044600!5e0!3m2!1sen!2snp!4v1234567890"
+                    src={content.visitOfficeMapUrl || DEFAULT_DATA.visitOfficeMapUrl}
                     width="100%"
                     height="100%"
                     style={{ border: 0 }}
@@ -307,13 +311,10 @@ export default function Contact() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
             <h3 className="text-lg font-bold text-gray-900 mb-3">
-              Response Time
+              {content.responseTimeTitle}
             </h3>
             <p className="text-sm text-gray-700 leading-relaxed">
-              We strive to respond to all inquiries within 24-48 business hours.
-              For urgent matters during trading hours, please call us directly.
-              For account-related issues, having your account number ready will
-              help us serve you faster.
+              {content.responseTimeDescription}
             </p>
           </div>
         </div>

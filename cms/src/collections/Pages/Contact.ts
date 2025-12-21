@@ -10,124 +10,111 @@ export const ContactPage: Tab = {
             type: 'tabs',
             tabs: [
                 {
-                    label: 'Header',
+                    label: 'Hero',
                     fields: [
                         {
-                            name: 'contactHeaderTitle',
+                            name: 'contactHeroTitle',
                             type: 'text',
-                            defaultValue: 'Get In Touch',
-                            label: 'Header Title',
+                            defaultValue: 'Contact Us',
+                            required: true,
                         },
                         {
-                            name: 'contactHeaderSubtitle',
+                            name: 'contactHeroDescription',
                             type: 'textarea',
-                            defaultValue: "Have questions about our financial services? We're here to help you 24/7 with personalized support.",
-                            label: 'Header Subtitle',
+                            defaultValue: 'Get in touch with our team for any queries or assistance',
+                            required: true,
                         },
                     ],
                 },
                 {
-                    label: 'Contact Methods',
+                    label: 'Form Section',
                     fields: [
+                        {
+                            name: 'contactFormTitle',
+                            type: 'text',
+                            defaultValue: 'Send us a Message',
+                        },
+                    ]
+                },
+                {
+                    label: 'Contact Info',
+                    fields: [
+                        {
+                            name: 'contactInfoTitle',
+                            type: 'text',
+                            defaultValue: 'Contact Information',
+                        },
                         {
                             name: 'contactMethods',
                             type: 'array',
-                            label: 'Methods',
-                            minRows: 1,
-                            maxRows: 8,
+                            label: 'Contact Details',
                             fields: [
                                 {
                                     name: 'icon',
                                     type: 'select',
                                     options: [
+                                        { label: 'Map Pin', value: 'MapPin' },
                                         { label: 'Phone', value: 'Phone' },
                                         { label: 'Mail', value: 'Mail' },
-                                        { label: 'Message/Chat', value: 'MessageCircle' },
-                                        { label: 'Map Pin/Location', value: 'MapPin' },
                                         { label: 'Clock', value: 'Clock' },
                                     ],
-                                    defaultValue: 'Phone',
+                                    defaultValue: 'MapPin',
                                 },
                                 {
                                     name: 'title',
                                     type: 'text',
                                     required: true,
-                                    label: 'Title',
                                 },
                                 {
-                                    name: 'description',
-                                    type: 'text',
-                                    label: 'Description',
-                                },
-                                {
-                                    name: 'contactInfo',
-                                    type: 'text',
+                                    name: 'content', // Rich Text or Array of strings? usage in frontend shows lines. 
+                                    // Let's use textarea first, maybe array if multiple lines are distinct.
+                                    // Looking at frontend: <br /> breaks used.
+                                    // Textarea is safest for simple breaks or richText.
+                                    // Let's use richText for flexibility or just textarea line by line.
+                                    // Frontend uses: 
+                                    // New Baneshwor, Kathmandu
+                                    // <br />
+                                    // Nepal
+                                    // simple textarea is fine, we can render newlines.
+                                    type: 'textarea',
                                     required: true,
-                                    label: 'Contact Info',
-                                },
-                                {
-                                    name: 'availability',
-                                    type: 'text',
-                                    label: 'Availability',
                                 },
                             ],
                         },
                     ],
                 },
                 {
-                    label: 'Form Settings',
+                    label: 'Office Visit',
                     fields: [
                         {
-                            name: 'contactForm',
-                            type: 'relationship',
-                            relationTo: 'forms',
-                            label: 'Select Contact Form',
-                            required: true,
+                            name: 'visitOfficeTitle',
+                            type: 'text',
+                            defaultValue: 'Visit Our Office',
                         },
                         {
-                            name: 'formTitle',
+                            name: 'visitOfficeDescription',
+                            type: 'textarea',
+                            defaultValue: 'We welcome you to visit our office for account opening, document submission, or any queries. Our team is ready to assist you.',
+                        },
+                        {
+                            name: 'visitOfficeMapUrl',
                             type: 'text',
-                            defaultValue: 'Send Us a Message',
+                            // defaultValue: 'https://www.google.com/maps/embed?...', // Optional default
                         },
                     ],
                 },
                 {
-                    label: 'Business Hours',
+                    label: 'Response Time',
                     fields: [
                         {
-                            name: 'businessHoursTitle',
+                            name: 'responseTimeTitle',
                             type: 'text',
-                            defaultValue: 'Business Hours',
-                            label: 'Section Title',
+                            defaultValue: 'Response Time',
                         },
                         {
-                            name: 'businessHours',
-                            type: 'array',
-                            label: 'Schedule',
-                            minRows: 1,
-                            maxRows: 7,
-                            fields: [
-                                {
-                                    name: 'day',
-                                    type: 'text',
-                                    required: true,
-                                    label: 'Day(s)',
-                                    defaultValue: 'Monday - Friday',
-                                },
-                                {
-                                    name: 'time',
-                                    type: 'text',
-                                    required: true,
-                                    label: 'Time',
-                                    defaultValue: '9:00 AM to 6:00 PM',
-                                },
-                            ],
-                        },
-                        {
-                            name: 'businessHoursNote',
-                            type: 'text',
-                            label: 'Assessment/Note',
-                            defaultValue: '24/7 Customer Support Available',
+                            name: 'responseTimeDescription',
+                            type: 'textarea',
+                            defaultValue: 'We strive to respond to all inquiries within 24-48 business hours. For urgent matters during trading hours, please call us directly.',
                         },
                     ],
                 },
