@@ -136,7 +136,7 @@ export default function Education() {
             <div className="space-y-3 text-gray-700">
               {/* CMS rich text renderer would go here. For now, just render text or simple paragraphs */}
               {/* {JSON.stringify(topic.content)} */}
-              <div dangerouslySetInnerHTML={{ __html: typeof topic.content === 'string' ? topic.content : 'Content available in CMS' }} />
+              <div dangerouslySetInnerHTML={{ __html: topic.content }} />
             </div>
           </div>
         );

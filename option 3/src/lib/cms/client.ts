@@ -28,6 +28,42 @@ export class CmsClient {
         }
     }
 
+    /**
+     * Minimal Lexical JSON to HTML serializer
+     * This handles basic nesting, text formatting (bold, italic), and lists.
+     */
+    private serializeLexicalRichText(node: any): string {
+        if (!node) return '';
+
+        // If it's a text node
+        if (node.type === 'text') {
+            let text = node.text || '';
+            if (node.format & 1) text = `<strong>${text}</strong>`; // Bold
+            if (node.format & 2) text = `<em>${text}</em>`;   // Italic
+            return text;
+        }
+
+        // If it's a container node
+        const childrenHTML = node.children?.map((child: any) => this.serializeLexicalRichText(child)).join('') || '';
+
+        switch (node.type) {
+            case 'root':
+                return childrenHTML;
+            case 'paragraph':
+                return `<p>${childrenHTML}</p>`;
+            case 'list':
+                const tag = node.tag === 'ol' ? 'ol' : 'ul';
+                return `<${tag}>${childrenHTML}</${tag}>`;
+            case 'listitem':
+                return `<li>${childrenHTML}</li>`;
+            case 'heading':
+                const hTag = node.tag || 'h1';
+                return `<${hTag}>${childrenHTML}</${hTag}>`;
+            default:
+                return childrenHTML;
+        }
+    }
+
     public async getServicesPage(): Promise<ServicesPageCmsResponse | null> {
         const page = await this.fetchCollection<any>('pages', '?where[slug][equals]=services&depth=2');
 
@@ -115,7 +151,7 @@ export class CmsClient {
                     title: t.title,
                     icon: t.icon,
                     theme: t.theme,
-                    content: t.content
+                    content: t.content?.root ? this.serializeLexicalRichText(t.content.root) : (typeof t.content === 'string' ? t.content : '')
                 })) || [],
                 riskTitle: page.riskTitle,
                 riskItems: page.riskItems?.map((r: any) => ({
