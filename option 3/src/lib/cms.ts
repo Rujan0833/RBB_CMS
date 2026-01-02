@@ -29,3 +29,6 @@ export const fetchContactPage = async () => {
 export const fetchHomePage = async () => {
     return cmsClient.getHomePage();
 };
+
+
+

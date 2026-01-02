@@ -114,10 +114,14 @@ export interface Config {
   globals: {
     header: Header;
     footer: Footer;
+    'site-settings': SiteSetting;
+    setting: Setting;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
+    'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
+    setting: SettingSelect<false> | SettingSelect<true>;
   };
   locale: null;
   user: User & {
@@ -2524,26 +2528,88 @@ export interface Header {
  */
 export interface Footer {
   id: number;
-  navItems?:
+  brand: {
+    companyName: string;
+    tagline?: string | null;
+    description?: string | null;
+  };
+  contact?: {
+    phone?: string | null;
+    email?: string | null;
+    address?: string | null;
+  };
+  quickLinks?:
     | {
-        link: {
-          type?: ('reference' | 'custom') | null;
-          newTab?: boolean | null;
-          reference?:
-            | ({
-                relationTo: 'pages';
-                value: number | Page;
-              } | null)
-            | ({
-                relationTo: 'posts';
-                value: number | Post;
-              } | null);
-          url?: string | null;
-          label: string;
-        };
+        label: string;
+        url: string;
         id?: string | null;
       }[]
     | null;
+  legalLinks?:
+    | {
+        label: string;
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
+  riskDisclaimer?: {
+    title?: string | null;
+    content?: string | null;
+  };
+  bottom?: {
+    copyright?: string | null;
+    licenseInfo?: string | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-settings".
+ */
+export interface SiteSetting {
+  id: number;
+  branding?: {
+    siteName?: string | null;
+    logo?: (number | null) | Media;
+  };
+  office: {
+    address: string;
+    phones?:
+      | {
+          number: string;
+          type?: ('landline' | 'mobile') | null;
+          id?: string | null;
+        }[]
+      | null;
+    emails?:
+      | {
+          email: string;
+          type?: ('general' | 'support') | null;
+          id?: string | null;
+        }[]
+      | null;
+    officeHours?:
+      | {
+          day: string;
+          time: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "setting".
+ */
+export interface Setting {
+  id: number;
+  lightModeIcon?: (number | null) | Media;
+  lightModeLogo?: (number | null) | Media;
+  darkModeIcon?: (number | null) | Media;
+  darkModeLogo?: (number | null) | Media;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -2575,20 +2641,100 @@ export interface HeaderSelect<T extends boolean = true> {
  * via the `definition` "footer_select".
  */
 export interface FooterSelect<T extends boolean = true> {
-  navItems?:
+  brand?:
     | T
     | {
-        link?:
-          | T
-          | {
-              type?: T;
-              newTab?: T;
-              reference?: T;
-              url?: T;
-              label?: T;
-            };
+        companyName?: T;
+        tagline?: T;
+        description?: T;
+      };
+  contact?:
+    | T
+    | {
+        phone?: T;
+        email?: T;
+        address?: T;
+      };
+  quickLinks?:
+    | T
+    | {
+        label?: T;
+        url?: T;
         id?: T;
       };
+  legalLinks?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+        id?: T;
+      };
+  riskDisclaimer?:
+    | T
+    | {
+        title?: T;
+        content?: T;
+      };
+  bottom?:
+    | T
+    | {
+        copyright?: T;
+        licenseInfo?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-settings_select".
+ */
+export interface SiteSettingsSelect<T extends boolean = true> {
+  branding?:
+    | T
+    | {
+        siteName?: T;
+        logo?: T;
+      };
+  office?:
+    | T
+    | {
+        address?: T;
+        phones?:
+          | T
+          | {
+              number?: T;
+              type?: T;
+              id?: T;
+            };
+        emails?:
+          | T
+          | {
+              email?: T;
+              type?: T;
+              id?: T;
+            };
+        officeHours?:
+          | T
+          | {
+              day?: T;
+              time?: T;
+              id?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "setting_select".
+ */
+export interface SettingSelect<T extends boolean = true> {
+  lightModeIcon?: T;
+  lightModeLogo?: T;
+  darkModeIcon?: T;
+  darkModeLogo?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
