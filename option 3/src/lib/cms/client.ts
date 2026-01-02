@@ -233,7 +233,10 @@ export class CmsClient {
                 visitOfficeDescription: page.visitOfficeDescription,
                 visitOfficeMapUrl: page.visitOfficeMapUrl,
                 responseTimeTitle: page.responseTimeTitle,
-                responseTimeDescription: page.responseTimeDescription
+                responseTimeDescription: page.responseTimeDescription,
+                contactForm: page.contactForm
+                    ? { id: (typeof page.contactForm === 'object' ? page.contactForm.id : page.contactForm).toString() }
+                    : undefined
             };
         } catch (error) {
             console.error('Error fetching Contact page:', error);
@@ -281,5 +284,43 @@ export class CmsClient {
             infoTitle: page.infoTitle,
             infoItems: page.infoItems?.map((i: any) => ({ text: i.text })) || []
         };
+    }
+
+    public async getForm(id: string): Promise<any> {
+        try {
+            const res = await fetch(`${this.baseUrl}/api/forms/${id}`);
+            if (!res.ok) throw new Error('Failed to fetch form');
+            return await res.json();
+        } catch (error) {
+            console.error('Error fetching form:', error);
+            return null;
+        }
+    }
+
+    public async submitForm(formId: string, data: any): Promise<boolean> {
+        try {
+            console.log('Submitting form:', { formId, data });
+            const submissionData = Object.entries(data).map(([name, value]) => ({
+                field: name,
+                value,
+            }));
+
+            const res = await fetch(`${this.baseUrl}/api/form-submissions`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    form: formId,
+                    submissionData,
+                }),
+            });
+
+            console.log('Submission response:', res.status, res.statusText);
+            return res.ok;
+        } catch (error) {
+            console.error('Error submitting form:', error);
+            return false;
+        }
     }
 }

@@ -137,3 +137,88 @@ export interface OpenAccountPage {
     infoItems: InformationItem[];
 }
 
+export interface ContactMethod {
+    icon: string;
+    title: string;
+    content: string;
+}
+
+export interface ContactPage {
+    heroTitle: string;
+    heroDescription: string;
+    formTitle: string;
+    contactInfoTitle: string;
+    contactMethods: ContactMethod[];
+    visitOfficeTitle: string;
+    visitOfficeDescription: string;
+    visitOfficeMapUrl: string;
+    responseTimeTitle: string;
+    responseTimeDescription: string;
+    contactForm?: {
+        id: string;
+        [key: string]: any;
+    };
+}
+
+export interface HeroFeature {
+    icon: string;
+    title: string;
+    subtitle: string;
+}
+
+export interface TrustIndicator {
+    icon: string;
+    title: string;
+    description: string;
+}
+
+export interface ServicePreview {
+    title: string;
+    description: string;
+}
+
+export interface HomePage {
+    heroBadge: string;
+    heroTitle: string;
+    heroDescription: string;
+    heroFeatures: HeroFeature[];
+    trustIndicators: TrustIndicator[];
+    servicesTitle: string;
+    servicesDescription: string;
+    servicePreviews: ServicePreview[];
+    ctaTitle: string;
+    ctaDescription: string;
+    ctaButtonText: string;
+}
+
+export interface EducationTopic {
+    title: string;
+    icon: string;
+    theme: string;
+    content: string;
+}
+
+export interface RiskItem {
+    title: string;
+    text: string;
+}
+
+export interface InvestorFAQ {
+    question: string;
+    answer: string;
+}
+
+export interface InvestorPage {
+    heroTitle: string;
+    heroDescription: string;
+    educationTopics: EducationTopic[];
+    riskTitle: string;
+    riskItems: RiskItem[];
+    faqs: InvestorFAQ[];
+    practicesTitle: string;
+    practicesDos: string[];
+    practicesDonts: string[];
+    commitmentTitle: string;
+    commitmentText1: string;
+    commitmentText2: string;
+}

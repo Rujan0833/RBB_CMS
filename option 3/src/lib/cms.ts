@@ -29,3 +29,11 @@ export const fetchContactPage = async () => {
 export const fetchHomePage = async () => {
     return cmsClient.getHomePage();
 };
+
+export const getForm = async (id: string) => {
+    return cmsClient.getForm(id);
+};
+
+export const submitForm = async (formId: string, data: any) => {
+    return cmsClient.submitForm(formId, data);
+};

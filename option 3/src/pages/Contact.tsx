@@ -1,7 +1,8 @@
-import { MapPin, Phone, Mail, Clock, Send } from "lucide-react";
-import { useState, FormEvent, useEffect } from "react";
+import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { useState, useEffect } from "react";
 // import { supabase } from '../lib/supabase';
 import { fetchContactPage } from '../lib/cms';
+import { DynamicForm } from "../components/DynamicForm";
 
 const DEFAULT_DATA = {
   heroTitle: "Contact Us",
@@ -41,17 +42,6 @@ const IconMap: any = { MapPin, Phone, Mail, Clock };
 
 export default function Contact() {
   const [data, setData] = useState<any>(null);
-  const [formData, setFormData] = useState({
-    full_name: "",
-    email: "",
-    phone: "",
-    subject: "",
-    message: "",
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<
-    "idle" | "success" | "error"
-  >("idle");
 
   useEffect(() => {
     const loadData = async () => {
@@ -66,35 +56,6 @@ export default function Contact() {
   }, []);
 
   const content = data || DEFAULT_DATA;
-
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitStatus("idle");
-
-    try {
-      // Mock submission or supabase usage
-      // const { error } = await supabase.from("contact_submissions").insert([formData]);
-      // if (error) throw error;
-
-      // Simulate success for now as supabase is commented out
-      await new Promise(resolve => setTimeout(resolve, 1000));
-
-      setSubmitStatus("success");
-      setFormData({
-        full_name: "",
-        email: "",
-        phone: "",
-        subject: "",
-        message: "",
-      });
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      setSubmitStatus("error");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
 
   return (
     <div className="min-h-screen">
@@ -114,146 +75,13 @@ export default function Contact() {
               <h2 className="text-3xl font-bold text-gray-900 mb-8">
                 {content.formTitle}
               </h2>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label
-                    htmlFor="full_name"
-                    className="block text-sm font-medium text-gray-700 mb-2"
-                  >
-                    Full Name *
-                  </label>
-                  <input
-                    type="text"
-                    id="full_name"
-                    required
-                    value={formData.full_name}
-                    onChange={(e) =>
-                      setFormData({ ...formData, full_name: e.target.value })
-                    }
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-transparent outline-none transition-colors"
-                    placeholder="Enter your full name"
-                  />
+              {content.contactForm?.id ? (
+                <DynamicForm formId={content.contactForm.id} />
+              ) : (
+                <div className="bg-gray-50 border border-gray-200 rounded-lg p-8 text-center">
+                  <p className="text-gray-600 italic">Form is being configured. Please check back soon.</p>
                 </div>
-
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="block text-sm font-medium text-gray-700 mb-2"
-                  >
-                    Email Address *
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    required
-                    value={formData.email}
-                    onChange={(e) =>
-                      setFormData({ ...formData, email: e.target.value })
-                    }
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-transparent outline-none transition-colors"
-                    placeholder="your.email@example.com"
-                  />
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="phone"
-                    className="block text-sm font-medium text-gray-700 mb-2"
-                  >
-                    Phone Number *
-                  </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    required
-                    value={formData.phone}
-                    onChange={(e) =>
-                      setFormData({ ...formData, phone: e.target.value })
-                    }
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-transparent outline-none transition-colors"
-                    placeholder="+977-XXX-XXXXXXX"
-                  />
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="subject"
-                    className="block text-sm font-medium text-gray-700 mb-2"
-                  >
-                    Subject *
-                  </label>
-                  <select
-                    id="subject"
-                    required
-                    value={formData.subject}
-                    onChange={(e) =>
-                      setFormData({ ...formData, subject: e.target.value })
-                    }
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-transparent outline-none transition-colors"
-                  >
-                    <option value="">Select a subject</option>
-                    <option value="Account Opening">Account Opening</option>
-                    <option value="Trading Support">Trading Support</option>
-                    <option value="DEMAT Services">DEMAT Services</option>
-                    <option value="General Inquiry">General Inquiry</option>
-                    <option value="Complaint">Complaint</option>
-                    <option value="Other">Other</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="message"
-                    className="block text-sm font-medium text-gray-700 mb-2"
-                  >
-                    Message *
-                  </label>
-                  <textarea
-                    id="message"
-                    required
-                    rows={6}
-                    value={formData.message}
-                    onChange={(e) =>
-                      setFormData({ ...formData, message: e.target.value })
-                    }
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-transparent outline-none transition-colors resize-none"
-                    placeholder="Tell us how we can help you..."
-                  ></textarea>
-                </div>
-
-                {submitStatus === "success" && (
-                  <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-                    <p className="text-green-800 font-medium">
-                      Thank you for contacting us! We will get back to you
-                      shortly.
-                    </p>
-                  </div>
-                )}
-
-                {submitStatus === "error" && (
-                  <div className="bg-red-50 border border-red-200 rounded-lg p-4">
-                    <p className="text-red-800 font-medium">
-                      Something went wrong. Please try again or contact us
-                      directly.
-                    </p>
-                  </div>
-                )}
-
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full flex items-center justify-center px-8 py-4 bg-blue-900 text-white font-semibold rounded-lg hover:bg-blue-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {isSubmitting ? (
-                    "Sending..."
-                  ) : (
-                    <>
-                      <Send className="mr-2 h-5 w-5" />
-                      Send Message
-                    </>
-                  )}
-                </button>
-              </form>
+              )}
             </div>
 
             <div>
