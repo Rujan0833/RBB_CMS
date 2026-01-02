@@ -1,19 +1,40 @@
 import { Link, useLocation } from 'react-router-dom';
 import { TrendingUp, Menu, X } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { getHeader } from '../lib/cms';
+import { NavItem } from '../lib/cms/types';
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [navLinks, setNavLinks] = useState<{ path: string; label: string }[]>([]);
   const location = useLocation();
 
-  const navLinks = [
-    { path: '/', label: 'Home' },
-    { path: '/about', label: 'About Us' },
-    { path: '/services', label: 'Services' },
-    { path: '/open-account', label: 'Open Account' },
-    { path: '/education', label: 'Investor Education' },
-    { path: '/contact', label: 'Contact' },
-  ];
+  useEffect(() => {
+    const fetchNav = async () => {
+      const header = await getHeader();
+      if (header?.navItems) {
+        const mappedLinks = header.navItems.map((item: NavItem) => {
+          const { link } = item;
+          let path = '/';
+
+          if (link.type === 'reference' && link.reference?.value) {
+            const page = link.reference.value;
+            const slug = typeof page === 'object' ? page.slug : null;
+            path = slug === 'home' ? '/' : `/${slug}`;
+          } else if (link.type === 'custom' && link.url) {
+            path = link.url;
+          }
+
+          return {
+            path,
+            label: link.label
+          };
+        });
+        setNavLinks(mappedLinks);
+      }
+    };
+    fetchNav();
+  }, []);
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -34,11 +55,10 @@ export default function Navigation() {
               <Link
                 key={link.path}
                 to={link.path}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                  isActive(link.path)
+                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${isActive(link.path)
                     ? 'bg-blue-900 text-white'
                     : 'text-gray-700 hover:bg-blue-50 hover:text-blue-900'
-                }`}
+                  }`}
               >
                 {link.label}
               </Link>
@@ -65,11 +85,10 @@ export default function Navigation() {
                 key={link.path}
                 to={link.path}
                 onClick={() => setIsMenuOpen(false)}
-                className={`block px-3 py-2 rounded-md text-base font-medium ${
-                  isActive(link.path)
+                className={`block px-3 py-2 rounded-md text-base font-medium ${isActive(link.path)
                     ? 'bg-blue-900 text-white'
                     : 'text-gray-700 hover:bg-blue-50 hover:text-blue-900'
-                }`}
+                  }`}
               >
                 {link.label}
               </Link>

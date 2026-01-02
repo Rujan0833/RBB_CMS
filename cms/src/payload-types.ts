@@ -435,6 +435,7 @@ export interface Page {
   contactHeroTitle: string;
   contactHeroDescription: string;
   contactFormTitle?: string | null;
+  contactForm?: (number | null) | Form;
   contactInfoTitle?: string | null;
   contactMethods?:
     | {
@@ -1277,6 +1278,11 @@ export interface FormSubmission {
         id?: string | null;
       }[]
     | null;
+  name?: string | null;
+  email?: string | null;
+  phone?: string | null;
+  subject?: string | null;
+  message?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1741,6 +1747,7 @@ export interface PagesSelect<T extends boolean = true> {
   contactHeroTitle?: T;
   contactHeroDescription?: T;
   contactFormTitle?: T;
+  contactForm?: T;
   contactInfoTitle?: T;
   contactMethods?:
     | T
@@ -2376,6 +2383,11 @@ export interface FormSubmissionsSelect<T extends boolean = true> {
         value?: T;
         id?: T;
       };
+  name?: T;
+  email?: T;
+  phone?: T;
+  subject?: T;
+  message?: T;
   updatedAt?: T;
   createdAt?: T;
 }

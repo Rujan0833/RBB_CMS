@@ -1,4 +1,4 @@
-import { AboutPage, ServicesPageCmsResponse, CmsResponse, OpenAccountPage, InvestorPage, ContactPage, HomePage } from './types';
+import { AboutPage, ServicesPageCmsResponse, CmsResponse, OpenAccountPage, InvestorPage, ContactPage, HomePage, HeaderData } from './types';
 
 export class CmsClient {
     private baseUrl: string;
@@ -293,6 +293,18 @@ export class CmsClient {
             return await res.json();
         } catch (error) {
             console.error('Error fetching form:', error);
+            return null;
+        }
+    }
+
+    public async getHeader(): Promise<HeaderData | null> {
+        try {
+            const res = await fetch(`${this.baseUrl}/api/globals/header?depth=2`);
+            if (!res.ok) throw new Error('Failed to fetch header');
+            const data = await res.json();
+            return data as HeaderData;
+        } catch (error) {
+            console.error('Error fetching header:', error);
             return null;
         }
     }

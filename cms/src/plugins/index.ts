@@ -11,6 +11,7 @@ import { searchFields } from '@/search/fieldOverrides'
 import { beforeSyncWithSearch } from '@/search/beforeSync'
 import { isSuperAdmin } from '../access/isSuperAdmin'
 import { isClientAdmin } from '../access/isClientAdmin'
+import { mapSubmissionData } from '../hooks/mapSubmissionData'
 
 const isSuperOrClientAdmin = (args: any) => isSuperAdmin(args) || isClientAdmin(args)
 
@@ -84,11 +85,57 @@ export const plugins: Plugin[] = [
       },
     },
     formSubmissionOverrides: {
+      admin: {
+        defaultColumns: ['name', 'email', 'subject', 'createdAt'],
+      },
       access: {
         read: isSuperOrClientAdmin,
         update: isSuperOrClientAdmin,
         create: () => true,
         delete: isSuperOrClientAdmin,
+      },
+      fields: ({ defaultFields }) => {
+        return [
+          ...defaultFields,
+          {
+            name: 'name',
+            type: 'text',
+            admin: {
+              readOnly: true,
+            },
+          },
+          {
+            name: 'email',
+            type: 'text',
+            admin: {
+              readOnly: true,
+            },
+          },
+          {
+            name: 'phone',
+            type: 'text',
+            admin: {
+              readOnly: true,
+            },
+          },
+          {
+            name: 'subject',
+            type: 'text',
+            admin: {
+              readOnly: true,
+            },
+          },
+          {
+            name: 'message',
+            type: 'textarea',
+            admin: {
+              readOnly: true,
+            },
+          },
+        ]
+      },
+      hooks: {
+        beforeChange: [mapSubmissionData],
       },
     },
   }),

@@ -222,3 +222,23 @@ export interface InvestorPage {
     commitmentText1: string;
     commitmentText2: string;
 }
+export interface LinkField {
+    type?: 'reference' | 'custom' | null;
+    newTab?: boolean | null;
+    reference?: {
+        relationTo: 'pages' | 'posts';
+        value: string | any;
+    } | null;
+    url?: string | null;
+    label: string;
+    appearance?: 'default' | 'outline' | null;
+}
+
+export interface NavItem {
+    link: LinkField;
+    id?: string | null;
+}
+
+export interface HeaderData {
+    navItems?: NavItem[] | null;
+}

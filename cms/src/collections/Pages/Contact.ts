@@ -35,6 +35,12 @@ export const ContactPage: Tab = {
                             type: 'text',
                             defaultValue: 'Send us a Message',
                         },
+                        {
+                            name: 'contactForm',
+                            type: 'relationship',
+                            relationTo: 'forms',
+                            required: false,
+                        },
                     ]
                 },
                 {
