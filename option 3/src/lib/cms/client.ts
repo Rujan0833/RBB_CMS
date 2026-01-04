@@ -1,4 +1,4 @@
-import { AboutPage, ServicesPageCmsResponse, CmsResponse, OpenAccountPage, InvestorPage, ContactPage, HomePage, HeaderData } from './types';
+import { AboutPage, ServicesPageCmsResponse, CmsResponse, OpenAccountPage, InvestorPage, ContactPage, HomePage, HeaderData, FooterData } from './types';
 
 export class CmsClient {
     private baseUrl: string;
@@ -139,7 +139,8 @@ export class CmsClient {
 
     public async getInvestorPage(): Promise<InvestorPage | null> {
         try {
-            const page = await this.fetchCollection<any>('pages', '?where[slug][equals]=education&depth=2')
+            const page = await this.fetchCollection<any>('pages', '?where[slug][equals]=investor&depth=2')
+                || await this.fetchCollection<any>('pages', '?where[slug][equals]=education&depth=2')
                 || await this.fetchCollection<any>('pages', '?where[template][equals]=investor&depth=2');
 
             if (!page) return null;
@@ -305,6 +306,18 @@ export class CmsClient {
             return data as HeaderData;
         } catch (error) {
             console.error('Error fetching header:', error);
+            return null;
+        }
+    }
+
+    public async getFooter(): Promise<FooterData | null> {
+        try {
+            const res = await fetch(`${this.baseUrl}/api/globals/footer?depth=2`);
+            if (!res.ok) throw new Error('Failed to fetch footer');
+            const data = await res.json();
+            return data as FooterData;
+        } catch (error) {
+            console.error('Error fetching footer:', error);
             return null;
         }
     }

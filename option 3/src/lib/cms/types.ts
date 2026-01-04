@@ -242,3 +242,7 @@ export interface NavItem {
 export interface HeaderData {
     navItems?: NavItem[] | null;
 }
+
+export interface FooterData {
+    navItems?: NavItem[] | null;
+}
