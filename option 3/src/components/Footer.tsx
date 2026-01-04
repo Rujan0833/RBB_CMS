@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { TrendingUp, Mail, Phone, MapPin } from 'lucide-react'
+import { fetchFooter } from '../lib/api/siteSettings'
 
 /* =====================
    Fallback Footer Data
@@ -46,31 +47,19 @@ const FALLBACK_FOOTER = {
 export default function Footer() {
   const [footer, setFooter] = useState<any>(FALLBACK_FOOTER)
 
-  useEffect(() => {
-    const fetchFooter = async () => {
-      try {
-        console.log('Fetching footer...')
-
-        // Make sure you have VITE_CMS_URL in your .env file
-        const res = await fetch(
-          `${import.meta.env.VITE_CMS_URL}/api/globals/footer?depth=2`
-        )
-
-        if (!res.ok) {
-          throw new Error(`HTTP error! status: ${res.status}`)
-        }
-
-        const data = await res.json()
-        console.log('Footer API data:', data)
-        setFooter(data)
-      } catch (error) {
-        console.warn('Footer API failed, using fallback data', error)
-        setFooter(FALLBACK_FOOTER)
-      }
+useEffect(() => {
+  const loadFooter = async () => {   // <-- rename this function
+    try {
+      const data = await fetchFooter()   // <-- calls the imported API function
+      setFooter(data)
+    } catch (error) {
+      console.error('Error fetching footer data:', error)
     }
+  }
 
-    fetchFooter()
-  }, [])
+  loadFooter()
+}, [])
+
 
   return (
     <footer className="bg-gray-900 text-gray-300">
