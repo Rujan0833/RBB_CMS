@@ -30,6 +30,7 @@ export const fetchHomePage = async () => {
     return cmsClient.getHomePage();
 };
 
+<<<<<<< HEAD
 export const getForm = async (id: string) => {
     return cmsClient.getForm(id);
 };
@@ -45,3 +46,7 @@ export const getFooter = async () => {
 export const submitForm = async (formId: string, data: any) => {
     return cmsClient.submitForm(formId, data);
 };
+=======
+
+
+>>>>>>> origin/rbb_new

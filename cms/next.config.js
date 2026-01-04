@@ -30,7 +30,10 @@ const nextConfig = {
     return webpackConfig
   },
   reactStrictMode: false,
+<<<<<<< HEAD
   devIndicators: false,
+=======
+>>>>>>> origin/rbb_new
   redirects,
 }
 
