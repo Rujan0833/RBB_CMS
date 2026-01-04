@@ -16,13 +16,13 @@ export const InvestorPage: Tab = {
                             name: 'investorHeroTitle',
                             type: 'text',
                             defaultValue: 'Investor Education',
-                            required: true,
+                            required: false,
                         },
                         {
                             name: 'investorHeroDescription',
                             type: 'textarea',
                             defaultValue: 'Learn the basics of stock market investing in Nepal and make informed decisions',
-                            required: true,
+                            required: false,
                         },
                     ],
                 },
@@ -38,7 +38,7 @@ export const InvestorPage: Tab = {
                                 {
                                     name: 'title',
                                     type: 'text',
-                                    required: true,
+                                    required: false,
                                 },
                                 {
                                     name: 'icon',
@@ -88,7 +88,7 @@ export const InvestorPage: Tab = {
                                 {
                                     name: 'text',
                                     type: 'textarea',
-                                    required: true,
+                                    required: false,
                                 },
                             ],
                         },
@@ -105,12 +105,12 @@ export const InvestorPage: Tab = {
                                 {
                                     name: 'question',
                                     type: 'text',
-                                    required: true,
+                                    required: false,
                                 },
                                 {
                                     name: 'answer',
                                     type: 'textarea',
-                                    required: true,
+                                    required: false,
                                 },
                             ],
                         },

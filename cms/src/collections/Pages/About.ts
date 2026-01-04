@@ -174,7 +174,7 @@ export const AboutPage: Tab = {
                         {
                             name: 'commitmentDescription',
                             type: 'textarea',
-                            required: true,
+                            required: false,
                         },
                     ],
                 },

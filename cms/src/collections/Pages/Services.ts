@@ -16,7 +16,7 @@ export const ServicesPage: Tab = {
                             name: 'servicesHeroTitle', // Scoped to avoid conflict with AboutPage
                             type: 'text',
                             defaultValue: 'Our Services',
-                            required: true,
+                            required: false,
                         },
                         {
                             name: 'servicesHeroDescription', // Scoped to avoid conflict
@@ -37,7 +37,7 @@ export const ServicesPage: Tab = {
                                 {
                                     name: 'title',
                                     type: 'text',
-                                    required: true,
+                                    required: false,
                                 },
                                 {
                                     name: 'serviceIcon',
@@ -53,7 +53,7 @@ export const ServicesPage: Tab = {
                                 {
                                     name: 'description',
                                     type: 'textarea',
-                                    required: true,
+                                    required: false,
                                 },
                                 {
                                     name: 'features',

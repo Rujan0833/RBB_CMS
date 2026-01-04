@@ -16,13 +16,13 @@ export const OpenAccountPage: Tab = {
                             name: 'openAccountHeroTitle',
                             type: 'text',
                             defaultValue: 'Open a Trading Account',
-                            required: true,
+                            required: false,
                         },
                         {
                             name: 'openAccountHeroDescription',
                             type: 'textarea',
                             defaultValue: 'Start your investment journey with a simple, straightforward account opening process',
-                            required: true,
+                            required: false,
                         },
                     ],
                 },
@@ -48,17 +48,17 @@ export const OpenAccountPage: Tab = {
                                 {
                                     name: 'stepNumber',
                                     type: 'text',
-                                    required: true,
+                                    required: false,
                                 },
                                 {
                                     name: 'title',
                                     type: 'text',
-                                    required: true,
+                                    required: false,
                                 },
                                 {
                                     name: 'description',
                                     type: 'textarea',
-                                    required: true,
+                                    required: false,
                                 },
                                 {
                                     name: 'icon',
@@ -108,7 +108,7 @@ export const OpenAccountPage: Tab = {
                                 {
                                     name: 'title',
                                     type: 'text',
-                                    required: true,
+                                    required: false,
                                 },
                                 {
                                     name: 'description',

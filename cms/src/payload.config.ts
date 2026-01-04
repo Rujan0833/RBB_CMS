@@ -9,9 +9,18 @@ import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
 import { Posts } from './collections/Posts'
 import { Roles } from './collections/Roles'
+import { ContactSubmissions } from './collections/Submissions/ContactSubmissions'
 import { Users } from './collections/Users'
 import { Footer } from './Footer/config'
 import { Header } from './Header/config'
+import {
+  AboutView,
+  ContactView,
+  HomeView,
+  InvestorView,
+  OpenAccountView,
+  ServicesView,
+} from './collections/Pages/Views'
 import { plugins } from './plugins'
 import { defaultLexical } from '@/fields/defaultLexical'
 import { getServerSideURL } from './utilities/getURL'
@@ -63,7 +72,21 @@ export default buildConfig({
       connectionString: process.env.DATABASE_URI || '',
     },
   }),
-  collections: [Pages, Posts, Media, Categories, Users, Roles],
+  collections: [
+    Pages,
+    HomeView,
+    AboutView,
+    ServicesView,
+    ContactView,
+    InvestorView,
+    OpenAccountView,
+    Posts,
+    Media,
+    Categories,
+    Users,
+    Roles,
+    ContactSubmissions,
+  ],
   cors: [
     getServerSideURL(),
     'http://localhost:8080',

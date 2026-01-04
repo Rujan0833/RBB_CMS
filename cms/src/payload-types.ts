@@ -68,11 +68,18 @@ export interface Config {
   blocks: {};
   collections: {
     pages: Page;
+    'home-page': HomePage;
+    'about-page': AboutPage;
+    'services-page': ServicesPage;
+    'contact-page': ContactPage;
+    'investor-page': InvestorPage;
+    'open-account-page': OpenAccountPage;
     posts: Post;
     media: Media;
     categories: Category;
     users: User;
     roles: Role;
+    'contact-submissions': ContactSubmission;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -91,11 +98,18 @@ export interface Config {
   };
   collectionsSelect: {
     pages: PagesSelect<false> | PagesSelect<true>;
+    'home-page': HomePageSelect<false> | HomePageSelect<true>;
+    'about-page': AboutPageSelect<false> | AboutPageSelect<true>;
+    'services-page': ServicesPageSelect<false> | ServicesPageSelect<true>;
+    'contact-page': ContactPageSelect<false> | ContactPageSelect<true>;
+    'investor-page': InvestorPageSelect<false> | InvestorPageSelect<true>;
+    'open-account-page': OpenAccountPageSelect<false> | OpenAccountPageSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     roles: RolesSelect<false> | RolesSelect<true>;
+    'contact-submissions': ContactSubmissionsSelect<false> | ContactSubmissionsSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -160,23 +174,7 @@ export interface Page {
   id: number;
   title: string;
   publishedAt?: string | null;
-  template?:
-    | (
-        | 'default'
-        | 'about'
-        | 'services'
-        | 'open-account'
-        | 'investor'
-        | 'how-it-works'
-        | 'home'
-        | 'career'
-        | 'knowledge-center'
-        | 'faq'
-        | 'contact'
-        | 'legal'
-        | 'notice'
-      )
-    | null;
+  template?: ('default' | 'about' | 'services' | 'open-account' | 'investor' | 'home' | 'contact') | null;
   hero: {
     type: 'none' | 'highImpact' | 'mediumImpact' | 'lowImpact';
     richText?: {
@@ -269,14 +267,14 @@ export interface Page {
       }[]
     | null;
   commitmentTitle?: string | null;
-  commitmentDescription: string;
-  servicesHeroTitle: string;
+  commitmentDescription?: string | null;
+  servicesHeroTitle?: string | null;
   servicesHeroDescription?: string | null;
   serviceBlocks?:
     | {
-        title: string;
+        title?: string | null;
         serviceIcon?: ('TrendingUp' | 'Monitor' | 'FileText' | 'PieChart') | null;
-        description: string;
+        description?: string | null;
         features?:
           | {
               text?: string | null;
@@ -303,135 +301,6 @@ export interface Page {
   helpSectionCtaUrl?: string | null;
   disclaimerTitle?: string | null;
   disclaimerText?: string | null;
-  headerTitle: string;
-  headerSubtitle?: string | null;
-  steps?:
-    | {
-        stepNumber: number;
-        icon?: ('Smartphone' | 'Clock' | 'CheckCircle' | 'CreditCard' | 'FileText' | 'Shield') | null;
-        title: string;
-        description?: string | null;
-        bulletPoints?:
-          | {
-              text?: string | null;
-              id?: string | null;
-            }[]
-          | null;
-        id?: string | null;
-      }[]
-    | null;
-  trustFeatures?:
-    | {
-        icon?: ('Shield' | 'Clock' | 'FileText' | 'Zap') | null;
-        title: string;
-        description?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  careerHeaderTitle?: string | null;
-  careerHeaderSubtitle?: string | null;
-  jobOpenings?:
-    | {
-        title: string;
-        department?:
-          | (
-              | 'Technology'
-              | 'Risk Management'
-              | 'Marketing'
-              | 'Sales'
-              | 'Customer Success'
-              | 'Product'
-              | 'Finance'
-              | 'HR'
-            )
-          | null;
-        location?: ('Kathmandu' | 'Lalitpur' | 'Bhaktapur' | 'Chitwan' | 'Pokhara' | 'Remote') | null;
-        type?: ('Full-time' | 'Part-time' | 'Contract' | 'Internship') | null;
-        experience?: string | null;
-        salary?: string | null;
-        description?: string | null;
-        skills?:
-          | {
-              skill?: string | null;
-              id?: string | null;
-            }[]
-          | null;
-        id?: string | null;
-      }[]
-    | null;
-  benefits?:
-    | {
-        icon?: ('TrendingUp' | 'Target' | 'Zap' | 'Star' | 'Coffee' | 'Award' | 'Heart' | 'Users') | null;
-        title?: string | null;
-        description?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  lifeAtCompany?:
-    | {
-        icon?: ('TrendingUp' | 'Target' | 'Zap' | 'Star' | 'Coffee' | 'Award' | 'Heart' | 'Users') | null;
-        title?: string | null;
-        description?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  knowledgeCenterHeaderTitle?: string | null;
-  knowledgeCenterHeaderSubtitle?: string | null;
-  articles?:
-    | {
-        title: string;
-        excerpt?: string | null;
-        category?: string | null;
-        author?: string | null;
-        date?: string | null;
-        readTime?: string | null;
-        featured?: boolean | null;
-        id?: string | null;
-      }[]
-    | null;
-  guides?:
-    | {
-        title: string;
-        description?: string | null;
-        icon?: ('Lightbulb' | 'FileText' | 'TrendingUp' | 'Shield' | 'BookOpen') | null;
-        category?: string | null;
-        steps?: number | null;
-        id?: string | null;
-      }[]
-    | null;
-  reports?:
-    | {
-        title: string;
-        type?: string | null;
-        date?: string | null;
-        size?: string | null;
-        icon?: ('TrendingUp' | 'BookOpen' | 'Shield' | 'FileText') | null;
-        id?: string | null;
-      }[]
-    | null;
-  faqs?:
-    | {
-        question: string;
-        answer?: string | null;
-        category?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  faqHeaderTitle?: string | null;
-  faqHeaderSubtitle?: string | null;
-  faqCategories?:
-    | {
-        categoryName: string;
-        questions?:
-          | {
-              question: string;
-              answer: string;
-              id?: string | null;
-            }[]
-          | null;
-        id?: string | null;
-      }[]
-    | null;
   contactHeroTitle: string;
   contactHeroDescription: string;
   contactFormTitle?: string | null;
@@ -450,69 +319,15 @@ export interface Page {
   visitOfficeMapUrl?: string | null;
   responseTimeTitle?: string | null;
   responseTimeDescription?: string | null;
-  legalHeaderTitle?: string | null;
-  legalHeaderSubtitle?: string | null;
-  regulatoryInfo?:
-    | {
-        title: string;
-        details?: string | null;
-        validity?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  documents?:
-    | {
-        title: string;
-        description?: string | null;
-        category?: string | null;
-        lastUpdated?: string | null;
-        icon?: ('FileText' | 'Shield' | 'Scale' | 'AlertCircle') | null;
-        color?: ('blue' | 'green' | 'purple' | 'orange' | 'teal' | 'red') | null;
-        id?: string | null;
-      }[]
-    | null;
-  importantNotices?:
-    | {
-        title: string;
-        description?: string | null;
-        type?: ('primary' | 'accent' | 'success' | 'destructive') | null;
-        id?: string | null;
-      }[]
-    | null;
-  noticeHeaderTitle?: string | null;
-  noticeHeaderSubtitle?: string | null;
-  notices?:
-    | {
-        title: string;
-        date: string;
-        content: string;
-        type?: ('Important' | 'Service Update' | 'Policy Update' | 'Holiday Notice' | 'Product Launch') | null;
-        icon?: ('AlertTriangle' | 'Info' | 'FileText' | 'Calendar' | 'Bell') | null;
-        id?: string | null;
-      }[]
-    | null;
-  contactSection?: {
-    title?: string | null;
-    description?: string | null;
-    primaryButtonText?: string | null;
-    primaryButtonLink?: string | null;
-    secondaryButtonText?: string | null;
-    secondaryButtonLink?: string | null;
-  };
-  subscribeSection?: {
-    title?: string | null;
-    description?: string | null;
-    buttonText?: string | null;
-  };
-  openAccountHeroTitle: string;
-  openAccountHeroDescription: string;
+  openAccountHeroTitle?: string | null;
+  openAccountHeroDescription?: string | null;
   openAccountProcessTitle?: string | null;
   openAccountProcessDescription?: string | null;
   openAccountSteps?:
     | {
-        stepNumber: string;
-        title: string;
-        description: string;
+        stepNumber?: string | null;
+        title?: string | null;
+        description?: string | null;
         icon?: ('FileText' | 'CreditCard' | 'UserCheck' | 'CheckCircle2' | 'Download') | null;
         items?:
           | {
@@ -527,7 +342,7 @@ export interface Page {
   downloadsDescription?: string | null;
   openAccountDownloads?:
     | {
-        title: string;
+        title?: string | null;
         description?: string | null;
         link?: string | null;
         icon?: 'Download' | null;
@@ -547,11 +362,11 @@ export interface Page {
         id?: string | null;
       }[]
     | null;
-  investorHeroTitle: string;
-  investorHeroDescription: string;
+  investorHeroTitle?: string | null;
+  investorHeroDescription?: string | null;
   educationTopics?:
     | {
-        title: string;
+        title?: string | null;
         icon?: ('BookOpen' | 'TrendingUp') | null;
         theme?: ('blue' | 'green') | null;
         content?: {
@@ -576,14 +391,14 @@ export interface Page {
   riskItems?:
     | {
         title?: string | null;
-        text: string;
+        text?: string | null;
         id?: string | null;
       }[]
     | null;
   investorFaqs?:
     | {
-        question: string;
-        answer: string;
+        question?: string | null;
+        answer?: string | null;
         id?: string | null;
       }[]
     | null;
@@ -604,12 +419,12 @@ export interface Page {
   investorCommitmentText1?: string | null;
   investorCommitmentText2?: string | null;
   homeHeroBadge?: string | null;
-  homeHeroTitle: string;
-  homeHeroDescription: string;
+  homeHeroTitle?: string | null;
+  homeHeroDescription?: string | null;
   homeHeroFeatures?:
     | {
         icon?: ('CheckCircle2' | 'Shield') | null;
-        title: string;
+        title?: string | null;
         subtitle?: string | null;
         id?: string | null;
       }[]
@@ -617,7 +432,7 @@ export interface Page {
   homeTrustIndicators?:
     | {
         icon?: ('Shield' | 'TrendingUp' | 'Users' | 'Award') | null;
-        title: string;
+        title?: string | null;
         description?: string | null;
         id?: string | null;
       }[]
@@ -626,8 +441,8 @@ export interface Page {
   homeServicesDescription?: string | null;
   homeServicePreviews?:
     | {
-        title: string;
-        description: string;
+        title?: string | null;
+        description?: string | null;
         id?: string | null;
       }[]
     | null;
@@ -1240,6 +1055,1821 @@ export interface Form {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home-page".
+ */
+export interface HomePage {
+  id: number;
+  title: string;
+  publishedAt?: string | null;
+  template?: ('default' | 'about' | 'services' | 'open-account' | 'investor' | 'home' | 'contact') | null;
+  hero: {
+    type: 'none' | 'highImpact' | 'mediumImpact' | 'lowImpact';
+    richText?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    links?:
+      | {
+          link: {
+            type?: ('reference' | 'custom') | null;
+            newTab?: boolean | null;
+            reference?:
+              | ({
+                  relationTo: 'pages';
+                  value: number | Page;
+                } | null)
+              | ({
+                  relationTo: 'posts';
+                  value: number | Post;
+                } | null);
+            url?: string | null;
+            label: string;
+            /**
+             * Choose how the link should be rendered.
+             */
+            appearance?: ('default' | 'outline') | null;
+          };
+          id?: string | null;
+        }[]
+      | null;
+    media?: (number | null) | Media;
+  };
+  layout?: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[] | null;
+  heroTitle: string;
+  heroDescription: string;
+  whoWeAreTitle?: string | null;
+  whoWeAreContent?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  valuesTitle?: string | null;
+  values?:
+    | {
+        valueIcon: 'Shield' | 'Award' | 'Users' | 'Target';
+        title: string;
+        description: string;
+        id?: string | null;
+      }[]
+    | null;
+  complianceTitle?: string | null;
+  licenses?:
+    | {
+        licenseIcon?: ('Shield' | 'Award') | null;
+        title: string;
+        description: string;
+        licenseIdLabel?: string | null;
+        licenseIdValue?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  leadershipTitle?: string | null;
+  leaders?:
+    | {
+        name: string;
+        role: string;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  commitmentTitle?: string | null;
+  commitmentDescription?: string | null;
+  servicesHeroTitle?: string | null;
+  servicesHeroDescription?: string | null;
+  serviceBlocks?:
+    | {
+        title?: string | null;
+        serviceIcon?: ('TrendingUp' | 'Monitor' | 'FileText' | 'PieChart') | null;
+        description?: string | null;
+        features?:
+          | {
+              text?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        sideBoxTitle?: string | null;
+        sideBoxType?: ('blue-cta' | 'gray-list' | 'simple-note') | null;
+        sideBoxDescription?: string | null;
+        sideBoxList?:
+          | {
+              text?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        ctaText?: string | null;
+        ctaUrl?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  helpSectionTitle?: string | null;
+  helpSectionDescription?: string | null;
+  helpSectionCtaText?: string | null;
+  helpSectionCtaUrl?: string | null;
+  disclaimerTitle?: string | null;
+  disclaimerText?: string | null;
+  contactHeroTitle: string;
+  contactHeroDescription: string;
+  contactFormTitle?: string | null;
+  contactForm?: (number | null) | Form;
+  contactInfoTitle?: string | null;
+  contactMethods?:
+    | {
+        icon?: ('MapPin' | 'Phone' | 'Mail' | 'Clock') | null;
+        title: string;
+        content: string;
+        id?: string | null;
+      }[]
+    | null;
+  visitOfficeTitle?: string | null;
+  visitOfficeDescription?: string | null;
+  visitOfficeMapUrl?: string | null;
+  responseTimeTitle?: string | null;
+  responseTimeDescription?: string | null;
+  openAccountHeroTitle?: string | null;
+  openAccountHeroDescription?: string | null;
+  openAccountProcessTitle?: string | null;
+  openAccountProcessDescription?: string | null;
+  openAccountSteps?:
+    | {
+        stepNumber?: string | null;
+        title?: string | null;
+        description?: string | null;
+        icon?: ('FileText' | 'CreditCard' | 'UserCheck' | 'CheckCircle2' | 'Download') | null;
+        items?:
+          | {
+              text?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  downloadsTitle?: string | null;
+  downloadsDescription?: string | null;
+  openAccountDownloads?:
+    | {
+        title?: string | null;
+        description?: string | null;
+        link?: string | null;
+        icon?: 'Download' | null;
+        id?: string | null;
+      }[]
+    | null;
+  contactTitle?: string | null;
+  contactDescription?: string | null;
+  contactCtaText?: string | null;
+  contactCtaUrl?: string | null;
+  learnMoreText?: string | null;
+  learnMoreUrl?: string | null;
+  infoTitle?: string | null;
+  infoItems?:
+    | {
+        text?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  investorHeroTitle?: string | null;
+  investorHeroDescription?: string | null;
+  educationTopics?:
+    | {
+        title?: string | null;
+        icon?: ('BookOpen' | 'TrendingUp') | null;
+        theme?: ('blue' | 'green') | null;
+        content?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        id?: string | null;
+      }[]
+    | null;
+  riskTitle?: string | null;
+  riskItems?:
+    | {
+        title?: string | null;
+        text?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  investorFaqs?:
+    | {
+        question?: string | null;
+        answer?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  practicesTitle?: string | null;
+  practicesDos?:
+    | {
+        text?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  practicesDonts?:
+    | {
+        text?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  investorCommitmentTitle?: string | null;
+  investorCommitmentText1?: string | null;
+  investorCommitmentText2?: string | null;
+  homeHeroBadge?: string | null;
+  homeHeroTitle?: string | null;
+  homeHeroDescription?: string | null;
+  homeHeroFeatures?:
+    | {
+        icon?: ('CheckCircle2' | 'Shield') | null;
+        title?: string | null;
+        subtitle?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  homeTrustIndicators?:
+    | {
+        icon?: ('Shield' | 'TrendingUp' | 'Users' | 'Award') | null;
+        title?: string | null;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  homeServicesTitle?: string | null;
+  homeServicesDescription?: string | null;
+  homeServicePreviews?:
+    | {
+        title?: string | null;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  homeCtaTitle?: string | null;
+  homeCtaDescription?: string | null;
+  homeCtaButtonText?: string | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (number | null) | Media;
+    description?: string | null;
+  };
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "about-page".
+ */
+export interface AboutPage {
+  id: number;
+  title: string;
+  publishedAt?: string | null;
+  template?: ('default' | 'about' | 'services' | 'open-account' | 'investor' | 'home' | 'contact') | null;
+  hero: {
+    type: 'none' | 'highImpact' | 'mediumImpact' | 'lowImpact';
+    richText?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    links?:
+      | {
+          link: {
+            type?: ('reference' | 'custom') | null;
+            newTab?: boolean | null;
+            reference?:
+              | ({
+                  relationTo: 'pages';
+                  value: number | Page;
+                } | null)
+              | ({
+                  relationTo: 'posts';
+                  value: number | Post;
+                } | null);
+            url?: string | null;
+            label: string;
+            /**
+             * Choose how the link should be rendered.
+             */
+            appearance?: ('default' | 'outline') | null;
+          };
+          id?: string | null;
+        }[]
+      | null;
+    media?: (number | null) | Media;
+  };
+  layout?: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[] | null;
+  heroTitle: string;
+  heroDescription: string;
+  whoWeAreTitle?: string | null;
+  whoWeAreContent?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  valuesTitle?: string | null;
+  values?:
+    | {
+        valueIcon: 'Shield' | 'Award' | 'Users' | 'Target';
+        title: string;
+        description: string;
+        id?: string | null;
+      }[]
+    | null;
+  complianceTitle?: string | null;
+  licenses?:
+    | {
+        licenseIcon?: ('Shield' | 'Award') | null;
+        title: string;
+        description: string;
+        licenseIdLabel?: string | null;
+        licenseIdValue?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  leadershipTitle?: string | null;
+  leaders?:
+    | {
+        name: string;
+        role: string;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  commitmentTitle?: string | null;
+  commitmentDescription?: string | null;
+  servicesHeroTitle?: string | null;
+  servicesHeroDescription?: string | null;
+  serviceBlocks?:
+    | {
+        title?: string | null;
+        serviceIcon?: ('TrendingUp' | 'Monitor' | 'FileText' | 'PieChart') | null;
+        description?: string | null;
+        features?:
+          | {
+              text?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        sideBoxTitle?: string | null;
+        sideBoxType?: ('blue-cta' | 'gray-list' | 'simple-note') | null;
+        sideBoxDescription?: string | null;
+        sideBoxList?:
+          | {
+              text?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        ctaText?: string | null;
+        ctaUrl?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  helpSectionTitle?: string | null;
+  helpSectionDescription?: string | null;
+  helpSectionCtaText?: string | null;
+  helpSectionCtaUrl?: string | null;
+  disclaimerTitle?: string | null;
+  disclaimerText?: string | null;
+  contactHeroTitle: string;
+  contactHeroDescription: string;
+  contactFormTitle?: string | null;
+  contactForm?: (number | null) | Form;
+  contactInfoTitle?: string | null;
+  contactMethods?:
+    | {
+        icon?: ('MapPin' | 'Phone' | 'Mail' | 'Clock') | null;
+        title: string;
+        content: string;
+        id?: string | null;
+      }[]
+    | null;
+  visitOfficeTitle?: string | null;
+  visitOfficeDescription?: string | null;
+  visitOfficeMapUrl?: string | null;
+  responseTimeTitle?: string | null;
+  responseTimeDescription?: string | null;
+  openAccountHeroTitle?: string | null;
+  openAccountHeroDescription?: string | null;
+  openAccountProcessTitle?: string | null;
+  openAccountProcessDescription?: string | null;
+  openAccountSteps?:
+    | {
+        stepNumber?: string | null;
+        title?: string | null;
+        description?: string | null;
+        icon?: ('FileText' | 'CreditCard' | 'UserCheck' | 'CheckCircle2' | 'Download') | null;
+        items?:
+          | {
+              text?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  downloadsTitle?: string | null;
+  downloadsDescription?: string | null;
+  openAccountDownloads?:
+    | {
+        title?: string | null;
+        description?: string | null;
+        link?: string | null;
+        icon?: 'Download' | null;
+        id?: string | null;
+      }[]
+    | null;
+  contactTitle?: string | null;
+  contactDescription?: string | null;
+  contactCtaText?: string | null;
+  contactCtaUrl?: string | null;
+  learnMoreText?: string | null;
+  learnMoreUrl?: string | null;
+  infoTitle?: string | null;
+  infoItems?:
+    | {
+        text?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  investorHeroTitle?: string | null;
+  investorHeroDescription?: string | null;
+  educationTopics?:
+    | {
+        title?: string | null;
+        icon?: ('BookOpen' | 'TrendingUp') | null;
+        theme?: ('blue' | 'green') | null;
+        content?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        id?: string | null;
+      }[]
+    | null;
+  riskTitle?: string | null;
+  riskItems?:
+    | {
+        title?: string | null;
+        text?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  investorFaqs?:
+    | {
+        question?: string | null;
+        answer?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  practicesTitle?: string | null;
+  practicesDos?:
+    | {
+        text?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  practicesDonts?:
+    | {
+        text?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  investorCommitmentTitle?: string | null;
+  investorCommitmentText1?: string | null;
+  investorCommitmentText2?: string | null;
+  homeHeroBadge?: string | null;
+  homeHeroTitle?: string | null;
+  homeHeroDescription?: string | null;
+  homeHeroFeatures?:
+    | {
+        icon?: ('CheckCircle2' | 'Shield') | null;
+        title?: string | null;
+        subtitle?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  homeTrustIndicators?:
+    | {
+        icon?: ('Shield' | 'TrendingUp' | 'Users' | 'Award') | null;
+        title?: string | null;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  homeServicesTitle?: string | null;
+  homeServicesDescription?: string | null;
+  homeServicePreviews?:
+    | {
+        title?: string | null;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  homeCtaTitle?: string | null;
+  homeCtaDescription?: string | null;
+  homeCtaButtonText?: string | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (number | null) | Media;
+    description?: string | null;
+  };
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "services-page".
+ */
+export interface ServicesPage {
+  id: number;
+  title: string;
+  publishedAt?: string | null;
+  template?: ('default' | 'about' | 'services' | 'open-account' | 'investor' | 'home' | 'contact') | null;
+  hero: {
+    type: 'none' | 'highImpact' | 'mediumImpact' | 'lowImpact';
+    richText?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    links?:
+      | {
+          link: {
+            type?: ('reference' | 'custom') | null;
+            newTab?: boolean | null;
+            reference?:
+              | ({
+                  relationTo: 'pages';
+                  value: number | Page;
+                } | null)
+              | ({
+                  relationTo: 'posts';
+                  value: number | Post;
+                } | null);
+            url?: string | null;
+            label: string;
+            /**
+             * Choose how the link should be rendered.
+             */
+            appearance?: ('default' | 'outline') | null;
+          };
+          id?: string | null;
+        }[]
+      | null;
+    media?: (number | null) | Media;
+  };
+  layout?: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[] | null;
+  heroTitle: string;
+  heroDescription: string;
+  whoWeAreTitle?: string | null;
+  whoWeAreContent?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  valuesTitle?: string | null;
+  values?:
+    | {
+        valueIcon: 'Shield' | 'Award' | 'Users' | 'Target';
+        title: string;
+        description: string;
+        id?: string | null;
+      }[]
+    | null;
+  complianceTitle?: string | null;
+  licenses?:
+    | {
+        licenseIcon?: ('Shield' | 'Award') | null;
+        title: string;
+        description: string;
+        licenseIdLabel?: string | null;
+        licenseIdValue?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  leadershipTitle?: string | null;
+  leaders?:
+    | {
+        name: string;
+        role: string;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  commitmentTitle?: string | null;
+  commitmentDescription?: string | null;
+  servicesHeroTitle?: string | null;
+  servicesHeroDescription?: string | null;
+  serviceBlocks?:
+    | {
+        title?: string | null;
+        serviceIcon?: ('TrendingUp' | 'Monitor' | 'FileText' | 'PieChart') | null;
+        description?: string | null;
+        features?:
+          | {
+              text?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        sideBoxTitle?: string | null;
+        sideBoxType?: ('blue-cta' | 'gray-list' | 'simple-note') | null;
+        sideBoxDescription?: string | null;
+        sideBoxList?:
+          | {
+              text?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        ctaText?: string | null;
+        ctaUrl?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  helpSectionTitle?: string | null;
+  helpSectionDescription?: string | null;
+  helpSectionCtaText?: string | null;
+  helpSectionCtaUrl?: string | null;
+  disclaimerTitle?: string | null;
+  disclaimerText?: string | null;
+  contactHeroTitle: string;
+  contactHeroDescription: string;
+  contactFormTitle?: string | null;
+  contactForm?: (number | null) | Form;
+  contactInfoTitle?: string | null;
+  contactMethods?:
+    | {
+        icon?: ('MapPin' | 'Phone' | 'Mail' | 'Clock') | null;
+        title: string;
+        content: string;
+        id?: string | null;
+      }[]
+    | null;
+  visitOfficeTitle?: string | null;
+  visitOfficeDescription?: string | null;
+  visitOfficeMapUrl?: string | null;
+  responseTimeTitle?: string | null;
+  responseTimeDescription?: string | null;
+  openAccountHeroTitle?: string | null;
+  openAccountHeroDescription?: string | null;
+  openAccountProcessTitle?: string | null;
+  openAccountProcessDescription?: string | null;
+  openAccountSteps?:
+    | {
+        stepNumber?: string | null;
+        title?: string | null;
+        description?: string | null;
+        icon?: ('FileText' | 'CreditCard' | 'UserCheck' | 'CheckCircle2' | 'Download') | null;
+        items?:
+          | {
+              text?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  downloadsTitle?: string | null;
+  downloadsDescription?: string | null;
+  openAccountDownloads?:
+    | {
+        title?: string | null;
+        description?: string | null;
+        link?: string | null;
+        icon?: 'Download' | null;
+        id?: string | null;
+      }[]
+    | null;
+  contactTitle?: string | null;
+  contactDescription?: string | null;
+  contactCtaText?: string | null;
+  contactCtaUrl?: string | null;
+  learnMoreText?: string | null;
+  learnMoreUrl?: string | null;
+  infoTitle?: string | null;
+  infoItems?:
+    | {
+        text?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  investorHeroTitle?: string | null;
+  investorHeroDescription?: string | null;
+  educationTopics?:
+    | {
+        title?: string | null;
+        icon?: ('BookOpen' | 'TrendingUp') | null;
+        theme?: ('blue' | 'green') | null;
+        content?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        id?: string | null;
+      }[]
+    | null;
+  riskTitle?: string | null;
+  riskItems?:
+    | {
+        title?: string | null;
+        text?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  investorFaqs?:
+    | {
+        question?: string | null;
+        answer?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  practicesTitle?: string | null;
+  practicesDos?:
+    | {
+        text?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  practicesDonts?:
+    | {
+        text?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  investorCommitmentTitle?: string | null;
+  investorCommitmentText1?: string | null;
+  investorCommitmentText2?: string | null;
+  homeHeroBadge?: string | null;
+  homeHeroTitle?: string | null;
+  homeHeroDescription?: string | null;
+  homeHeroFeatures?:
+    | {
+        icon?: ('CheckCircle2' | 'Shield') | null;
+        title?: string | null;
+        subtitle?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  homeTrustIndicators?:
+    | {
+        icon?: ('Shield' | 'TrendingUp' | 'Users' | 'Award') | null;
+        title?: string | null;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  homeServicesTitle?: string | null;
+  homeServicesDescription?: string | null;
+  homeServicePreviews?:
+    | {
+        title?: string | null;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  homeCtaTitle?: string | null;
+  homeCtaDescription?: string | null;
+  homeCtaButtonText?: string | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (number | null) | Media;
+    description?: string | null;
+  };
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-page".
+ */
+export interface ContactPage {
+  id: number;
+  title: string;
+  publishedAt?: string | null;
+  template?: ('default' | 'about' | 'services' | 'open-account' | 'investor' | 'home' | 'contact') | null;
+  hero: {
+    type: 'none' | 'highImpact' | 'mediumImpact' | 'lowImpact';
+    richText?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    links?:
+      | {
+          link: {
+            type?: ('reference' | 'custom') | null;
+            newTab?: boolean | null;
+            reference?:
+              | ({
+                  relationTo: 'pages';
+                  value: number | Page;
+                } | null)
+              | ({
+                  relationTo: 'posts';
+                  value: number | Post;
+                } | null);
+            url?: string | null;
+            label: string;
+            /**
+             * Choose how the link should be rendered.
+             */
+            appearance?: ('default' | 'outline') | null;
+          };
+          id?: string | null;
+        }[]
+      | null;
+    media?: (number | null) | Media;
+  };
+  layout?: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[] | null;
+  heroTitle: string;
+  heroDescription: string;
+  whoWeAreTitle?: string | null;
+  whoWeAreContent?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  valuesTitle?: string | null;
+  values?:
+    | {
+        valueIcon: 'Shield' | 'Award' | 'Users' | 'Target';
+        title: string;
+        description: string;
+        id?: string | null;
+      }[]
+    | null;
+  complianceTitle?: string | null;
+  licenses?:
+    | {
+        licenseIcon?: ('Shield' | 'Award') | null;
+        title: string;
+        description: string;
+        licenseIdLabel?: string | null;
+        licenseIdValue?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  leadershipTitle?: string | null;
+  leaders?:
+    | {
+        name: string;
+        role: string;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  commitmentTitle?: string | null;
+  commitmentDescription?: string | null;
+  servicesHeroTitle?: string | null;
+  servicesHeroDescription?: string | null;
+  serviceBlocks?:
+    | {
+        title?: string | null;
+        serviceIcon?: ('TrendingUp' | 'Monitor' | 'FileText' | 'PieChart') | null;
+        description?: string | null;
+        features?:
+          | {
+              text?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        sideBoxTitle?: string | null;
+        sideBoxType?: ('blue-cta' | 'gray-list' | 'simple-note') | null;
+        sideBoxDescription?: string | null;
+        sideBoxList?:
+          | {
+              text?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        ctaText?: string | null;
+        ctaUrl?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  helpSectionTitle?: string | null;
+  helpSectionDescription?: string | null;
+  helpSectionCtaText?: string | null;
+  helpSectionCtaUrl?: string | null;
+  disclaimerTitle?: string | null;
+  disclaimerText?: string | null;
+  contactHeroTitle: string;
+  contactHeroDescription: string;
+  contactFormTitle?: string | null;
+  contactForm?: (number | null) | Form;
+  contactInfoTitle?: string | null;
+  contactMethods?:
+    | {
+        icon?: ('MapPin' | 'Phone' | 'Mail' | 'Clock') | null;
+        title: string;
+        content: string;
+        id?: string | null;
+      }[]
+    | null;
+  visitOfficeTitle?: string | null;
+  visitOfficeDescription?: string | null;
+  visitOfficeMapUrl?: string | null;
+  responseTimeTitle?: string | null;
+  responseTimeDescription?: string | null;
+  openAccountHeroTitle?: string | null;
+  openAccountHeroDescription?: string | null;
+  openAccountProcessTitle?: string | null;
+  openAccountProcessDescription?: string | null;
+  openAccountSteps?:
+    | {
+        stepNumber?: string | null;
+        title?: string | null;
+        description?: string | null;
+        icon?: ('FileText' | 'CreditCard' | 'UserCheck' | 'CheckCircle2' | 'Download') | null;
+        items?:
+          | {
+              text?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  downloadsTitle?: string | null;
+  downloadsDescription?: string | null;
+  openAccountDownloads?:
+    | {
+        title?: string | null;
+        description?: string | null;
+        link?: string | null;
+        icon?: 'Download' | null;
+        id?: string | null;
+      }[]
+    | null;
+  contactTitle?: string | null;
+  contactDescription?: string | null;
+  contactCtaText?: string | null;
+  contactCtaUrl?: string | null;
+  learnMoreText?: string | null;
+  learnMoreUrl?: string | null;
+  infoTitle?: string | null;
+  infoItems?:
+    | {
+        text?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  investorHeroTitle?: string | null;
+  investorHeroDescription?: string | null;
+  educationTopics?:
+    | {
+        title?: string | null;
+        icon?: ('BookOpen' | 'TrendingUp') | null;
+        theme?: ('blue' | 'green') | null;
+        content?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        id?: string | null;
+      }[]
+    | null;
+  riskTitle?: string | null;
+  riskItems?:
+    | {
+        title?: string | null;
+        text?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  investorFaqs?:
+    | {
+        question?: string | null;
+        answer?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  practicesTitle?: string | null;
+  practicesDos?:
+    | {
+        text?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  practicesDonts?:
+    | {
+        text?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  investorCommitmentTitle?: string | null;
+  investorCommitmentText1?: string | null;
+  investorCommitmentText2?: string | null;
+  homeHeroBadge?: string | null;
+  homeHeroTitle?: string | null;
+  homeHeroDescription?: string | null;
+  homeHeroFeatures?:
+    | {
+        icon?: ('CheckCircle2' | 'Shield') | null;
+        title?: string | null;
+        subtitle?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  homeTrustIndicators?:
+    | {
+        icon?: ('Shield' | 'TrendingUp' | 'Users' | 'Award') | null;
+        title?: string | null;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  homeServicesTitle?: string | null;
+  homeServicesDescription?: string | null;
+  homeServicePreviews?:
+    | {
+        title?: string | null;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  homeCtaTitle?: string | null;
+  homeCtaDescription?: string | null;
+  homeCtaButtonText?: string | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (number | null) | Media;
+    description?: string | null;
+  };
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "investor-page".
+ */
+export interface InvestorPage {
+  id: number;
+  title: string;
+  publishedAt?: string | null;
+  template?: ('default' | 'about' | 'services' | 'open-account' | 'investor' | 'home' | 'contact') | null;
+  hero: {
+    type: 'none' | 'highImpact' | 'mediumImpact' | 'lowImpact';
+    richText?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    links?:
+      | {
+          link: {
+            type?: ('reference' | 'custom') | null;
+            newTab?: boolean | null;
+            reference?:
+              | ({
+                  relationTo: 'pages';
+                  value: number | Page;
+                } | null)
+              | ({
+                  relationTo: 'posts';
+                  value: number | Post;
+                } | null);
+            url?: string | null;
+            label: string;
+            /**
+             * Choose how the link should be rendered.
+             */
+            appearance?: ('default' | 'outline') | null;
+          };
+          id?: string | null;
+        }[]
+      | null;
+    media?: (number | null) | Media;
+  };
+  layout?: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[] | null;
+  heroTitle: string;
+  heroDescription: string;
+  whoWeAreTitle?: string | null;
+  whoWeAreContent?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  valuesTitle?: string | null;
+  values?:
+    | {
+        valueIcon: 'Shield' | 'Award' | 'Users' | 'Target';
+        title: string;
+        description: string;
+        id?: string | null;
+      }[]
+    | null;
+  complianceTitle?: string | null;
+  licenses?:
+    | {
+        licenseIcon?: ('Shield' | 'Award') | null;
+        title: string;
+        description: string;
+        licenseIdLabel?: string | null;
+        licenseIdValue?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  leadershipTitle?: string | null;
+  leaders?:
+    | {
+        name: string;
+        role: string;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  commitmentTitle?: string | null;
+  commitmentDescription?: string | null;
+  servicesHeroTitle?: string | null;
+  servicesHeroDescription?: string | null;
+  serviceBlocks?:
+    | {
+        title?: string | null;
+        serviceIcon?: ('TrendingUp' | 'Monitor' | 'FileText' | 'PieChart') | null;
+        description?: string | null;
+        features?:
+          | {
+              text?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        sideBoxTitle?: string | null;
+        sideBoxType?: ('blue-cta' | 'gray-list' | 'simple-note') | null;
+        sideBoxDescription?: string | null;
+        sideBoxList?:
+          | {
+              text?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        ctaText?: string | null;
+        ctaUrl?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  helpSectionTitle?: string | null;
+  helpSectionDescription?: string | null;
+  helpSectionCtaText?: string | null;
+  helpSectionCtaUrl?: string | null;
+  disclaimerTitle?: string | null;
+  disclaimerText?: string | null;
+  contactHeroTitle: string;
+  contactHeroDescription: string;
+  contactFormTitle?: string | null;
+  contactForm?: (number | null) | Form;
+  contactInfoTitle?: string | null;
+  contactMethods?:
+    | {
+        icon?: ('MapPin' | 'Phone' | 'Mail' | 'Clock') | null;
+        title: string;
+        content: string;
+        id?: string | null;
+      }[]
+    | null;
+  visitOfficeTitle?: string | null;
+  visitOfficeDescription?: string | null;
+  visitOfficeMapUrl?: string | null;
+  responseTimeTitle?: string | null;
+  responseTimeDescription?: string | null;
+  openAccountHeroTitle?: string | null;
+  openAccountHeroDescription?: string | null;
+  openAccountProcessTitle?: string | null;
+  openAccountProcessDescription?: string | null;
+  openAccountSteps?:
+    | {
+        stepNumber?: string | null;
+        title?: string | null;
+        description?: string | null;
+        icon?: ('FileText' | 'CreditCard' | 'UserCheck' | 'CheckCircle2' | 'Download') | null;
+        items?:
+          | {
+              text?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  downloadsTitle?: string | null;
+  downloadsDescription?: string | null;
+  openAccountDownloads?:
+    | {
+        title?: string | null;
+        description?: string | null;
+        link?: string | null;
+        icon?: 'Download' | null;
+        id?: string | null;
+      }[]
+    | null;
+  contactTitle?: string | null;
+  contactDescription?: string | null;
+  contactCtaText?: string | null;
+  contactCtaUrl?: string | null;
+  learnMoreText?: string | null;
+  learnMoreUrl?: string | null;
+  infoTitle?: string | null;
+  infoItems?:
+    | {
+        text?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  investorHeroTitle?: string | null;
+  investorHeroDescription?: string | null;
+  educationTopics?:
+    | {
+        title?: string | null;
+        icon?: ('BookOpen' | 'TrendingUp') | null;
+        theme?: ('blue' | 'green') | null;
+        content?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        id?: string | null;
+      }[]
+    | null;
+  riskTitle?: string | null;
+  riskItems?:
+    | {
+        title?: string | null;
+        text?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  investorFaqs?:
+    | {
+        question?: string | null;
+        answer?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  practicesTitle?: string | null;
+  practicesDos?:
+    | {
+        text?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  practicesDonts?:
+    | {
+        text?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  investorCommitmentTitle?: string | null;
+  investorCommitmentText1?: string | null;
+  investorCommitmentText2?: string | null;
+  homeHeroBadge?: string | null;
+  homeHeroTitle?: string | null;
+  homeHeroDescription?: string | null;
+  homeHeroFeatures?:
+    | {
+        icon?: ('CheckCircle2' | 'Shield') | null;
+        title?: string | null;
+        subtitle?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  homeTrustIndicators?:
+    | {
+        icon?: ('Shield' | 'TrendingUp' | 'Users' | 'Award') | null;
+        title?: string | null;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  homeServicesTitle?: string | null;
+  homeServicesDescription?: string | null;
+  homeServicePreviews?:
+    | {
+        title?: string | null;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  homeCtaTitle?: string | null;
+  homeCtaDescription?: string | null;
+  homeCtaButtonText?: string | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (number | null) | Media;
+    description?: string | null;
+  };
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "open-account-page".
+ */
+export interface OpenAccountPage {
+  id: number;
+  title: string;
+  publishedAt?: string | null;
+  template?: ('default' | 'about' | 'services' | 'open-account' | 'investor' | 'home' | 'contact') | null;
+  hero: {
+    type: 'none' | 'highImpact' | 'mediumImpact' | 'lowImpact';
+    richText?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    links?:
+      | {
+          link: {
+            type?: ('reference' | 'custom') | null;
+            newTab?: boolean | null;
+            reference?:
+              | ({
+                  relationTo: 'pages';
+                  value: number | Page;
+                } | null)
+              | ({
+                  relationTo: 'posts';
+                  value: number | Post;
+                } | null);
+            url?: string | null;
+            label: string;
+            /**
+             * Choose how the link should be rendered.
+             */
+            appearance?: ('default' | 'outline') | null;
+          };
+          id?: string | null;
+        }[]
+      | null;
+    media?: (number | null) | Media;
+  };
+  layout?: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[] | null;
+  heroTitle: string;
+  heroDescription: string;
+  whoWeAreTitle?: string | null;
+  whoWeAreContent?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  valuesTitle?: string | null;
+  values?:
+    | {
+        valueIcon: 'Shield' | 'Award' | 'Users' | 'Target';
+        title: string;
+        description: string;
+        id?: string | null;
+      }[]
+    | null;
+  complianceTitle?: string | null;
+  licenses?:
+    | {
+        licenseIcon?: ('Shield' | 'Award') | null;
+        title: string;
+        description: string;
+        licenseIdLabel?: string | null;
+        licenseIdValue?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  leadershipTitle?: string | null;
+  leaders?:
+    | {
+        name: string;
+        role: string;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  commitmentTitle?: string | null;
+  commitmentDescription?: string | null;
+  servicesHeroTitle?: string | null;
+  servicesHeroDescription?: string | null;
+  serviceBlocks?:
+    | {
+        title?: string | null;
+        serviceIcon?: ('TrendingUp' | 'Monitor' | 'FileText' | 'PieChart') | null;
+        description?: string | null;
+        features?:
+          | {
+              text?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        sideBoxTitle?: string | null;
+        sideBoxType?: ('blue-cta' | 'gray-list' | 'simple-note') | null;
+        sideBoxDescription?: string | null;
+        sideBoxList?:
+          | {
+              text?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        ctaText?: string | null;
+        ctaUrl?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  helpSectionTitle?: string | null;
+  helpSectionDescription?: string | null;
+  helpSectionCtaText?: string | null;
+  helpSectionCtaUrl?: string | null;
+  disclaimerTitle?: string | null;
+  disclaimerText?: string | null;
+  contactHeroTitle: string;
+  contactHeroDescription: string;
+  contactFormTitle?: string | null;
+  contactForm?: (number | null) | Form;
+  contactInfoTitle?: string | null;
+  contactMethods?:
+    | {
+        icon?: ('MapPin' | 'Phone' | 'Mail' | 'Clock') | null;
+        title: string;
+        content: string;
+        id?: string | null;
+      }[]
+    | null;
+  visitOfficeTitle?: string | null;
+  visitOfficeDescription?: string | null;
+  visitOfficeMapUrl?: string | null;
+  responseTimeTitle?: string | null;
+  responseTimeDescription?: string | null;
+  openAccountHeroTitle?: string | null;
+  openAccountHeroDescription?: string | null;
+  openAccountProcessTitle?: string | null;
+  openAccountProcessDescription?: string | null;
+  openAccountSteps?:
+    | {
+        stepNumber?: string | null;
+        title?: string | null;
+        description?: string | null;
+        icon?: ('FileText' | 'CreditCard' | 'UserCheck' | 'CheckCircle2' | 'Download') | null;
+        items?:
+          | {
+              text?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  downloadsTitle?: string | null;
+  downloadsDescription?: string | null;
+  openAccountDownloads?:
+    | {
+        title?: string | null;
+        description?: string | null;
+        link?: string | null;
+        icon?: 'Download' | null;
+        id?: string | null;
+      }[]
+    | null;
+  contactTitle?: string | null;
+  contactDescription?: string | null;
+  contactCtaText?: string | null;
+  contactCtaUrl?: string | null;
+  learnMoreText?: string | null;
+  learnMoreUrl?: string | null;
+  infoTitle?: string | null;
+  infoItems?:
+    | {
+        text?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  investorHeroTitle?: string | null;
+  investorHeroDescription?: string | null;
+  educationTopics?:
+    | {
+        title?: string | null;
+        icon?: ('BookOpen' | 'TrendingUp') | null;
+        theme?: ('blue' | 'green') | null;
+        content?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        id?: string | null;
+      }[]
+    | null;
+  riskTitle?: string | null;
+  riskItems?:
+    | {
+        title?: string | null;
+        text?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  investorFaqs?:
+    | {
+        question?: string | null;
+        answer?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  practicesTitle?: string | null;
+  practicesDos?:
+    | {
+        text?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  practicesDonts?:
+    | {
+        text?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  investorCommitmentTitle?: string | null;
+  investorCommitmentText1?: string | null;
+  investorCommitmentText2?: string | null;
+  homeHeroBadge?: string | null;
+  homeHeroTitle?: string | null;
+  homeHeroDescription?: string | null;
+  homeHeroFeatures?:
+    | {
+        icon?: ('CheckCircle2' | 'Shield') | null;
+        title?: string | null;
+        subtitle?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  homeTrustIndicators?:
+    | {
+        icon?: ('Shield' | 'TrendingUp' | 'Users' | 'Award') | null;
+        title?: string | null;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  homeServicesTitle?: string | null;
+  homeServicesDescription?: string | null;
+  homeServicePreviews?:
+    | {
+        title?: string | null;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  homeCtaTitle?: string | null;
+  homeCtaDescription?: string | null;
+  homeCtaButtonText?: string | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (number | null) | Media;
+    description?: string | null;
+  };
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-submissions".
+ */
+export interface ContactSubmission {
+  id: number;
+  form: number | Form;
+  name?: string | null;
+  email?: string | null;
+  phone?: string | null;
+  subject?: string | null;
+  message?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1438,6 +3068,30 @@ export interface PayloadLockedDocument {
         value: number | Page;
       } | null)
     | ({
+        relationTo: 'home-page';
+        value: number | HomePage;
+      } | null)
+    | ({
+        relationTo: 'about-page';
+        value: number | AboutPage;
+      } | null)
+    | ({
+        relationTo: 'services-page';
+        value: number | ServicesPage;
+      } | null)
+    | ({
+        relationTo: 'contact-page';
+        value: number | ContactPage;
+      } | null)
+    | ({
+        relationTo: 'investor-page';
+        value: number | InvestorPage;
+      } | null)
+    | ({
+        relationTo: 'open-account-page';
+        value: number | OpenAccountPage;
+      } | null)
+    | ({
         relationTo: 'posts';
         value: number | Post;
       } | null)
@@ -1456,6 +3110,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'roles';
         value: number | Role;
+      } | null)
+    | ({
+        relationTo: 'contact-submissions';
+        value: number | ContactSubmission;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -1626,124 +3284,6 @@ export interface PagesSelect<T extends boolean = true> {
   helpSectionCtaUrl?: T;
   disclaimerTitle?: T;
   disclaimerText?: T;
-  headerTitle?: T;
-  headerSubtitle?: T;
-  steps?:
-    | T
-    | {
-        stepNumber?: T;
-        icon?: T;
-        title?: T;
-        description?: T;
-        bulletPoints?:
-          | T
-          | {
-              text?: T;
-              id?: T;
-            };
-        id?: T;
-      };
-  trustFeatures?:
-    | T
-    | {
-        icon?: T;
-        title?: T;
-        description?: T;
-        id?: T;
-      };
-  careerHeaderTitle?: T;
-  careerHeaderSubtitle?: T;
-  jobOpenings?:
-    | T
-    | {
-        title?: T;
-        department?: T;
-        location?: T;
-        type?: T;
-        experience?: T;
-        salary?: T;
-        description?: T;
-        skills?:
-          | T
-          | {
-              skill?: T;
-              id?: T;
-            };
-        id?: T;
-      };
-  benefits?:
-    | T
-    | {
-        icon?: T;
-        title?: T;
-        description?: T;
-        id?: T;
-      };
-  lifeAtCompany?:
-    | T
-    | {
-        icon?: T;
-        title?: T;
-        description?: T;
-        id?: T;
-      };
-  knowledgeCenterHeaderTitle?: T;
-  knowledgeCenterHeaderSubtitle?: T;
-  articles?:
-    | T
-    | {
-        title?: T;
-        excerpt?: T;
-        category?: T;
-        author?: T;
-        date?: T;
-        readTime?: T;
-        featured?: T;
-        id?: T;
-      };
-  guides?:
-    | T
-    | {
-        title?: T;
-        description?: T;
-        icon?: T;
-        category?: T;
-        steps?: T;
-        id?: T;
-      };
-  reports?:
-    | T
-    | {
-        title?: T;
-        type?: T;
-        date?: T;
-        size?: T;
-        icon?: T;
-        id?: T;
-      };
-  faqs?:
-    | T
-    | {
-        question?: T;
-        answer?: T;
-        category?: T;
-        id?: T;
-      };
-  faqHeaderTitle?: T;
-  faqHeaderSubtitle?: T;
-  faqCategories?:
-    | T
-    | {
-        categoryName?: T;
-        questions?:
-          | T
-          | {
-              question?: T;
-              answer?: T;
-              id?: T;
-            };
-        id?: T;
-      };
   contactHeroTitle?: T;
   contactHeroDescription?: T;
   contactFormTitle?: T;
@@ -1762,64 +3302,6 @@ export interface PagesSelect<T extends boolean = true> {
   visitOfficeMapUrl?: T;
   responseTimeTitle?: T;
   responseTimeDescription?: T;
-  legalHeaderTitle?: T;
-  legalHeaderSubtitle?: T;
-  regulatoryInfo?:
-    | T
-    | {
-        title?: T;
-        details?: T;
-        validity?: T;
-        id?: T;
-      };
-  documents?:
-    | T
-    | {
-        title?: T;
-        description?: T;
-        category?: T;
-        lastUpdated?: T;
-        icon?: T;
-        color?: T;
-        id?: T;
-      };
-  importantNotices?:
-    | T
-    | {
-        title?: T;
-        description?: T;
-        type?: T;
-        id?: T;
-      };
-  noticeHeaderTitle?: T;
-  noticeHeaderSubtitle?: T;
-  notices?:
-    | T
-    | {
-        title?: T;
-        date?: T;
-        content?: T;
-        type?: T;
-        icon?: T;
-        id?: T;
-      };
-  contactSection?:
-    | T
-    | {
-        title?: T;
-        description?: T;
-        primaryButtonText?: T;
-        primaryButtonLink?: T;
-        secondaryButtonText?: T;
-        secondaryButtonLink?: T;
-      };
-  subscribeSection?:
-    | T
-    | {
-        title?: T;
-        description?: T;
-        buttonText?: T;
-      };
   openAccountHeroTitle?: T;
   openAccountHeroDescription?: T;
   openAccountProcessTitle?: T;
@@ -2035,6 +3517,1530 @@ export interface FormBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home-page_select".
+ */
+export interface HomePageSelect<T extends boolean = true> {
+  title?: T;
+  publishedAt?: T;
+  template?: T;
+  hero?:
+    | T
+    | {
+        type?: T;
+        richText?: T;
+        links?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    url?: T;
+                    label?: T;
+                    appearance?: T;
+                  };
+              id?: T;
+            };
+        media?: T;
+      };
+  layout?:
+    | T
+    | {
+        cta?: T | CallToActionBlockSelect<T>;
+        content?: T | ContentBlockSelect<T>;
+        mediaBlock?: T | MediaBlockSelect<T>;
+        archive?: T | ArchiveBlockSelect<T>;
+        formBlock?: T | FormBlockSelect<T>;
+      };
+  heroTitle?: T;
+  heroDescription?: T;
+  whoWeAreTitle?: T;
+  whoWeAreContent?: T;
+  valuesTitle?: T;
+  values?:
+    | T
+    | {
+        valueIcon?: T;
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  complianceTitle?: T;
+  licenses?:
+    | T
+    | {
+        licenseIcon?: T;
+        title?: T;
+        description?: T;
+        licenseIdLabel?: T;
+        licenseIdValue?: T;
+        id?: T;
+      };
+  leadershipTitle?: T;
+  leaders?:
+    | T
+    | {
+        name?: T;
+        role?: T;
+        description?: T;
+        id?: T;
+      };
+  commitmentTitle?: T;
+  commitmentDescription?: T;
+  servicesHeroTitle?: T;
+  servicesHeroDescription?: T;
+  serviceBlocks?:
+    | T
+    | {
+        title?: T;
+        serviceIcon?: T;
+        description?: T;
+        features?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        sideBoxTitle?: T;
+        sideBoxType?: T;
+        sideBoxDescription?: T;
+        sideBoxList?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        ctaText?: T;
+        ctaUrl?: T;
+        id?: T;
+      };
+  helpSectionTitle?: T;
+  helpSectionDescription?: T;
+  helpSectionCtaText?: T;
+  helpSectionCtaUrl?: T;
+  disclaimerTitle?: T;
+  disclaimerText?: T;
+  contactHeroTitle?: T;
+  contactHeroDescription?: T;
+  contactFormTitle?: T;
+  contactForm?: T;
+  contactInfoTitle?: T;
+  contactMethods?:
+    | T
+    | {
+        icon?: T;
+        title?: T;
+        content?: T;
+        id?: T;
+      };
+  visitOfficeTitle?: T;
+  visitOfficeDescription?: T;
+  visitOfficeMapUrl?: T;
+  responseTimeTitle?: T;
+  responseTimeDescription?: T;
+  openAccountHeroTitle?: T;
+  openAccountHeroDescription?: T;
+  openAccountProcessTitle?: T;
+  openAccountProcessDescription?: T;
+  openAccountSteps?:
+    | T
+    | {
+        stepNumber?: T;
+        title?: T;
+        description?: T;
+        icon?: T;
+        items?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  downloadsTitle?: T;
+  downloadsDescription?: T;
+  openAccountDownloads?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        link?: T;
+        icon?: T;
+        id?: T;
+      };
+  contactTitle?: T;
+  contactDescription?: T;
+  contactCtaText?: T;
+  contactCtaUrl?: T;
+  learnMoreText?: T;
+  learnMoreUrl?: T;
+  infoTitle?: T;
+  infoItems?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  investorHeroTitle?: T;
+  investorHeroDescription?: T;
+  educationTopics?:
+    | T
+    | {
+        title?: T;
+        icon?: T;
+        theme?: T;
+        content?: T;
+        id?: T;
+      };
+  riskTitle?: T;
+  riskItems?:
+    | T
+    | {
+        title?: T;
+        text?: T;
+        id?: T;
+      };
+  investorFaqs?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  practicesTitle?: T;
+  practicesDos?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  practicesDonts?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  investorCommitmentTitle?: T;
+  investorCommitmentText1?: T;
+  investorCommitmentText2?: T;
+  homeHeroBadge?: T;
+  homeHeroTitle?: T;
+  homeHeroDescription?: T;
+  homeHeroFeatures?:
+    | T
+    | {
+        icon?: T;
+        title?: T;
+        subtitle?: T;
+        id?: T;
+      };
+  homeTrustIndicators?:
+    | T
+    | {
+        icon?: T;
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  homeServicesTitle?: T;
+  homeServicesDescription?: T;
+  homeServicePreviews?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  homeCtaTitle?: T;
+  homeCtaDescription?: T;
+  homeCtaButtonText?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  generateSlug?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "about-page_select".
+ */
+export interface AboutPageSelect<T extends boolean = true> {
+  title?: T;
+  publishedAt?: T;
+  template?: T;
+  hero?:
+    | T
+    | {
+        type?: T;
+        richText?: T;
+        links?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    url?: T;
+                    label?: T;
+                    appearance?: T;
+                  };
+              id?: T;
+            };
+        media?: T;
+      };
+  layout?:
+    | T
+    | {
+        cta?: T | CallToActionBlockSelect<T>;
+        content?: T | ContentBlockSelect<T>;
+        mediaBlock?: T | MediaBlockSelect<T>;
+        archive?: T | ArchiveBlockSelect<T>;
+        formBlock?: T | FormBlockSelect<T>;
+      };
+  heroTitle?: T;
+  heroDescription?: T;
+  whoWeAreTitle?: T;
+  whoWeAreContent?: T;
+  valuesTitle?: T;
+  values?:
+    | T
+    | {
+        valueIcon?: T;
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  complianceTitle?: T;
+  licenses?:
+    | T
+    | {
+        licenseIcon?: T;
+        title?: T;
+        description?: T;
+        licenseIdLabel?: T;
+        licenseIdValue?: T;
+        id?: T;
+      };
+  leadershipTitle?: T;
+  leaders?:
+    | T
+    | {
+        name?: T;
+        role?: T;
+        description?: T;
+        id?: T;
+      };
+  commitmentTitle?: T;
+  commitmentDescription?: T;
+  servicesHeroTitle?: T;
+  servicesHeroDescription?: T;
+  serviceBlocks?:
+    | T
+    | {
+        title?: T;
+        serviceIcon?: T;
+        description?: T;
+        features?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        sideBoxTitle?: T;
+        sideBoxType?: T;
+        sideBoxDescription?: T;
+        sideBoxList?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        ctaText?: T;
+        ctaUrl?: T;
+        id?: T;
+      };
+  helpSectionTitle?: T;
+  helpSectionDescription?: T;
+  helpSectionCtaText?: T;
+  helpSectionCtaUrl?: T;
+  disclaimerTitle?: T;
+  disclaimerText?: T;
+  contactHeroTitle?: T;
+  contactHeroDescription?: T;
+  contactFormTitle?: T;
+  contactForm?: T;
+  contactInfoTitle?: T;
+  contactMethods?:
+    | T
+    | {
+        icon?: T;
+        title?: T;
+        content?: T;
+        id?: T;
+      };
+  visitOfficeTitle?: T;
+  visitOfficeDescription?: T;
+  visitOfficeMapUrl?: T;
+  responseTimeTitle?: T;
+  responseTimeDescription?: T;
+  openAccountHeroTitle?: T;
+  openAccountHeroDescription?: T;
+  openAccountProcessTitle?: T;
+  openAccountProcessDescription?: T;
+  openAccountSteps?:
+    | T
+    | {
+        stepNumber?: T;
+        title?: T;
+        description?: T;
+        icon?: T;
+        items?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  downloadsTitle?: T;
+  downloadsDescription?: T;
+  openAccountDownloads?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        link?: T;
+        icon?: T;
+        id?: T;
+      };
+  contactTitle?: T;
+  contactDescription?: T;
+  contactCtaText?: T;
+  contactCtaUrl?: T;
+  learnMoreText?: T;
+  learnMoreUrl?: T;
+  infoTitle?: T;
+  infoItems?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  investorHeroTitle?: T;
+  investorHeroDescription?: T;
+  educationTopics?:
+    | T
+    | {
+        title?: T;
+        icon?: T;
+        theme?: T;
+        content?: T;
+        id?: T;
+      };
+  riskTitle?: T;
+  riskItems?:
+    | T
+    | {
+        title?: T;
+        text?: T;
+        id?: T;
+      };
+  investorFaqs?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  practicesTitle?: T;
+  practicesDos?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  practicesDonts?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  investorCommitmentTitle?: T;
+  investorCommitmentText1?: T;
+  investorCommitmentText2?: T;
+  homeHeroBadge?: T;
+  homeHeroTitle?: T;
+  homeHeroDescription?: T;
+  homeHeroFeatures?:
+    | T
+    | {
+        icon?: T;
+        title?: T;
+        subtitle?: T;
+        id?: T;
+      };
+  homeTrustIndicators?:
+    | T
+    | {
+        icon?: T;
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  homeServicesTitle?: T;
+  homeServicesDescription?: T;
+  homeServicePreviews?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  homeCtaTitle?: T;
+  homeCtaDescription?: T;
+  homeCtaButtonText?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  generateSlug?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "services-page_select".
+ */
+export interface ServicesPageSelect<T extends boolean = true> {
+  title?: T;
+  publishedAt?: T;
+  template?: T;
+  hero?:
+    | T
+    | {
+        type?: T;
+        richText?: T;
+        links?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    url?: T;
+                    label?: T;
+                    appearance?: T;
+                  };
+              id?: T;
+            };
+        media?: T;
+      };
+  layout?:
+    | T
+    | {
+        cta?: T | CallToActionBlockSelect<T>;
+        content?: T | ContentBlockSelect<T>;
+        mediaBlock?: T | MediaBlockSelect<T>;
+        archive?: T | ArchiveBlockSelect<T>;
+        formBlock?: T | FormBlockSelect<T>;
+      };
+  heroTitle?: T;
+  heroDescription?: T;
+  whoWeAreTitle?: T;
+  whoWeAreContent?: T;
+  valuesTitle?: T;
+  values?:
+    | T
+    | {
+        valueIcon?: T;
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  complianceTitle?: T;
+  licenses?:
+    | T
+    | {
+        licenseIcon?: T;
+        title?: T;
+        description?: T;
+        licenseIdLabel?: T;
+        licenseIdValue?: T;
+        id?: T;
+      };
+  leadershipTitle?: T;
+  leaders?:
+    | T
+    | {
+        name?: T;
+        role?: T;
+        description?: T;
+        id?: T;
+      };
+  commitmentTitle?: T;
+  commitmentDescription?: T;
+  servicesHeroTitle?: T;
+  servicesHeroDescription?: T;
+  serviceBlocks?:
+    | T
+    | {
+        title?: T;
+        serviceIcon?: T;
+        description?: T;
+        features?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        sideBoxTitle?: T;
+        sideBoxType?: T;
+        sideBoxDescription?: T;
+        sideBoxList?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        ctaText?: T;
+        ctaUrl?: T;
+        id?: T;
+      };
+  helpSectionTitle?: T;
+  helpSectionDescription?: T;
+  helpSectionCtaText?: T;
+  helpSectionCtaUrl?: T;
+  disclaimerTitle?: T;
+  disclaimerText?: T;
+  contactHeroTitle?: T;
+  contactHeroDescription?: T;
+  contactFormTitle?: T;
+  contactForm?: T;
+  contactInfoTitle?: T;
+  contactMethods?:
+    | T
+    | {
+        icon?: T;
+        title?: T;
+        content?: T;
+        id?: T;
+      };
+  visitOfficeTitle?: T;
+  visitOfficeDescription?: T;
+  visitOfficeMapUrl?: T;
+  responseTimeTitle?: T;
+  responseTimeDescription?: T;
+  openAccountHeroTitle?: T;
+  openAccountHeroDescription?: T;
+  openAccountProcessTitle?: T;
+  openAccountProcessDescription?: T;
+  openAccountSteps?:
+    | T
+    | {
+        stepNumber?: T;
+        title?: T;
+        description?: T;
+        icon?: T;
+        items?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  downloadsTitle?: T;
+  downloadsDescription?: T;
+  openAccountDownloads?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        link?: T;
+        icon?: T;
+        id?: T;
+      };
+  contactTitle?: T;
+  contactDescription?: T;
+  contactCtaText?: T;
+  contactCtaUrl?: T;
+  learnMoreText?: T;
+  learnMoreUrl?: T;
+  infoTitle?: T;
+  infoItems?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  investorHeroTitle?: T;
+  investorHeroDescription?: T;
+  educationTopics?:
+    | T
+    | {
+        title?: T;
+        icon?: T;
+        theme?: T;
+        content?: T;
+        id?: T;
+      };
+  riskTitle?: T;
+  riskItems?:
+    | T
+    | {
+        title?: T;
+        text?: T;
+        id?: T;
+      };
+  investorFaqs?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  practicesTitle?: T;
+  practicesDos?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  practicesDonts?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  investorCommitmentTitle?: T;
+  investorCommitmentText1?: T;
+  investorCommitmentText2?: T;
+  homeHeroBadge?: T;
+  homeHeroTitle?: T;
+  homeHeroDescription?: T;
+  homeHeroFeatures?:
+    | T
+    | {
+        icon?: T;
+        title?: T;
+        subtitle?: T;
+        id?: T;
+      };
+  homeTrustIndicators?:
+    | T
+    | {
+        icon?: T;
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  homeServicesTitle?: T;
+  homeServicesDescription?: T;
+  homeServicePreviews?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  homeCtaTitle?: T;
+  homeCtaDescription?: T;
+  homeCtaButtonText?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  generateSlug?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-page_select".
+ */
+export interface ContactPageSelect<T extends boolean = true> {
+  title?: T;
+  publishedAt?: T;
+  template?: T;
+  hero?:
+    | T
+    | {
+        type?: T;
+        richText?: T;
+        links?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    url?: T;
+                    label?: T;
+                    appearance?: T;
+                  };
+              id?: T;
+            };
+        media?: T;
+      };
+  layout?:
+    | T
+    | {
+        cta?: T | CallToActionBlockSelect<T>;
+        content?: T | ContentBlockSelect<T>;
+        mediaBlock?: T | MediaBlockSelect<T>;
+        archive?: T | ArchiveBlockSelect<T>;
+        formBlock?: T | FormBlockSelect<T>;
+      };
+  heroTitle?: T;
+  heroDescription?: T;
+  whoWeAreTitle?: T;
+  whoWeAreContent?: T;
+  valuesTitle?: T;
+  values?:
+    | T
+    | {
+        valueIcon?: T;
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  complianceTitle?: T;
+  licenses?:
+    | T
+    | {
+        licenseIcon?: T;
+        title?: T;
+        description?: T;
+        licenseIdLabel?: T;
+        licenseIdValue?: T;
+        id?: T;
+      };
+  leadershipTitle?: T;
+  leaders?:
+    | T
+    | {
+        name?: T;
+        role?: T;
+        description?: T;
+        id?: T;
+      };
+  commitmentTitle?: T;
+  commitmentDescription?: T;
+  servicesHeroTitle?: T;
+  servicesHeroDescription?: T;
+  serviceBlocks?:
+    | T
+    | {
+        title?: T;
+        serviceIcon?: T;
+        description?: T;
+        features?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        sideBoxTitle?: T;
+        sideBoxType?: T;
+        sideBoxDescription?: T;
+        sideBoxList?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        ctaText?: T;
+        ctaUrl?: T;
+        id?: T;
+      };
+  helpSectionTitle?: T;
+  helpSectionDescription?: T;
+  helpSectionCtaText?: T;
+  helpSectionCtaUrl?: T;
+  disclaimerTitle?: T;
+  disclaimerText?: T;
+  contactHeroTitle?: T;
+  contactHeroDescription?: T;
+  contactFormTitle?: T;
+  contactForm?: T;
+  contactInfoTitle?: T;
+  contactMethods?:
+    | T
+    | {
+        icon?: T;
+        title?: T;
+        content?: T;
+        id?: T;
+      };
+  visitOfficeTitle?: T;
+  visitOfficeDescription?: T;
+  visitOfficeMapUrl?: T;
+  responseTimeTitle?: T;
+  responseTimeDescription?: T;
+  openAccountHeroTitle?: T;
+  openAccountHeroDescription?: T;
+  openAccountProcessTitle?: T;
+  openAccountProcessDescription?: T;
+  openAccountSteps?:
+    | T
+    | {
+        stepNumber?: T;
+        title?: T;
+        description?: T;
+        icon?: T;
+        items?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  downloadsTitle?: T;
+  downloadsDescription?: T;
+  openAccountDownloads?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        link?: T;
+        icon?: T;
+        id?: T;
+      };
+  contactTitle?: T;
+  contactDescription?: T;
+  contactCtaText?: T;
+  contactCtaUrl?: T;
+  learnMoreText?: T;
+  learnMoreUrl?: T;
+  infoTitle?: T;
+  infoItems?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  investorHeroTitle?: T;
+  investorHeroDescription?: T;
+  educationTopics?:
+    | T
+    | {
+        title?: T;
+        icon?: T;
+        theme?: T;
+        content?: T;
+        id?: T;
+      };
+  riskTitle?: T;
+  riskItems?:
+    | T
+    | {
+        title?: T;
+        text?: T;
+        id?: T;
+      };
+  investorFaqs?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  practicesTitle?: T;
+  practicesDos?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  practicesDonts?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  investorCommitmentTitle?: T;
+  investorCommitmentText1?: T;
+  investorCommitmentText2?: T;
+  homeHeroBadge?: T;
+  homeHeroTitle?: T;
+  homeHeroDescription?: T;
+  homeHeroFeatures?:
+    | T
+    | {
+        icon?: T;
+        title?: T;
+        subtitle?: T;
+        id?: T;
+      };
+  homeTrustIndicators?:
+    | T
+    | {
+        icon?: T;
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  homeServicesTitle?: T;
+  homeServicesDescription?: T;
+  homeServicePreviews?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  homeCtaTitle?: T;
+  homeCtaDescription?: T;
+  homeCtaButtonText?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  generateSlug?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "investor-page_select".
+ */
+export interface InvestorPageSelect<T extends boolean = true> {
+  title?: T;
+  publishedAt?: T;
+  template?: T;
+  hero?:
+    | T
+    | {
+        type?: T;
+        richText?: T;
+        links?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    url?: T;
+                    label?: T;
+                    appearance?: T;
+                  };
+              id?: T;
+            };
+        media?: T;
+      };
+  layout?:
+    | T
+    | {
+        cta?: T | CallToActionBlockSelect<T>;
+        content?: T | ContentBlockSelect<T>;
+        mediaBlock?: T | MediaBlockSelect<T>;
+        archive?: T | ArchiveBlockSelect<T>;
+        formBlock?: T | FormBlockSelect<T>;
+      };
+  heroTitle?: T;
+  heroDescription?: T;
+  whoWeAreTitle?: T;
+  whoWeAreContent?: T;
+  valuesTitle?: T;
+  values?:
+    | T
+    | {
+        valueIcon?: T;
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  complianceTitle?: T;
+  licenses?:
+    | T
+    | {
+        licenseIcon?: T;
+        title?: T;
+        description?: T;
+        licenseIdLabel?: T;
+        licenseIdValue?: T;
+        id?: T;
+      };
+  leadershipTitle?: T;
+  leaders?:
+    | T
+    | {
+        name?: T;
+        role?: T;
+        description?: T;
+        id?: T;
+      };
+  commitmentTitle?: T;
+  commitmentDescription?: T;
+  servicesHeroTitle?: T;
+  servicesHeroDescription?: T;
+  serviceBlocks?:
+    | T
+    | {
+        title?: T;
+        serviceIcon?: T;
+        description?: T;
+        features?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        sideBoxTitle?: T;
+        sideBoxType?: T;
+        sideBoxDescription?: T;
+        sideBoxList?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        ctaText?: T;
+        ctaUrl?: T;
+        id?: T;
+      };
+  helpSectionTitle?: T;
+  helpSectionDescription?: T;
+  helpSectionCtaText?: T;
+  helpSectionCtaUrl?: T;
+  disclaimerTitle?: T;
+  disclaimerText?: T;
+  contactHeroTitle?: T;
+  contactHeroDescription?: T;
+  contactFormTitle?: T;
+  contactForm?: T;
+  contactInfoTitle?: T;
+  contactMethods?:
+    | T
+    | {
+        icon?: T;
+        title?: T;
+        content?: T;
+        id?: T;
+      };
+  visitOfficeTitle?: T;
+  visitOfficeDescription?: T;
+  visitOfficeMapUrl?: T;
+  responseTimeTitle?: T;
+  responseTimeDescription?: T;
+  openAccountHeroTitle?: T;
+  openAccountHeroDescription?: T;
+  openAccountProcessTitle?: T;
+  openAccountProcessDescription?: T;
+  openAccountSteps?:
+    | T
+    | {
+        stepNumber?: T;
+        title?: T;
+        description?: T;
+        icon?: T;
+        items?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  downloadsTitle?: T;
+  downloadsDescription?: T;
+  openAccountDownloads?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        link?: T;
+        icon?: T;
+        id?: T;
+      };
+  contactTitle?: T;
+  contactDescription?: T;
+  contactCtaText?: T;
+  contactCtaUrl?: T;
+  learnMoreText?: T;
+  learnMoreUrl?: T;
+  infoTitle?: T;
+  infoItems?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  investorHeroTitle?: T;
+  investorHeroDescription?: T;
+  educationTopics?:
+    | T
+    | {
+        title?: T;
+        icon?: T;
+        theme?: T;
+        content?: T;
+        id?: T;
+      };
+  riskTitle?: T;
+  riskItems?:
+    | T
+    | {
+        title?: T;
+        text?: T;
+        id?: T;
+      };
+  investorFaqs?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  practicesTitle?: T;
+  practicesDos?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  practicesDonts?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  investorCommitmentTitle?: T;
+  investorCommitmentText1?: T;
+  investorCommitmentText2?: T;
+  homeHeroBadge?: T;
+  homeHeroTitle?: T;
+  homeHeroDescription?: T;
+  homeHeroFeatures?:
+    | T
+    | {
+        icon?: T;
+        title?: T;
+        subtitle?: T;
+        id?: T;
+      };
+  homeTrustIndicators?:
+    | T
+    | {
+        icon?: T;
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  homeServicesTitle?: T;
+  homeServicesDescription?: T;
+  homeServicePreviews?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  homeCtaTitle?: T;
+  homeCtaDescription?: T;
+  homeCtaButtonText?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  generateSlug?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "open-account-page_select".
+ */
+export interface OpenAccountPageSelect<T extends boolean = true> {
+  title?: T;
+  publishedAt?: T;
+  template?: T;
+  hero?:
+    | T
+    | {
+        type?: T;
+        richText?: T;
+        links?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    url?: T;
+                    label?: T;
+                    appearance?: T;
+                  };
+              id?: T;
+            };
+        media?: T;
+      };
+  layout?:
+    | T
+    | {
+        cta?: T | CallToActionBlockSelect<T>;
+        content?: T | ContentBlockSelect<T>;
+        mediaBlock?: T | MediaBlockSelect<T>;
+        archive?: T | ArchiveBlockSelect<T>;
+        formBlock?: T | FormBlockSelect<T>;
+      };
+  heroTitle?: T;
+  heroDescription?: T;
+  whoWeAreTitle?: T;
+  whoWeAreContent?: T;
+  valuesTitle?: T;
+  values?:
+    | T
+    | {
+        valueIcon?: T;
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  complianceTitle?: T;
+  licenses?:
+    | T
+    | {
+        licenseIcon?: T;
+        title?: T;
+        description?: T;
+        licenseIdLabel?: T;
+        licenseIdValue?: T;
+        id?: T;
+      };
+  leadershipTitle?: T;
+  leaders?:
+    | T
+    | {
+        name?: T;
+        role?: T;
+        description?: T;
+        id?: T;
+      };
+  commitmentTitle?: T;
+  commitmentDescription?: T;
+  servicesHeroTitle?: T;
+  servicesHeroDescription?: T;
+  serviceBlocks?:
+    | T
+    | {
+        title?: T;
+        serviceIcon?: T;
+        description?: T;
+        features?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        sideBoxTitle?: T;
+        sideBoxType?: T;
+        sideBoxDescription?: T;
+        sideBoxList?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        ctaText?: T;
+        ctaUrl?: T;
+        id?: T;
+      };
+  helpSectionTitle?: T;
+  helpSectionDescription?: T;
+  helpSectionCtaText?: T;
+  helpSectionCtaUrl?: T;
+  disclaimerTitle?: T;
+  disclaimerText?: T;
+  contactHeroTitle?: T;
+  contactHeroDescription?: T;
+  contactFormTitle?: T;
+  contactForm?: T;
+  contactInfoTitle?: T;
+  contactMethods?:
+    | T
+    | {
+        icon?: T;
+        title?: T;
+        content?: T;
+        id?: T;
+      };
+  visitOfficeTitle?: T;
+  visitOfficeDescription?: T;
+  visitOfficeMapUrl?: T;
+  responseTimeTitle?: T;
+  responseTimeDescription?: T;
+  openAccountHeroTitle?: T;
+  openAccountHeroDescription?: T;
+  openAccountProcessTitle?: T;
+  openAccountProcessDescription?: T;
+  openAccountSteps?:
+    | T
+    | {
+        stepNumber?: T;
+        title?: T;
+        description?: T;
+        icon?: T;
+        items?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  downloadsTitle?: T;
+  downloadsDescription?: T;
+  openAccountDownloads?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        link?: T;
+        icon?: T;
+        id?: T;
+      };
+  contactTitle?: T;
+  contactDescription?: T;
+  contactCtaText?: T;
+  contactCtaUrl?: T;
+  learnMoreText?: T;
+  learnMoreUrl?: T;
+  infoTitle?: T;
+  infoItems?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  investorHeroTitle?: T;
+  investorHeroDescription?: T;
+  educationTopics?:
+    | T
+    | {
+        title?: T;
+        icon?: T;
+        theme?: T;
+        content?: T;
+        id?: T;
+      };
+  riskTitle?: T;
+  riskItems?:
+    | T
+    | {
+        title?: T;
+        text?: T;
+        id?: T;
+      };
+  investorFaqs?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  practicesTitle?: T;
+  practicesDos?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  practicesDonts?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  investorCommitmentTitle?: T;
+  investorCommitmentText1?: T;
+  investorCommitmentText2?: T;
+  homeHeroBadge?: T;
+  homeHeroTitle?: T;
+  homeHeroDescription?: T;
+  homeHeroFeatures?:
+    | T
+    | {
+        icon?: T;
+        title?: T;
+        subtitle?: T;
+        id?: T;
+      };
+  homeTrustIndicators?:
+    | T
+    | {
+        icon?: T;
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  homeServicesTitle?: T;
+  homeServicesDescription?: T;
+  homeServicePreviews?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  homeCtaTitle?: T;
+  homeCtaDescription?: T;
+  homeCtaButtonText?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  generateSlug?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "posts_select".
  */
 export interface PostsSelect<T extends boolean = true> {
@@ -2218,6 +5224,20 @@ export interface RolesSelect<T extends boolean = true> {
         action?: T;
         id?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-submissions_select".
+ */
+export interface ContactSubmissionsSelect<T extends boolean = true> {
+  form?: T;
+  name?: T;
+  email?: T;
+  phone?: T;
+  subject?: T;
+  message?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -2617,6 +5637,30 @@ export interface TaskSchedulePublish {
       | ({
           relationTo: 'pages';
           value: number | Page;
+        } | null)
+      | ({
+          relationTo: 'home-page';
+          value: number | HomePage;
+        } | null)
+      | ({
+          relationTo: 'about-page';
+          value: number | AboutPage;
+        } | null)
+      | ({
+          relationTo: 'services-page';
+          value: number | ServicesPage;
+        } | null)
+      | ({
+          relationTo: 'contact-page';
+          value: number | ContactPage;
+        } | null)
+      | ({
+          relationTo: 'investor-page';
+          value: number | InvestorPage;
+        } | null)
+      | ({
+          relationTo: 'open-account-page';
+          value: number | OpenAccountPage;
         } | null)
       | ({
           relationTo: 'posts';

@@ -86,6 +86,7 @@ export const plugins: Plugin[] = [
     },
     formSubmissionOverrides: {
       admin: {
+        hidden: true,
         defaultColumns: ['name', 'email', 'subject', 'createdAt'],
       },
       access: {

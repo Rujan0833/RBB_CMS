@@ -35,7 +35,7 @@ export const CareerPage: Tab = {
                                 {
                                     name: 'title',
                                     type: 'text',
-                                    required: true,
+                                    required: false,
                                 },
                                 {
                                     type: 'row',

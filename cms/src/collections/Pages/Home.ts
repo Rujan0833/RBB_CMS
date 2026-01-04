@@ -21,13 +21,13 @@ export const HomePage: Tab = {
                             name: 'homeHeroTitle',
                             type: 'text',
                             defaultValue: "Your Trusted Partner in Nepal's Capital Market",
-                            required: true,
+                            required: false,
                         },
                         {
                             name: 'homeHeroDescription',
                             type: 'textarea',
                             defaultValue: 'Navigate the Nepal Stock Exchange with confidence. Professional brokerage services for retail and institutional investors.',
-                            required: true,
+                            required: false,
                         },
                         {
                             name: 'homeHeroFeatures',
@@ -48,7 +48,7 @@ export const HomePage: Tab = {
                                 {
                                     name: 'title',
                                     type: 'text',
-                                    required: true,
+                                    required: false,
                                 },
                                 {
                                     name: 'subtitle',
@@ -82,7 +82,7 @@ export const HomePage: Tab = {
                                 {
                                     name: 'title',
                                     type: 'text',
-                                    required: true,
+                                    required: false,
                                 },
                                 {
                                     name: 'description',
@@ -115,12 +115,12 @@ export const HomePage: Tab = {
                                 {
                                     name: 'title',
                                     type: 'text',
-                                    required: true,
+                                    required: false,
                                 },
                                 {
                                     name: 'description',
                                     type: 'textarea',
-                                    required: true,
+                                    required: false,
                                 },
                             ],
                         },

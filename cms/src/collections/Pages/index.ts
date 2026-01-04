@@ -25,13 +25,7 @@ import { isSuperAdmin } from '../../access/isSuperAdmin'
 
 import { AboutPage } from './About'
 import { ServicesPage } from './Services'
-import { HowItWorksPage } from './HowItWorks'
-import { CareerPage } from './Career'
-import { KnowledgeCenterPage } from './KnowledgeCenter'
-import { FAQPage } from './FAQPage'
 import { ContactPage } from './Contact'
-import { LegalPage } from './LegalPage';
-import { NoticePage } from './NoticePage';
 import { OpenAccountPage } from './OpenAccount';
 import { InvestorPage } from './Investor';
 import { HomePage } from './Home';
@@ -64,6 +58,7 @@ export const Pages: CollectionConfig<'pages'> = {
     slug: true,
   },
   admin: {
+    hidden: true,
     defaultColumns: ['title', 'slug', 'updatedAt'],
     livePreview: {
       url: ({ data, req }) =>
@@ -104,14 +99,8 @@ export const Pages: CollectionConfig<'pages'> = {
         { label: 'Services Page', value: 'services' },
         { label: 'Open Account Page', value: 'open-account' },
         { label: 'Investor Education Page', value: 'investor' },
-        { label: 'How It Works Page', value: 'how-it-works' },
         { label: 'Home Page', value: 'home' },
-        { label: 'Career Page', value: 'career' },
-        { label: 'Knowledge Center Page', value: 'knowledge-center' },
-        { label: 'FAQ Page', value: 'faq' },
         { label: 'Contact Page', value: 'contact' },
-        { label: 'Legal Page', value: 'legal' },
-        { label: 'Notice Page', value: 'notice' },
       ],
       admin: {
         position: 'sidebar',
@@ -139,13 +128,7 @@ export const Pages: CollectionConfig<'pages'> = {
         },
         AboutPage,
         ServicesPage,
-        HowItWorksPage,
-        CareerPage,
-        KnowledgeCenterPage,
-        FAQPage,
         ContactPage,
-        LegalPage,
-        NoticePage,
         OpenAccountPage,
         InvestorPage,
         HomePage,
