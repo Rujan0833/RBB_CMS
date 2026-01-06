@@ -9,6 +9,7 @@ const isSuperOrClientAdmin: FieldAccess = (args) => {
 
 export const Roles: CollectionConfig = {
     slug: 'roles',
+    lockDocuments: false,
     admin: {
         useAsTitle: 'name',
         defaultColumns: ['name', 'updatedAt'],

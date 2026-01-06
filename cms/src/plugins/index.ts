@@ -88,6 +88,7 @@ export const plugins: Plugin[] = [
       admin: {
         hidden: true,
         defaultColumns: ['name', 'email', 'subject', 'createdAt'],
+        listSearchableFields: ['name', 'email', 'subject'],
       },
       access: {
         read: isSuperOrClientAdmin,

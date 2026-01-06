@@ -4,6 +4,7 @@ import { Pages } from './index'
 export const createVirtualPageCollection = (slug: string, template: string, label: string): CollectionConfig => ({
     slug,
     dbName: 'pages',
+    lockDocuments: false,
     labels: {
         singular: label,
         plural: label,

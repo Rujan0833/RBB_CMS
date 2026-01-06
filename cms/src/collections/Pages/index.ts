@@ -33,6 +33,7 @@ import { checkRole } from '../../access/rbac'
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
+  lockDocuments: false,
   access: {
     create: checkRole('pages', 'create'),
     delete: checkRole('pages', 'delete'),

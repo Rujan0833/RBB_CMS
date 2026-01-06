@@ -3064,34 +3064,6 @@ export interface PayloadLockedDocument {
   id: number;
   document?:
     | ({
-        relationTo: 'pages';
-        value: number | Page;
-      } | null)
-    | ({
-        relationTo: 'home-page';
-        value: number | HomePage;
-      } | null)
-    | ({
-        relationTo: 'about-page';
-        value: number | AboutPage;
-      } | null)
-    | ({
-        relationTo: 'services-page';
-        value: number | ServicesPage;
-      } | null)
-    | ({
-        relationTo: 'contact-page';
-        value: number | ContactPage;
-      } | null)
-    | ({
-        relationTo: 'investor-page';
-        value: number | InvestorPage;
-      } | null)
-    | ({
-        relationTo: 'open-account-page';
-        value: number | OpenAccountPage;
-      } | null)
-    | ({
         relationTo: 'posts';
         value: number | Post;
       } | null)
@@ -3106,10 +3078,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'users';
         value: number | User;
-      } | null)
-    | ({
-        relationTo: 'roles';
-        value: number | Role;
       } | null)
     | ({
         relationTo: 'contact-submissions';
