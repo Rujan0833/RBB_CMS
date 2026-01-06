@@ -1,4 +1,4 @@
-import type { Access } from 'payload/types'
+    import type { Access } from 'payload/types'
 
 export const checkRole = (
     resource: string,

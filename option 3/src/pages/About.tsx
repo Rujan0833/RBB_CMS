@@ -1,6 +1,7 @@
-import { Shield, Award, Users, Target } from 'lucide-react';
+import { Shield, Users } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { fetchAboutPage, getImageUrl } from '../lib/cms';
+import { LucideIcon } from '../components/LucideIcon';
 
 // Fallback data (existing hardcoded content)
 const DEFAULT_DATA = {
@@ -34,8 +35,6 @@ const DEFAULT_DATA = {
   commitmentDescription: "We are committed to providing honest, transparent, and compliant brokerage services. We do not promise guaranteed returns or unrealistic gains. Market investments are subject to market risks, and we encourage all investors to make informed decisions based on their financial goals and risk appetite. Our role is to facilitate your trading and provide guidance, not to assure profits."
 };
 
-const IconMap: any = { Shield, Award, Users, Target };
-
 export default function About() {
   const [data, setData] = useState<any>(null);
 
@@ -43,8 +42,6 @@ export default function About() {
     const loadData = async () => {
       const cmsData = await fetchAboutPage();
       if (cmsData) {
-        // CMS Client now returns fully mapped and typed data
-        // We merge with default data to ensure all fields exist if CMS returns partials
         setData({
           ...DEFAULT_DATA,
           ...cmsData
@@ -53,8 +50,6 @@ export default function About() {
         setData(DEFAULT_DATA);
       }
     };
-
-
     loadData();
   }, []);
 
@@ -84,10 +79,9 @@ export default function About() {
               <h3 className="text-2xl font-bold text-gray-900 mb-6">{content.valuesTitle}</h3>
               <div className="space-y-4">
                 {content.values.map((value: any, index: number) => {
-                  const Icon = IconMap[value.icon] || Shield;
                   return (
                     <div key={index} className="flex items-start space-x-3">
-                      <Icon className="h-6 w-6 text-blue-900 mt-1 flex-shrink-0" />
+                      <LucideIcon name={value.icon} className="h-6 w-6 text-blue-900 mt-1 flex-shrink-0" size={24} fallback={Shield} />
                       <div>
                         <h4 className="font-semibold text-gray-900 mb-1">{value.title}</h4>
                         <p className="text-gray-600 text-sm">{value.description}</p>
@@ -106,11 +100,10 @@ export default function About() {
           <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">{content.complianceTitle}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {content.licenses.map((license: any, index: number) => {
-              const Icon = IconMap[license.icon] || Shield;
               return (
                 <div key={index} className="bg-white rounded-xl p-8 shadow-md">
                   <div className="flex items-center justify-center w-16 h-16 bg-blue-900 text-white rounded-full mb-4 mx-auto">
-                    <Icon className="h-8 w-8" />
+                    <LucideIcon name={license.icon} className="h-8 w-8" size={32} fallback={Shield} />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-3 text-center">{license.title}</h3>
                   <p className="text-gray-600 text-center">

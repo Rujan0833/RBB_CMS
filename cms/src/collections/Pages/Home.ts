@@ -1,4 +1,4 @@
-import { Tab } from 'payload/types';
+import type { Tab } from 'payload';
 
 export const HomePage: Tab = {
     label: 'Home Page',
@@ -38,12 +38,13 @@ export const HomePage: Tab = {
                             fields: [
                                 {
                                     name: 'icon',
-                                    type: 'select',
-                                    options: [
-                                        { label: 'Check Circle', value: 'CheckCircle2' },
-                                        { label: 'Shield', value: 'Shield' },
-                                    ],
-                                    defaultValue: 'CheckCircle2',
+                                    type: 'text',
+                                    admin: {
+                                        components: {
+                                            Field: '@/components/fields/IconPicker',
+                                        },
+                                    },
+                                    defaultValue: 'CheckCircle',
                                 },
                                 {
                                     name: 'title',
@@ -70,13 +71,12 @@ export const HomePage: Tab = {
                             fields: [
                                 {
                                     name: 'icon',
-                                    type: 'select',
-                                    options: [
-                                        { label: 'Shield', value: 'Shield' },
-                                        { label: 'Trending Up', value: 'TrendingUp' },
-                                        { label: 'Users', value: 'Users' },
-                                        { label: 'Award', value: 'Award' },
-                                    ],
+                                    type: 'text',
+                                    admin: {
+                                        components: {
+                                            Field: '@/components/fields/IconPicker',
+                                        },
+                                    },
                                     defaultValue: 'Shield',
                                 },
                                 {

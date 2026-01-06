@@ -1,4 +1,4 @@
-import { Tab } from 'payload/types';
+import type { Tab } from 'payload';
 
 export const ServicesPage: Tab = {
     label: 'Services Specifics',
@@ -41,13 +41,12 @@ export const ServicesPage: Tab = {
                                 },
                                 {
                                     name: 'serviceIcon',
-                                    type: 'select',
-                                    options: [
-                                        { label: 'Trending Up', value: 'TrendingUp' },
-                                        { label: 'Monitor', value: 'Monitor' },
-                                        { label: 'File Text', value: 'FileText' },
-                                        { label: 'Pie Chart', value: 'PieChart' },
-                                    ],
+                                    type: 'text',
+                                    admin: {
+                                        components: {
+                                            Field: '@/components/fields/IconPicker',
+                                        },
+                                    },
                                     defaultValue: 'TrendingUp',
                                 },
                                 {
