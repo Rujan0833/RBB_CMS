@@ -1,7 +1,8 @@
-import { CheckCircle2, FileText, CreditCard, UserCheck, Download, ArrowRight } from 'lucide-react';
+import { CheckCircle2, Download, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { fetchOpenAccountPage } from '../lib/cms';
+import { LucideIcon } from '../components/LucideIcon';
 
 const DEFAULT_DATA = {
   heroTitle: "Open a Trading Account",
@@ -96,8 +97,6 @@ const DEFAULT_DATA = {
   ]
 };
 
-const IconMap: any = { CheckCircle2, FileText, CreditCard, UserCheck, Download };
-
 export default function OpenAccount() {
   const [data, setData] = useState<any>(null);
 
@@ -140,11 +139,6 @@ export default function OpenAccount() {
 
           <div className="space-y-8 max-w-4xl mx-auto">
             {content.steps.map((step: any, index: number) => {
-              const Icon = IconMap[step.icon] || IconMap.CheckCircle2; // Fallback icon
-              // Determine style based on step number or just alternate/cycling if needed
-              // Original code had specific styling for step 4 (green). 
-              // We can infer styling or keep it simple. Let's try to infer if it's the last step or 'activation' step?
-              // For now, let's keep uniform styling or check if it's the last one for green.
               const isLast = index === content.steps.length - 1;
               const boxClass = isLast
                 ? "bg-green-50 border-2 border-green-200"
@@ -165,7 +159,7 @@ export default function OpenAccount() {
                   </div>
                   <div className="flex-1">
                     <h3 className="text-xl font-bold text-gray-900 mb-3 flex items-center">
-                      <Icon className={`h-6 w-6 mr-2 ${iconClass}`} />
+                      <LucideIcon name={step.icon} className={`h-6 w-6 mr-2 ${iconClass}`} size={24} fallback={CheckCircle2} />
                       {step.title}
                     </h3>
                     <p className="text-gray-700 mb-4">
@@ -204,7 +198,7 @@ export default function OpenAccount() {
                 href={download.link || "#"}
                 className="flex flex-col items-center p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow"
               >
-                <Download className="h-12 w-12 text-blue-900 mb-4" />
+                <LucideIcon name={download.icon} className="h-12 w-12 text-blue-900 mb-4" size={48} fallback={Download} />
                 <h3 className="font-semibold text-gray-900 mb-2">{download.title}</h3>
                 <p className="text-sm text-gray-600 text-center mb-3">{download.description}</p>
                 <span className="text-sm text-blue-900 font-medium">Download PDF</span>

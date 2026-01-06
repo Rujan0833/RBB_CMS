@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
-import { Shield, TrendingUp, Users, Award, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, Shield, CheckCircle2 } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { fetchHomePage } from '../lib/cms';
+import { LucideIcon } from '../components/LucideIcon';
 
 const DEFAULT_DATA = {
   heroBadge: "SEBON Licensed & NEPSE Member",
@@ -67,8 +68,6 @@ const DEFAULT_DATA = {
   ctaButtonText: "Open Trading Account"
 };
 
-const IconMap: any = { Shield, TrendingUp, Users, Award, CheckCircle2 };
-
 export default function Home() {
   const [data, setData] = useState<any>(null);
 
@@ -93,7 +92,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
               <div className="inline-flex items-center px-4 py-2 bg-green-600/20 border border-green-500/30 rounded-full mb-6">
-                <Shield className="h-4 w-4 mr-2" />
+                <LucideIcon name="Shield" className="h-4 w-4 mr-2" size={16} />
                 <span className="text-sm font-medium">{content.heroBadge}</span>
               </div>
               <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
@@ -122,11 +121,10 @@ export default function Home() {
               <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-8">
                 <div className="space-y-6">
                   {content.heroFeatures.map((feature: any, index: number) => {
-                    const Icon = IconMap[feature.icon] || CheckCircle2;
                     return (
                       <div key={index} className="flex items-start space-x-4">
                         <div className="bg-green-600 rounded-lg p-3">
-                          <Icon className="h-6 w-6" />
+                          <LucideIcon name={feature.icon} className="h-6 w-6" size={24} fallback={CheckCircle2} />
                         </div>
                         <div>
                           <h3 className="font-semibold text-lg mb-1">{feature.title}</h3>
@@ -146,11 +144,10 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             {content.trustIndicators.map((indicator: any, index: number) => {
-              const Icon = IconMap[indicator.icon] || Shield;
               return (
                 <div key={index} className="text-center">
                   <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 text-blue-900 rounded-full mb-4">
-                    <Icon className="h-8 w-8" />
+                    <LucideIcon name={indicator.icon} className="h-8 w-8" size={32} fallback={Shield} />
                   </div>
                   <h3 className="text-2xl font-bold text-gray-900 mb-2">{indicator.title}</h3>
                   <p className="text-gray-600">{indicator.description}</p>

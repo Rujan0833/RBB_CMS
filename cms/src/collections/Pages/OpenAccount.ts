@@ -1,4 +1,4 @@
-import { Tab } from 'payload/types';
+import type { Tab } from 'payload';
 
 export const OpenAccountPage: Tab = {
     label: 'Open Account Specifics',
@@ -62,14 +62,12 @@ export const OpenAccountPage: Tab = {
                                 },
                                 {
                                     name: 'icon',
-                                    type: 'select',
-                                    options: [
-                                        { label: 'FileText', value: 'FileText' },
-                                        { label: 'CreditCard', value: 'CreditCard' },
-                                        { label: 'UserCheck', value: 'UserCheck' },
-                                        { label: 'CheckCircle2', value: 'CheckCircle2' },
-                                        { label: 'Download', value: 'Download' },
-                                    ],
+                                    type: 'text',
+                                    admin: {
+                                        components: {
+                                            Field: '@/components/fields/IconPicker',
+                                        },
+                                    },
                                     defaultValue: 'FileText',
                                 },
                                 {
@@ -121,10 +119,12 @@ export const OpenAccountPage: Tab = {
                                 },
                                 {
                                     name: 'icon',
-                                    type: 'select',
-                                    options: [
-                                        { label: 'Download', value: 'Download' },
-                                    ],
+                                    type: 'text',
+                                    admin: {
+                                        components: {
+                                            Field: '@/components/fields/IconPicker',
+                                        },
+                                    },
                                     defaultValue: 'Download',
                                 }
                             ]

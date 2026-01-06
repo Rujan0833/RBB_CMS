@@ -240,7 +240,7 @@ export interface Page {
   valuesTitle?: string | null;
   values?:
     | {
-        valueIcon: 'Shield' | 'Award' | 'Users' | 'Target';
+        valueIcon: string;
         title: string;
         description: string;
         id?: string | null;
@@ -249,7 +249,7 @@ export interface Page {
   complianceTitle?: string | null;
   licenses?:
     | {
-        licenseIcon?: ('Shield' | 'Award') | null;
+        licenseIcon?: string | null;
         title: string;
         description: string;
         licenseIdLabel?: string | null;
@@ -260,6 +260,7 @@ export interface Page {
   leadershipTitle?: string | null;
   leaders?:
     | {
+        photo?: (number | null) | Media;
         name: string;
         role: string;
         description?: string | null;
@@ -273,7 +274,7 @@ export interface Page {
   serviceBlocks?:
     | {
         title?: string | null;
-        serviceIcon?: ('TrendingUp' | 'Monitor' | 'FileText' | 'PieChart') | null;
+        serviceIcon?: string | null;
         description?: string | null;
         features?:
           | {
@@ -308,7 +309,7 @@ export interface Page {
   contactInfoTitle?: string | null;
   contactMethods?:
     | {
-        icon?: ('MapPin' | 'Phone' | 'Mail' | 'Clock') | null;
+        icon?: string | null;
         title: string;
         content: string;
         id?: string | null;
@@ -328,7 +329,7 @@ export interface Page {
         stepNumber?: string | null;
         title?: string | null;
         description?: string | null;
-        icon?: ('FileText' | 'CreditCard' | 'UserCheck' | 'CheckCircle2' | 'Download') | null;
+        icon?: string | null;
         items?:
           | {
               text?: string | null;
@@ -345,7 +346,7 @@ export interface Page {
         title?: string | null;
         description?: string | null;
         link?: string | null;
-        icon?: 'Download' | null;
+        icon?: string | null;
         id?: string | null;
       }[]
     | null;
@@ -367,7 +368,7 @@ export interface Page {
   educationTopics?:
     | {
         title?: string | null;
-        icon?: ('BookOpen' | 'TrendingUp') | null;
+        icon?: string | null;
         theme?: ('blue' | 'green') | null;
         content?: {
           root: {
@@ -423,7 +424,7 @@ export interface Page {
   homeHeroDescription?: string | null;
   homeHeroFeatures?:
     | {
-        icon?: ('CheckCircle2' | 'Shield') | null;
+        icon?: string | null;
         title?: string | null;
         subtitle?: string | null;
         id?: string | null;
@@ -431,7 +432,7 @@ export interface Page {
     | null;
   homeTrustIndicators?:
     | {
-        icon?: ('Shield' | 'TrendingUp' | 'Users' | 'Award') | null;
+        icon?: string | null;
         title?: string | null;
         description?: string | null;
         id?: string | null;
@@ -1127,7 +1128,7 @@ export interface HomePage {
   valuesTitle?: string | null;
   values?:
     | {
-        valueIcon: 'Shield' | 'Award' | 'Users' | 'Target';
+        valueIcon: string;
         title: string;
         description: string;
         id?: string | null;
@@ -1136,7 +1137,7 @@ export interface HomePage {
   complianceTitle?: string | null;
   licenses?:
     | {
-        licenseIcon?: ('Shield' | 'Award') | null;
+        licenseIcon?: string | null;
         title: string;
         description: string;
         licenseIdLabel?: string | null;
@@ -1147,6 +1148,7 @@ export interface HomePage {
   leadershipTitle?: string | null;
   leaders?:
     | {
+        photo?: (number | null) | Media;
         name: string;
         role: string;
         description?: string | null;
@@ -1160,7 +1162,7 @@ export interface HomePage {
   serviceBlocks?:
     | {
         title?: string | null;
-        serviceIcon?: ('TrendingUp' | 'Monitor' | 'FileText' | 'PieChart') | null;
+        serviceIcon?: string | null;
         description?: string | null;
         features?:
           | {
@@ -1195,7 +1197,7 @@ export interface HomePage {
   contactInfoTitle?: string | null;
   contactMethods?:
     | {
-        icon?: ('MapPin' | 'Phone' | 'Mail' | 'Clock') | null;
+        icon?: string | null;
         title: string;
         content: string;
         id?: string | null;
@@ -1215,7 +1217,7 @@ export interface HomePage {
         stepNumber?: string | null;
         title?: string | null;
         description?: string | null;
-        icon?: ('FileText' | 'CreditCard' | 'UserCheck' | 'CheckCircle2' | 'Download') | null;
+        icon?: string | null;
         items?:
           | {
               text?: string | null;
@@ -1232,7 +1234,7 @@ export interface HomePage {
         title?: string | null;
         description?: string | null;
         link?: string | null;
-        icon?: 'Download' | null;
+        icon?: string | null;
         id?: string | null;
       }[]
     | null;
@@ -1254,7 +1256,7 @@ export interface HomePage {
   educationTopics?:
     | {
         title?: string | null;
-        icon?: ('BookOpen' | 'TrendingUp') | null;
+        icon?: string | null;
         theme?: ('blue' | 'green') | null;
         content?: {
           root: {
@@ -1310,7 +1312,7 @@ export interface HomePage {
   homeHeroDescription?: string | null;
   homeHeroFeatures?:
     | {
-        icon?: ('CheckCircle2' | 'Shield') | null;
+        icon?: string | null;
         title?: string | null;
         subtitle?: string | null;
         id?: string | null;
@@ -1318,7 +1320,7 @@ export interface HomePage {
     | null;
   homeTrustIndicators?:
     | {
-        icon?: ('Shield' | 'TrendingUp' | 'Users' | 'Award') | null;
+        icon?: string | null;
         title?: string | null;
         description?: string | null;
         id?: string | null;
@@ -1427,7 +1429,7 @@ export interface AboutPage {
   valuesTitle?: string | null;
   values?:
     | {
-        valueIcon: 'Shield' | 'Award' | 'Users' | 'Target';
+        valueIcon: string;
         title: string;
         description: string;
         id?: string | null;
@@ -1436,7 +1438,7 @@ export interface AboutPage {
   complianceTitle?: string | null;
   licenses?:
     | {
-        licenseIcon?: ('Shield' | 'Award') | null;
+        licenseIcon?: string | null;
         title: string;
         description: string;
         licenseIdLabel?: string | null;
@@ -1447,6 +1449,7 @@ export interface AboutPage {
   leadershipTitle?: string | null;
   leaders?:
     | {
+        photo?: (number | null) | Media;
         name: string;
         role: string;
         description?: string | null;
@@ -1460,7 +1463,7 @@ export interface AboutPage {
   serviceBlocks?:
     | {
         title?: string | null;
-        serviceIcon?: ('TrendingUp' | 'Monitor' | 'FileText' | 'PieChart') | null;
+        serviceIcon?: string | null;
         description?: string | null;
         features?:
           | {
@@ -1495,7 +1498,7 @@ export interface AboutPage {
   contactInfoTitle?: string | null;
   contactMethods?:
     | {
-        icon?: ('MapPin' | 'Phone' | 'Mail' | 'Clock') | null;
+        icon?: string | null;
         title: string;
         content: string;
         id?: string | null;
@@ -1515,7 +1518,7 @@ export interface AboutPage {
         stepNumber?: string | null;
         title?: string | null;
         description?: string | null;
-        icon?: ('FileText' | 'CreditCard' | 'UserCheck' | 'CheckCircle2' | 'Download') | null;
+        icon?: string | null;
         items?:
           | {
               text?: string | null;
@@ -1532,7 +1535,7 @@ export interface AboutPage {
         title?: string | null;
         description?: string | null;
         link?: string | null;
-        icon?: 'Download' | null;
+        icon?: string | null;
         id?: string | null;
       }[]
     | null;
@@ -1554,7 +1557,7 @@ export interface AboutPage {
   educationTopics?:
     | {
         title?: string | null;
-        icon?: ('BookOpen' | 'TrendingUp') | null;
+        icon?: string | null;
         theme?: ('blue' | 'green') | null;
         content?: {
           root: {
@@ -1610,7 +1613,7 @@ export interface AboutPage {
   homeHeroDescription?: string | null;
   homeHeroFeatures?:
     | {
-        icon?: ('CheckCircle2' | 'Shield') | null;
+        icon?: string | null;
         title?: string | null;
         subtitle?: string | null;
         id?: string | null;
@@ -1618,7 +1621,7 @@ export interface AboutPage {
     | null;
   homeTrustIndicators?:
     | {
-        icon?: ('Shield' | 'TrendingUp' | 'Users' | 'Award') | null;
+        icon?: string | null;
         title?: string | null;
         description?: string | null;
         id?: string | null;
@@ -1727,7 +1730,7 @@ export interface ServicesPage {
   valuesTitle?: string | null;
   values?:
     | {
-        valueIcon: 'Shield' | 'Award' | 'Users' | 'Target';
+        valueIcon: string;
         title: string;
         description: string;
         id?: string | null;
@@ -1736,7 +1739,7 @@ export interface ServicesPage {
   complianceTitle?: string | null;
   licenses?:
     | {
-        licenseIcon?: ('Shield' | 'Award') | null;
+        licenseIcon?: string | null;
         title: string;
         description: string;
         licenseIdLabel?: string | null;
@@ -1747,6 +1750,7 @@ export interface ServicesPage {
   leadershipTitle?: string | null;
   leaders?:
     | {
+        photo?: (number | null) | Media;
         name: string;
         role: string;
         description?: string | null;
@@ -1760,7 +1764,7 @@ export interface ServicesPage {
   serviceBlocks?:
     | {
         title?: string | null;
-        serviceIcon?: ('TrendingUp' | 'Monitor' | 'FileText' | 'PieChart') | null;
+        serviceIcon?: string | null;
         description?: string | null;
         features?:
           | {
@@ -1795,7 +1799,7 @@ export interface ServicesPage {
   contactInfoTitle?: string | null;
   contactMethods?:
     | {
-        icon?: ('MapPin' | 'Phone' | 'Mail' | 'Clock') | null;
+        icon?: string | null;
         title: string;
         content: string;
         id?: string | null;
@@ -1815,7 +1819,7 @@ export interface ServicesPage {
         stepNumber?: string | null;
         title?: string | null;
         description?: string | null;
-        icon?: ('FileText' | 'CreditCard' | 'UserCheck' | 'CheckCircle2' | 'Download') | null;
+        icon?: string | null;
         items?:
           | {
               text?: string | null;
@@ -1832,7 +1836,7 @@ export interface ServicesPage {
         title?: string | null;
         description?: string | null;
         link?: string | null;
-        icon?: 'Download' | null;
+        icon?: string | null;
         id?: string | null;
       }[]
     | null;
@@ -1854,7 +1858,7 @@ export interface ServicesPage {
   educationTopics?:
     | {
         title?: string | null;
-        icon?: ('BookOpen' | 'TrendingUp') | null;
+        icon?: string | null;
         theme?: ('blue' | 'green') | null;
         content?: {
           root: {
@@ -1910,7 +1914,7 @@ export interface ServicesPage {
   homeHeroDescription?: string | null;
   homeHeroFeatures?:
     | {
-        icon?: ('CheckCircle2' | 'Shield') | null;
+        icon?: string | null;
         title?: string | null;
         subtitle?: string | null;
         id?: string | null;
@@ -1918,7 +1922,7 @@ export interface ServicesPage {
     | null;
   homeTrustIndicators?:
     | {
-        icon?: ('Shield' | 'TrendingUp' | 'Users' | 'Award') | null;
+        icon?: string | null;
         title?: string | null;
         description?: string | null;
         id?: string | null;
@@ -2027,7 +2031,7 @@ export interface ContactPage {
   valuesTitle?: string | null;
   values?:
     | {
-        valueIcon: 'Shield' | 'Award' | 'Users' | 'Target';
+        valueIcon: string;
         title: string;
         description: string;
         id?: string | null;
@@ -2036,7 +2040,7 @@ export interface ContactPage {
   complianceTitle?: string | null;
   licenses?:
     | {
-        licenseIcon?: ('Shield' | 'Award') | null;
+        licenseIcon?: string | null;
         title: string;
         description: string;
         licenseIdLabel?: string | null;
@@ -2047,6 +2051,7 @@ export interface ContactPage {
   leadershipTitle?: string | null;
   leaders?:
     | {
+        photo?: (number | null) | Media;
         name: string;
         role: string;
         description?: string | null;
@@ -2060,7 +2065,7 @@ export interface ContactPage {
   serviceBlocks?:
     | {
         title?: string | null;
-        serviceIcon?: ('TrendingUp' | 'Monitor' | 'FileText' | 'PieChart') | null;
+        serviceIcon?: string | null;
         description?: string | null;
         features?:
           | {
@@ -2095,7 +2100,7 @@ export interface ContactPage {
   contactInfoTitle?: string | null;
   contactMethods?:
     | {
-        icon?: ('MapPin' | 'Phone' | 'Mail' | 'Clock') | null;
+        icon?: string | null;
         title: string;
         content: string;
         id?: string | null;
@@ -2115,7 +2120,7 @@ export interface ContactPage {
         stepNumber?: string | null;
         title?: string | null;
         description?: string | null;
-        icon?: ('FileText' | 'CreditCard' | 'UserCheck' | 'CheckCircle2' | 'Download') | null;
+        icon?: string | null;
         items?:
           | {
               text?: string | null;
@@ -2132,7 +2137,7 @@ export interface ContactPage {
         title?: string | null;
         description?: string | null;
         link?: string | null;
-        icon?: 'Download' | null;
+        icon?: string | null;
         id?: string | null;
       }[]
     | null;
@@ -2154,7 +2159,7 @@ export interface ContactPage {
   educationTopics?:
     | {
         title?: string | null;
-        icon?: ('BookOpen' | 'TrendingUp') | null;
+        icon?: string | null;
         theme?: ('blue' | 'green') | null;
         content?: {
           root: {
@@ -2210,7 +2215,7 @@ export interface ContactPage {
   homeHeroDescription?: string | null;
   homeHeroFeatures?:
     | {
-        icon?: ('CheckCircle2' | 'Shield') | null;
+        icon?: string | null;
         title?: string | null;
         subtitle?: string | null;
         id?: string | null;
@@ -2218,7 +2223,7 @@ export interface ContactPage {
     | null;
   homeTrustIndicators?:
     | {
-        icon?: ('Shield' | 'TrendingUp' | 'Users' | 'Award') | null;
+        icon?: string | null;
         title?: string | null;
         description?: string | null;
         id?: string | null;
@@ -2327,7 +2332,7 @@ export interface InvestorPage {
   valuesTitle?: string | null;
   values?:
     | {
-        valueIcon: 'Shield' | 'Award' | 'Users' | 'Target';
+        valueIcon: string;
         title: string;
         description: string;
         id?: string | null;
@@ -2336,7 +2341,7 @@ export interface InvestorPage {
   complianceTitle?: string | null;
   licenses?:
     | {
-        licenseIcon?: ('Shield' | 'Award') | null;
+        licenseIcon?: string | null;
         title: string;
         description: string;
         licenseIdLabel?: string | null;
@@ -2347,6 +2352,7 @@ export interface InvestorPage {
   leadershipTitle?: string | null;
   leaders?:
     | {
+        photo?: (number | null) | Media;
         name: string;
         role: string;
         description?: string | null;
@@ -2360,7 +2366,7 @@ export interface InvestorPage {
   serviceBlocks?:
     | {
         title?: string | null;
-        serviceIcon?: ('TrendingUp' | 'Monitor' | 'FileText' | 'PieChart') | null;
+        serviceIcon?: string | null;
         description?: string | null;
         features?:
           | {
@@ -2395,7 +2401,7 @@ export interface InvestorPage {
   contactInfoTitle?: string | null;
   contactMethods?:
     | {
-        icon?: ('MapPin' | 'Phone' | 'Mail' | 'Clock') | null;
+        icon?: string | null;
         title: string;
         content: string;
         id?: string | null;
@@ -2415,7 +2421,7 @@ export interface InvestorPage {
         stepNumber?: string | null;
         title?: string | null;
         description?: string | null;
-        icon?: ('FileText' | 'CreditCard' | 'UserCheck' | 'CheckCircle2' | 'Download') | null;
+        icon?: string | null;
         items?:
           | {
               text?: string | null;
@@ -2432,7 +2438,7 @@ export interface InvestorPage {
         title?: string | null;
         description?: string | null;
         link?: string | null;
-        icon?: 'Download' | null;
+        icon?: string | null;
         id?: string | null;
       }[]
     | null;
@@ -2454,7 +2460,7 @@ export interface InvestorPage {
   educationTopics?:
     | {
         title?: string | null;
-        icon?: ('BookOpen' | 'TrendingUp') | null;
+        icon?: string | null;
         theme?: ('blue' | 'green') | null;
         content?: {
           root: {
@@ -2510,7 +2516,7 @@ export interface InvestorPage {
   homeHeroDescription?: string | null;
   homeHeroFeatures?:
     | {
-        icon?: ('CheckCircle2' | 'Shield') | null;
+        icon?: string | null;
         title?: string | null;
         subtitle?: string | null;
         id?: string | null;
@@ -2518,7 +2524,7 @@ export interface InvestorPage {
     | null;
   homeTrustIndicators?:
     | {
-        icon?: ('Shield' | 'TrendingUp' | 'Users' | 'Award') | null;
+        icon?: string | null;
         title?: string | null;
         description?: string | null;
         id?: string | null;
@@ -2627,7 +2633,7 @@ export interface OpenAccountPage {
   valuesTitle?: string | null;
   values?:
     | {
-        valueIcon: 'Shield' | 'Award' | 'Users' | 'Target';
+        valueIcon: string;
         title: string;
         description: string;
         id?: string | null;
@@ -2636,7 +2642,7 @@ export interface OpenAccountPage {
   complianceTitle?: string | null;
   licenses?:
     | {
-        licenseIcon?: ('Shield' | 'Award') | null;
+        licenseIcon?: string | null;
         title: string;
         description: string;
         licenseIdLabel?: string | null;
@@ -2647,6 +2653,7 @@ export interface OpenAccountPage {
   leadershipTitle?: string | null;
   leaders?:
     | {
+        photo?: (number | null) | Media;
         name: string;
         role: string;
         description?: string | null;
@@ -2660,7 +2667,7 @@ export interface OpenAccountPage {
   serviceBlocks?:
     | {
         title?: string | null;
-        serviceIcon?: ('TrendingUp' | 'Monitor' | 'FileText' | 'PieChart') | null;
+        serviceIcon?: string | null;
         description?: string | null;
         features?:
           | {
@@ -2695,7 +2702,7 @@ export interface OpenAccountPage {
   contactInfoTitle?: string | null;
   contactMethods?:
     | {
-        icon?: ('MapPin' | 'Phone' | 'Mail' | 'Clock') | null;
+        icon?: string | null;
         title: string;
         content: string;
         id?: string | null;
@@ -2715,7 +2722,7 @@ export interface OpenAccountPage {
         stepNumber?: string | null;
         title?: string | null;
         description?: string | null;
-        icon?: ('FileText' | 'CreditCard' | 'UserCheck' | 'CheckCircle2' | 'Download') | null;
+        icon?: string | null;
         items?:
           | {
               text?: string | null;
@@ -2732,7 +2739,7 @@ export interface OpenAccountPage {
         title?: string | null;
         description?: string | null;
         link?: string | null;
-        icon?: 'Download' | null;
+        icon?: string | null;
         id?: string | null;
       }[]
     | null;
@@ -2754,7 +2761,7 @@ export interface OpenAccountPage {
   educationTopics?:
     | {
         title?: string | null;
-        icon?: ('BookOpen' | 'TrendingUp') | null;
+        icon?: string | null;
         theme?: ('blue' | 'green') | null;
         content?: {
           root: {
@@ -2810,7 +2817,7 @@ export interface OpenAccountPage {
   homeHeroDescription?: string | null;
   homeHeroFeatures?:
     | {
-        icon?: ('CheckCircle2' | 'Shield') | null;
+        icon?: string | null;
         title?: string | null;
         subtitle?: string | null;
         id?: string | null;
@@ -2818,7 +2825,7 @@ export interface OpenAccountPage {
     | null;
   homeTrustIndicators?:
     | {
-        icon?: ('Shield' | 'TrendingUp' | 'Users' | 'Award') | null;
+        icon?: string | null;
         title?: string | null;
         description?: string | null;
         id?: string | null;
@@ -3212,6 +3219,7 @@ export interface PagesSelect<T extends boolean = true> {
   leaders?:
     | T
     | {
+        photo?: T;
         name?: T;
         role?: T;
         description?: T;
@@ -3550,6 +3558,7 @@ export interface HomePageSelect<T extends boolean = true> {
   leaders?:
     | T
     | {
+        photo?: T;
         name?: T;
         role?: T;
         description?: T;
@@ -3804,6 +3813,7 @@ export interface AboutPageSelect<T extends boolean = true> {
   leaders?:
     | T
     | {
+        photo?: T;
         name?: T;
         role?: T;
         description?: T;
@@ -4058,6 +4068,7 @@ export interface ServicesPageSelect<T extends boolean = true> {
   leaders?:
     | T
     | {
+        photo?: T;
         name?: T;
         role?: T;
         description?: T;
@@ -4312,6 +4323,7 @@ export interface ContactPageSelect<T extends boolean = true> {
   leaders?:
     | T
     | {
+        photo?: T;
         name?: T;
         role?: T;
         description?: T;
@@ -4566,6 +4578,7 @@ export interface InvestorPageSelect<T extends boolean = true> {
   leaders?:
     | T
     | {
+        photo?: T;
         name?: T;
         role?: T;
         description?: T;
@@ -4820,6 +4833,7 @@ export interface OpenAccountPageSelect<T extends boolean = true> {
   leaders?:
     | T
     | {
+        photo?: T;
         name?: T;
         role?: T;
         description?: T;

@@ -1,4 +1,4 @@
-import { Tab } from 'payload/types';
+import type { Tab } from 'payload';
 
 export const AboutPage: Tab = {
     label: 'About Specifics',
@@ -62,13 +62,12 @@ export const AboutPage: Tab = {
                             fields: [
                                 {
                                     name: 'valueIcon', // Renamed to avoid enum conflict
-                                    type: 'select',
-                                    options: [
-                                        { label: 'Shield (Integrity)', value: 'Shield' },
-                                        { label: 'Award (Compliance)', value: 'Award' },
-                                        { label: 'Users (Client Focus)', value: 'Users' },
-                                        { label: 'Target (Excellence)', value: 'Target' },
-                                    ],
+                                    type: 'text',
+                                    admin: {
+                                        components: {
+                                            Field: '@/components/fields/IconPicker',
+                                        },
+                                    },
                                     defaultValue: 'Shield',
                                     required: true,
                                 },
@@ -102,11 +101,12 @@ export const AboutPage: Tab = {
                             fields: [
                                 {
                                     name: 'licenseIcon', // Renamed to avoid enum conflict
-                                    type: 'select',
-                                    options: [
-                                        { label: 'Shield', value: 'Shield' },
-                                        { label: 'Award', value: 'Award' },
-                                    ],
+                                    type: 'text',
+                                    admin: {
+                                        components: {
+                                            Field: '@/components/fields/IconPicker',
+                                        },
+                                    },
                                     defaultValue: 'Shield',
                                 },
                                 {
@@ -145,6 +145,12 @@ export const AboutPage: Tab = {
                             type: 'array',
                             label: 'Leaders',
                             fields: [
+                                {
+                                    name: 'photo',
+                                    type: 'relationship',
+                                    relationTo: 'media',
+                                    label: 'Leader Photo',
+                                },
                                 {
                                     name: 'name',
                                     type: 'text',

@@ -1,8 +1,8 @@
-import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { MapPin } from "lucide-react";
 import { useState, useEffect } from "react";
-// import { supabase } from '../lib/supabase';
 import { fetchContactPage } from '../lib/cms';
 import { DynamicForm } from "../components/DynamicForm";
+import { LucideIcon } from "../components/LucideIcon";
 
 const DEFAULT_DATA = {
   heroTitle: "Contact Us",
@@ -37,8 +37,6 @@ const DEFAULT_DATA = {
   responseTimeTitle: "Response Time",
   responseTimeDescription: "We strive to respond to all inquiries within 24-48 business hours. For urgent matters during trading hours, please call us directly. For account-related issues, having your account number ready will help us serve you faster."
 };
-
-const IconMap: any = { MapPin, Phone, Mail, Clock };
 
 export default function Contact() {
   const [data, setData] = useState<any>(null);
@@ -90,12 +88,11 @@ export default function Contact() {
               </h2>
               <div className="space-y-6 mb-8">
                 {content.contactMethods.map((method: any, index: number) => {
-                  const Icon = IconMap[method.icon] || MapPin;
                   return (
                     <div key={index} className="flex items-start space-x-4">
                       <div className="flex-shrink-0">
                         <div className="flex items-center justify-center w-12 h-12 bg-blue-100 text-blue-900 rounded-lg">
-                          <Icon className="h-6 w-6" />
+                          <LucideIcon name={method.icon} className="h-6 w-6" size={24} fallback={MapPin} />
                         </div>
                       </div>
                       <div>
