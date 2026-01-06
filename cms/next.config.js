@@ -29,8 +29,12 @@ const nextConfig = {
 
     return webpackConfig
   },
+<<<<<<< HEAD
   reactStrictMode: true,
   devIndicators: false,
+=======
+  reactStrictMode: false,
+>>>>>>> origin/rbb_new
   redirects,
 }
 
