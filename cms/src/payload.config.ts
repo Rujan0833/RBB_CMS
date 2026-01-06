@@ -11,7 +11,8 @@ import { Posts } from './collections/Posts'
 import { Roles } from './collections/Roles'
 import { ContactSubmissions } from './collections/Submissions/ContactSubmissions'
 import { Users } from './collections/Users'
-import { Footer } from './Footer/config'
+import { Foooter } from './Footer/config'
+
 import { Header } from './Header/config'
 import {
   AboutView,
@@ -101,7 +102,7 @@ export default buildConfig({
     'http://localhost:5173',
     'http://localhost:3000',
   ].filter(Boolean),
-  globals: [Header, Footer, SiteSettings, setting],
+  globals: [Header, Foooter, SiteSettings, setting],
   plugins,
   secret: process.env.PAYLOAD_SECRET,
   sharp,

@@ -5528,38 +5528,26 @@ export interface Header {
  */
 export interface Footer {
   id: number;
-  brand: {
-    companyName: string;
-    tagline?: string | null;
-    description?: string | null;
-  };
-  contact?: {
-    phone?: string | null;
-    email?: string | null;
-    address?: string | null;
-  };
-  quickLinks?:
+  navItems?:
     | {
-        label: string;
-        url: string;
+        link: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: number | Page;
+              } | null)
+            | ({
+                relationTo: 'posts';
+                value: number | Post;
+              } | null);
+          url?: string | null;
+          label: string;
+        };
         id?: string | null;
       }[]
     | null;
-  legalLinks?:
-    | {
-        label: string;
-        url: string;
-        id?: string | null;
-      }[]
-    | null;
-  riskDisclaimer?: {
-    title?: string | null;
-    content?: string | null;
-  };
-  bottom?: {
-    copyright?: string | null;
-    licenseInfo?: string | null;
-  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -5641,45 +5629,19 @@ export interface HeaderSelect<T extends boolean = true> {
  * via the `definition` "footer_select".
  */
 export interface FooterSelect<T extends boolean = true> {
-  brand?:
+  navItems?:
     | T
     | {
-        companyName?: T;
-        tagline?: T;
-        description?: T;
-      };
-  contact?:
-    | T
-    | {
-        phone?: T;
-        email?: T;
-        address?: T;
-      };
-  quickLinks?:
-    | T
-    | {
-        label?: T;
-        url?: T;
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+            };
         id?: T;
-      };
-  legalLinks?:
-    | T
-    | {
-        label?: T;
-        url?: T;
-        id?: T;
-      };
-  riskDisclaimer?:
-    | T
-    | {
-        title?: T;
-        content?: T;
-      };
-  bottom?:
-    | T
-    | {
-        copyright?: T;
-        licenseInfo?: T;
       };
   updatedAt?: T;
   createdAt?: T;
