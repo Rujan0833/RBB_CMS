@@ -4,7 +4,7 @@ import { isSuperAdmin } from '../access/isSuperAdmin'
 import { isClientAdmin } from '../access/isClientAdmin'
 
 const isSuperOrClientAdmin: FieldAccess = (args) => {
-    return isSuperAdmin(args as any) || isClientAdmin(args as any)
+    return Boolean(isSuperAdmin(args as any)) || Boolean(isClientAdmin(args as any))
 }
 
 export const Roles: CollectionConfig = {

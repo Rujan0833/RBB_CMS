@@ -260,6 +260,7 @@ export interface Page {
   leadershipTitle?: string | null;
   leaders?:
     | {
+        photo?: (number | null) | Media;
         name: string;
         role: string;
         description?: string | null;
@@ -1147,6 +1148,7 @@ export interface HomePage {
   leadershipTitle?: string | null;
   leaders?:
     | {
+        photo?: (number | null) | Media;
         name: string;
         role: string;
         description?: string | null;
@@ -1447,6 +1449,7 @@ export interface AboutPage {
   leadershipTitle?: string | null;
   leaders?:
     | {
+        photo?: (number | null) | Media;
         name: string;
         role: string;
         description?: string | null;
@@ -1747,6 +1750,7 @@ export interface ServicesPage {
   leadershipTitle?: string | null;
   leaders?:
     | {
+        photo?: (number | null) | Media;
         name: string;
         role: string;
         description?: string | null;
@@ -2047,6 +2051,7 @@ export interface ContactPage {
   leadershipTitle?: string | null;
   leaders?:
     | {
+        photo?: (number | null) | Media;
         name: string;
         role: string;
         description?: string | null;
@@ -2347,6 +2352,7 @@ export interface InvestorPage {
   leadershipTitle?: string | null;
   leaders?:
     | {
+        photo?: (number | null) | Media;
         name: string;
         role: string;
         description?: string | null;
@@ -2647,6 +2653,7 @@ export interface OpenAccountPage {
   leadershipTitle?: string | null;
   leaders?:
     | {
+        photo?: (number | null) | Media;
         name: string;
         role: string;
         description?: string | null;
@@ -3212,6 +3219,7 @@ export interface PagesSelect<T extends boolean = true> {
   leaders?:
     | T
     | {
+        photo?: T;
         name?: T;
         role?: T;
         description?: T;
@@ -3550,6 +3558,7 @@ export interface HomePageSelect<T extends boolean = true> {
   leaders?:
     | T
     | {
+        photo?: T;
         name?: T;
         role?: T;
         description?: T;
@@ -3804,6 +3813,7 @@ export interface AboutPageSelect<T extends boolean = true> {
   leaders?:
     | T
     | {
+        photo?: T;
         name?: T;
         role?: T;
         description?: T;
@@ -4058,6 +4068,7 @@ export interface ServicesPageSelect<T extends boolean = true> {
   leaders?:
     | T
     | {
+        photo?: T;
         name?: T;
         role?: T;
         description?: T;
@@ -4312,6 +4323,7 @@ export interface ContactPageSelect<T extends boolean = true> {
   leaders?:
     | T
     | {
+        photo?: T;
         name?: T;
         role?: T;
         description?: T;
@@ -4566,6 +4578,7 @@ export interface InvestorPageSelect<T extends boolean = true> {
   leaders?:
     | T
     | {
+        photo?: T;
         name?: T;
         role?: T;
         description?: T;
@@ -4820,6 +4833,7 @@ export interface OpenAccountPageSelect<T extends boolean = true> {
   leaders?:
     | T
     | {
+        photo?: T;
         name?: T;
         role?: T;
         description?: T;

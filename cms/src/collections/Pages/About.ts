@@ -1,4 +1,4 @@
-import { Tab } from 'payload/types';
+import type { Tab } from 'payload';
 
 export const AboutPage: Tab = {
     label: 'About Specifics',
@@ -145,6 +145,12 @@ export const AboutPage: Tab = {
                             type: 'array',
                             label: 'Leaders',
                             fields: [
+                                {
+                                    name: 'photo',
+                                    type: 'relationship',
+                                    relationTo: 'media',
+                                    label: 'Leader Photo',
+                                },
                                 {
                                     name: 'name',
                                     type: 'text',
