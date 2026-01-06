@@ -1,40 +1,4 @@
-<<<<<<< HEAD
-import { Link } from 'react-router-dom';
-import { TrendingUp, Mail, Phone, MapPin } from 'lucide-react';
-import { useState, useEffect } from 'react';
-import { getFooter } from '../lib/cms';
-import { NavItem } from '../lib/cms/types';
 
-export default function Footer() {
-  const [navLinks, setNavLinks] = useState<{ path: string; label: string }[]>([]);
-
-  useEffect(() => {
-    const fetchNav = async () => {
-      const footer = await getFooter();
-      if (footer?.navItems) {
-        const mappedLinks = footer.navItems.map((item: NavItem) => {
-          const { link } = item;
-          let path = '/';
-
-          if (link.type === 'reference' && link.reference?.value) {
-            const page = link.reference.value;
-            const slug = typeof page === 'object' ? page.slug : null;
-            path = slug === 'home' ? '/' : `/${slug}`;
-          } else if (link.type === 'custom' && link.url) {
-            path = link.url;
-          }
-
-          return {
-            path,
-            label: link.label
-          };
-        });
-        setNavLinks(mappedLinks);
-      }
-    };
-    fetchNav();
-  }, []);
-=======
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { TrendingUp, Mail, Phone, MapPin } from 'lucide-react'
@@ -97,7 +61,7 @@ useEffect(() => {
   loadFooter()
 }, [])
 
->>>>>>> origin/rbb_new
+
 
   return (
     <footer className="bg-gray-900 text-gray-300">
@@ -141,25 +105,7 @@ useEffect(() => {
           <div>
             <h4 className="text-white font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-2 text-sm">
-<<<<<<< HEAD
-              {navLinks.length > 0 ? (
-                navLinks.map((link) => (
-                  <li key={link.path}>
-                    <Link to={link.path} className="hover:text-white transition-colors">
-                      {link.label}
-                    </Link>
-                  </li>
-                ))
-              ) : (
-                <>
-                  <li><Link to="/about" className="hover:text-white transition-colors">About Us</Link></li>
-                  <li><Link to="/services" className="hover:text-white transition-colors">Services</Link></li>
-                  <li><Link to="/open-account" className="hover:text-white transition-colors">Open Account</Link></li>
-                  <li><Link to="/investor" className="hover:text-white transition-colors">Investor Education</Link></li>
-                  <li><Link to="/contact" className="hover:text-white transition-colors">Contact Us</Link></li>
-                </>
-              )}
-=======
+
               {(footer?.quickLinks || FALLBACK_FOOTER.quickLinks).map((link: any) => (
                 <li key={link.id}>
                   <Link to={link.url} className="hover:text-white transition-colors">
@@ -167,7 +113,7 @@ useEffect(() => {
                   </Link>
                 </li>
               ))}
->>>>>>> origin/rbb_new
+
             </ul>
           </div>
 
