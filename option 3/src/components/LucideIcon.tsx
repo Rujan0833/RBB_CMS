@@ -5,7 +5,7 @@ import {
     BarChart, PieChart, TrendingUp, DollarSign, Wallet, CreditCard, Activity,
     Home, Info, MapPin, Clock, BookOpen, Search, Filter, Monitor, FileText,
     Settings, Star, Zap, Layout, List, UserCheck, Download, Coffee, Heart,
-    CheckCircle2, ArrowRight, Plus
+    CheckCircle2, ArrowRight, Plus, HelpCircle
 } from 'lucide-react';
 
 export const IconMap: Record<string, React.FC<any>> = {
@@ -14,7 +14,7 @@ export const IconMap: Record<string, React.FC<any>> = {
     BarChart, PieChart, TrendingUp, DollarSign, Wallet, CreditCard, Activity,
     Home, Info, MapPin, Clock, BookOpen, Search, Filter, Monitor, FileText,
     Settings, Star, Zap, Layout, List, UserCheck, Download, Coffee, Heart,
-    CheckCircle2, ArrowRight, Plus
+    CheckCircle2, ArrowRight, Plus, HelpCircle
 };
 
 interface LucideIconProps {
@@ -30,14 +30,9 @@ export const LucideIcon: React.FC<LucideIconProps> = ({
     size = 24,
     fallback = HelpCircle // Using a common fallback if icon not found
 }) => {
-    // If HelpCircle is not imported, let's add it or use a default
     const IconComponent = IconMap[name] || fallback || Shield;
 
     return <IconComponent className={className} size={size} />;
 };
-
-// Add HelpCircle to imports if using it as fallback
-import { HelpCircle } from 'lucide-react';
-IconMap['HelpCircle'] = HelpCircle;
 
 export default LucideIcon;

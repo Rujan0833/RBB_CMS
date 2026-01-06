@@ -1,4 +1,4 @@
-import { BookOpen, AlertTriangle, TrendingUp } from 'lucide-react';
+import { BookOpen, AlertTriangle, TrendingUp, HelpCircle } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { fetchInvestorPage } from '../lib/cms';
 import { LucideIcon } from '../components/LucideIcon';
