@@ -1,15 +1,7 @@
-<<<<<<< HEAD
-import { MapPin, Phone, Mail, Clock } from "lucide-react";
-import { useState, useEffect } from "react";
-// import { supabase } from '../lib/supabase';
-import { fetchContactPage } from '../lib/cms';
-import { DynamicForm } from "../components/DynamicForm";
-=======
 import { MapPin, Phone, Mail, Clock, Send } from "lucide-react";
 import { useState, FormEvent, useEffect } from "react";
 import { fetchContactPage } from "../lib/cms";
 import { fetchSiteSettings } from "../lib/api/siteSettings";
->>>>>>> origin/rbb_new
 
 // ----- TypeScript Types -----
 interface ContactMethod {
@@ -55,9 +47,6 @@ const IconMap: Record<string, any> = { MapPin, Phone, Mail, Clock };
 
 // ----- Contact Component -----
 export default function Contact() {
-<<<<<<< HEAD
-  const [data, setData] = useState<any>(null);
-=======
   const [data, setData] = useState<ContactPageData | null>(null);
   const [formData, setFormData] = useState({
     full_name: "",
@@ -68,7 +57,6 @@ export default function Contact() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
->>>>>>> origin/rbb_new
 
   // ----- Fetch CMS page + site settings -----
   useEffect(() => {
@@ -131,8 +119,6 @@ export default function Contact() {
 
   const content = data || DEFAULT_DATA;
 
-<<<<<<< HEAD
-=======
   // ----- Handle form submission -----
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -154,7 +140,6 @@ export default function Contact() {
   };
 
   // ----- Render -----
->>>>>>> origin/rbb_new
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -171,18 +156,6 @@ export default function Contact() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Contact Form */}
             <div>
-<<<<<<< HEAD
-              <h2 className="text-3xl font-bold text-gray-900 mb-8">
-                {content.formTitle}
-              </h2>
-              {content.contactForm?.id ? (
-                <DynamicForm formId={content.contactForm.id} />
-              ) : (
-                <div className="bg-gray-50 border border-gray-200 rounded-lg p-8 text-center">
-                  <p className="text-gray-600 italic">Form is being configured. Please check back soon.</p>
-                </div>
-              )}
-=======
               <h2 className="text-3xl font-bold text-gray-900 mb-8">{content.formTitle}</h2>
               <form onSubmit={handleSubmit} className="space-y-6">
                 {["full_name", "email", "phone", "subject", "message"].map((field) => {
@@ -268,7 +241,6 @@ export default function Contact() {
                   {isSubmitting ? "Sending..." : <><Send className="mr-2 h-5 w-5" />Send Message</>}
                 </button>
               </form>
->>>>>>> origin/rbb_new
             </div>
 
             {/* Contact Info */}
