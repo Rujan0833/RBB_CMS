@@ -30,6 +30,7 @@ export const fetchHomePage = async () => {
     return cmsClient.getHomePage();
 };
 
+
 export const getForm = async (id: string) => {
     return cmsClient.getForm(id);
 };
@@ -38,10 +39,16 @@ export const getHeader = async () => {
     return cmsClient.getHeader();
 };
 
-export const getFooter = async () => {
+export const fetchFooter = async () => {
     return cmsClient.getFooter();
+};
+
+export const fetchSiteSettings = async () => {
+    return cmsClient.getSiteSettings();
 };
 
 export const submitForm = async (formId: string, data: any) => {
     return cmsClient.submitForm(formId, data);
 };
+
+

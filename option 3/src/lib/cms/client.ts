@@ -1,4 +1,4 @@
-import { AboutPage, ServicesPageCmsResponse, CmsResponse, OpenAccountPage, InvestorPage, ContactPage, HomePage, HeaderData, FooterData } from './types';
+import { AboutPage, ServicesPageCmsResponse, CmsResponse, OpenAccountPage, InvestorPage, ContactPage, HomePage, HeaderData, FooterData, SiteSettings } from './types';
 
 export class CmsClient {
     private baseUrl: string;
@@ -318,6 +318,18 @@ export class CmsClient {
             return data as FooterData;
         } catch (error) {
             console.error('Error fetching footer:', error);
+            return null;
+        }
+    }
+
+    public async getSiteSettings(): Promise<SiteSettings | null> {
+        try {
+            const res = await fetch(`${this.baseUrl}/api/globals/site-settings?depth=2`);
+            if (!res.ok) throw new Error('Failed to fetch site settings');
+            const data = await res.json();
+            return data as SiteSettings;
+        } catch (error) {
+            console.error('Error fetching site settings:', error);
             return null;
         }
     }

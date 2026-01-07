@@ -243,6 +243,64 @@ export interface HeaderData {
     navItems?: NavItem[] | null;
 }
 
+export interface SiteSettings {
+    branding?: {
+        siteName?: string;
+        logo?: Media;
+    };
+    office?: {
+        address?: {
+            value: string;
+            icon?: string;
+        };
+        phones?: Array<{
+            number: string;
+            type: 'landline' | 'mobile';
+            id?: string;
+        }>;
+        phoneIcon?: string;
+        emails?: Array<{
+            email: string;
+            type: 'general' | 'support';
+            id?: string;
+        }>;
+        emailIcon?: string;
+        officeHours?: Array<{
+            day: string;
+            time: string;
+            id?: string;
+        }>;
+        officeHoursIcon?: string;
+    };
+}
+
 export interface FooterData {
-    navItems?: NavItem[] | null;
+    brand?: {
+        companyName: string;
+        tagline?: string;
+        description?: string;
+    };
+    contact?: {
+        phone?: string;
+        email?: string;
+        address?: string;
+    };
+    quickLinks?: Array<{
+        label: string;
+        url: string;
+        id?: string;
+    }>;
+    legalLinks?: Array<{
+        label: string;
+        url: string;
+        id?: string;
+    }>;
+    riskDisclaimer?: {
+        title?: string;
+        content?: string;
+    };
+    bottom?: {
+        copyright?: string;
+        licenseInfo?: string;
+    };
 }

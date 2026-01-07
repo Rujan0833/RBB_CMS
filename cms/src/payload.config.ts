@@ -12,6 +12,7 @@ import { Roles } from './collections/Roles'
 import { ContactSubmissions } from './collections/Submissions/ContactSubmissions'
 import { Users } from './collections/Users'
 import { Footer } from './Footer/config'
+
 import { Header } from './Header/config'
 import {
   AboutView,
@@ -24,6 +25,8 @@ import {
 import { plugins } from './plugins'
 import { defaultLexical } from '@/fields/defaultLexical'
 import { getServerSideURL } from './utilities/getURL'
+import { SiteSettings } from './globals/siteSettings'
+import { setting } from './globals/config'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -99,7 +102,7 @@ export default buildConfig({
     'http://localhost:5173',
     'http://localhost:3000',
   ].filter(Boolean),
-  globals: [Header, Footer],
+  globals: [Header, Footer, SiteSettings, setting],
   plugins,
   secret: process.env.PAYLOAD_SECRET,
   sharp,
