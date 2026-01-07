@@ -1,5 +1,5 @@
 import React, { useState, useEffect, FormEvent } from 'react';
-import { Send } from 'lucide-react';
+import { Send, AlertCircle } from 'lucide-react';
 import { getForm, submitForm } from '../lib/cms';
 
 interface DynamicFormProps {
@@ -7,52 +7,78 @@ interface DynamicFormProps {
     onSuccess?: () => void;
 }
 
+// Nepali Phone Regex: 
+// 1. Mobile: 98/97/96 followed by 8 digits. Optional +977 or 977 prefix.
+// 2. Landline: 01 for KTM (7 digits) or 0 followed by area code (6-7 digits).
+const NEPAL_PHONE_REGEX = /^(?:\+977|977|0)?(?:9[678]\d{8}|0\d{1,2}\d{6,7})$/;
+
 export const DynamicForm: React.FC<DynamicFormProps> = ({ formId, onSuccess }) => {
     const [formConfig, setFormConfig] = useState<any>(null);
     const [formData, setFormData] = useState<Record<string, any>>({});
+    const [errors, setErrors] = useState<Record<string, string>>({});
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
     useEffect(() => {
         const loadForm = async () => {
-            console.log('Loading form config for ID:', formId);
             const config = await getForm(formId);
             if (config) {
-                console.log('Form config loaded:', config);
                 setFormConfig(config);
-                // Initialize form data
                 const initialData: Record<string, any> = {};
                 config.fields?.forEach((field: any) => {
                     initialData[field.name] = field.defaultValue || '';
                 });
                 setFormData(initialData);
-            } else {
-                console.error('Failed to load form config');
             }
         };
         loadForm();
     }, [formId]);
 
+    const validate = () => {
+        const newErrors: Record<string, string> = {};
+        formConfig.fields?.forEach((field: any) => {
+            const value = formData[field.name];
+            const isPhone = field.name.toLowerCase().includes('phone') || field.name.toLowerCase().includes('tel');
+
+            // Required check
+            if (field.required && !value) {
+                newErrors[field.name] = `${field.label} is required`;
+            }
+            // Nepali Phone validation
+            else if (isPhone && value) {
+                const cleanValue = value.replace(/\s+/g, ''); // Remove spaces for raw check
+                if (!NEPAL_PHONE_REGEX.test(cleanValue)) {
+                    newErrors[field.name] = 'Please enter a valid Nepali phone number (e.g., 98XXXXXXXX or 01XXXXXXX)';
+                }
+            }
+        });
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
+
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
+
+        // Run validation
+        if (!validate()) {
+            return;
+        }
+
         setIsSubmitting(true);
         setSubmitStatus('idle');
 
-        console.log('Handing submit for formId:', formId);
         const success = await submitForm(formId, formData);
 
         if (success) {
-            console.log('Submission SUCCESSful');
             setSubmitStatus('success');
-            // Reset form
             const resetData: Record<string, any> = {};
             formConfig.fields?.forEach((field: any) => {
                 resetData[field.name] = field.defaultValue || '';
             });
             setFormData(resetData);
+            setErrors({});
             if (onSuccess) onSuccess();
         } else {
-            console.error('Submission FAILED');
             setSubmitStatus('error');
         }
         setIsSubmitting(false);
@@ -66,8 +92,10 @@ export const DynamicForm: React.FC<DynamicFormProps> = ({ formId, onSuccess }) =
         <form onSubmit={handleSubmit} className="space-y-6">
             {formConfig.fields?.map((field: any) => {
                 const id = `field-${field.name}`;
+                const hasError = !!errors[field.name];
+
                 const label = (
-                    <label htmlFor={id} className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor={id} className={`block text-sm font-medium mb-2 ${hasError ? 'text-red-600' : 'text-gray-700'}`}>
                         {field.label} {field.required && '*'}
                     </label>
                 );
@@ -77,10 +105,20 @@ export const DynamicForm: React.FC<DynamicFormProps> = ({ formId, onSuccess }) =
                 const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
                     let value = e.target.value;
                     if (isPhone) {
-                        // Strip everything except digits and + (for country codes)
-                        value = value.replace(/[^0-9+]/g, '');
+                        // Allow only digits, +, and spaces during typing
+                        value = value.replace(/[^0-9+ ]/g, '');
                     }
+
                     setFormData({ ...formData, [field.name]: value });
+
+                    // Clear error when user starts typing again
+                    if (errors[field.name]) {
+                        setErrors(prev => {
+                            const newErrs = { ...prev };
+                            delete newErrs[field.name];
+                            return newErrs;
+                        });
+                    }
                 };
 
                 const commonProps = {
@@ -88,7 +126,10 @@ export const DynamicForm: React.FC<DynamicFormProps> = ({ formId, onSuccess }) =
                     required: field.required,
                     value: formData[field.name] || '',
                     onChange: handleChange,
-                    className: "w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-transparent outline-none transition-colors",
+                    className: `w-full px-4 py-3 border rounded-lg outline-none transition-colors ${hasError
+                            ? 'border-red-500 focus:ring-2 focus:ring-red-200'
+                            : 'border-gray-300 focus:ring-2 focus:ring-blue-900 focus:border-transparent'
+                        }`,
                     placeholder: field.placeholder,
                 };
 
@@ -116,6 +157,12 @@ export const DynamicForm: React.FC<DynamicFormProps> = ({ formId, onSuccess }) =
                                                 'text'
                                 }
                             />
+                        )}
+                        {hasError && (
+                            <div className="mt-2 flex items-center text-red-600 text-sm">
+                                <AlertCircle className="h-4 w-4 mr-1" />
+                                {errors[field.name]}
+                            </div>
                         )}
                     </div>
                 );
