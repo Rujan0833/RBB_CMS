@@ -1,7 +1,8 @@
-import { TrendingUp, Monitor, FileText, PieChart, HelpCircle, ArrowRight } from 'lucide-react';
+import { TrendingUp, HelpCircle, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { fetchServicesPage } from '../lib/cms';
+import { LucideIcon } from '../components/LucideIcon';
 
 const DEFAULT_DATA = {
   heroTitle: "Our Services",
@@ -83,8 +84,6 @@ const DEFAULT_DATA = {
   }
 };
 
-const IconMap: any = { TrendingUp, Monitor, FileText, PieChart, HelpCircle };
-
 export default function Services() {
   const [data, setData] = useState<any>(null);
 
@@ -124,13 +123,12 @@ export default function Services() {
           <div className="space-y-16">
             {content.serviceBlocks.map((block: any, index: number) => {
               const isEven = index % 2 === 0;
-              const Icon = IconMap[block.serviceIcon] || TrendingUp;
 
               return (
                 <div key={index} className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                   <div className={isEven ? "" : "order-1 md:order-2"}>
                     <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 text-blue-900 rounded-xl mb-6">
-                      <Icon className="h-8 w-8" />
+                      <LucideIcon name={block.serviceIcon} className="h-8 w-8" size={32} fallback={TrendingUp} />
                     </div>
                     <h2 className="text-3xl font-bold text-gray-900 mb-4">{block.title}</h2>
                     <p className="text-gray-700 mb-4 leading-relaxed">

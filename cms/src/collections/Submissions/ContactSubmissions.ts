@@ -15,7 +15,7 @@ export const ContactSubmissions: CollectionConfig = {
         group: 'Form Submissions',
         defaultColumns: ['name', 'email', 'subject', 'createdAt'],
         useAsTitle: 'name',
-         listSearchableFields: ['name', 'email', 'subject'],
+        listSearchableFields: ['name', 'email', 'subject'],
     },
     access: {
         read: (args): any => {

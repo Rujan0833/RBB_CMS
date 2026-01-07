@@ -1,6 +1,7 @@
-import { BookOpen, AlertTriangle, HelpCircle, TrendingUp } from 'lucide-react';
+import { BookOpen, AlertTriangle, TrendingUp, HelpCircle } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { fetchInvestorPage } from '../lib/cms';
+import { LucideIcon } from '../components/LucideIcon';
 
 const DEFAULT_DATA = {
   heroTitle: "Investor Education",
@@ -19,13 +20,12 @@ const DEFAULT_DATA = {
           ]
         }
       }
-      // Simplified content structure for default, logic below handles rendering
     },
     {
       title: "Key Trading Concepts",
       icon: "TrendingUp",
       theme: "green",
-      content: {} // Placeholder as default data usually matches hardcode
+      content: {}
     }
   ],
   riskTitle: "Risk Disclaimer",
@@ -91,8 +91,6 @@ const DEFAULT_DATA = {
   commitmentText2: "We strongly encourage all investors to conduct their own research, understand the risks involved, and make investment decisions based on their own financial situation and goals. When in doubt, consult with qualified financial advisors."
 };
 
-const IconMap: any = { BookOpen, TrendingUp, AlertTriangle, HelpCircle };
-
 export default function Education() {
   const [data, setData] = useState<any>(null);
   const [openFAQ, setOpenFAQ] = useState<number | null>(0);
@@ -111,31 +109,17 @@ export default function Education() {
 
   const content = data || DEFAULT_DATA;
 
-  // Helper to render topics content differently if coming from CMS vs Default hardcoded layout
-  // Since we are moving to dynamic, ideally the CMS returns rich text. For now, creating a flexible renderer or keeping hardcoded blocks if using default data
-  // But wait, the default data structure for "content" was simplified above.
-  // Actually, to preserve the exact look of the hardcoded page while allowing dynamic override, we might need to be clever.
-  // Let's keep the hardcoded JSX for the default case if "data" is null, OR assume we map consistently.
-  // Given the complexity of the grid items (Understanding NEPSE Trading vs Key Trading Concepts), 
-  // if CMS data is present, we render that. If not, we render the original hardcoded blocks.
-
   const renderTopics = () => {
     if (data && data.educationTopics && data.educationTopics.length > 0) {
       return data.educationTopics.map((topic: any, index: number) => {
-        const Icon = IconMap[topic.icon] || BookOpen;
         const themeClass = topic.theme === 'green' ? 'from-green-50 to-green-100' : 'from-blue-50 to-blue-100';
         const iconColor = topic.theme === 'green' ? 'text-green-700' : 'text-blue-900';
 
-        // Render RichText content or simple text
-        // If it's complex rich text json, we'd need a serializer. For simplicity, assuming mapped text or basic html
-        // For now, let's dump the content safely or use simple rendering
         return (
           <div key={index} className={`bg-gradient-to-br ${themeClass} rounded-xl p-8`}>
-            <Icon className={`h-12 w-12 ${iconColor} mb-4`} />
+            <LucideIcon name={topic.icon} className={`h-12 w-12 ${iconColor} mb-4`} size={48} fallback={BookOpen} />
             <h2 className="text-2xl font-bold text-gray-900 mb-4">{topic.title}</h2>
             <div className="space-y-3 text-gray-700">
-              {/* CMS rich text renderer would go here. For now, just render text or simple paragraphs */}
-              {/* {JSON.stringify(topic.content)} */}
               <div dangerouslySetInnerHTML={{ __html: topic.content }} />
             </div>
           </div>
@@ -143,11 +127,10 @@ export default function Education() {
       });
     }
 
-    // Fallback to original hardcoded blocks if no CMS data
     return (
       <>
         <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-8">
-          <BookOpen className="h-12 w-12 text-blue-900 mb-4" />
+          <LucideIcon name="BookOpen" className="h-12 w-12 text-blue-900 mb-4" size={48} fallback={BookOpen} />
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Understanding NEPSE Trading</h2>
           <div className="space-y-3 text-gray-700">
             <p className="leading-relaxed">
@@ -167,7 +150,7 @@ export default function Education() {
         </div>
 
         <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-8">
-          <TrendingUp className="h-12 w-12 text-green-700 mb-4" />
+          <LucideIcon name="TrendingUp" className="h-12 w-12 text-green-700 mb-4" size={48} fallback={TrendingUp} />
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Key Trading Concepts</h2>
           <div className="space-y-3 text-gray-700">
             <p className="leading-relaxed">
@@ -208,7 +191,7 @@ export default function Education() {
 
           <div className="bg-red-50 border-2 border-red-200 rounded-xl p-8 mb-12">
             <div className="flex items-start">
-              <AlertTriangle className="h-8 w-8 text-red-600 mt-1 mr-4 flex-shrink-0" />
+              <LucideIcon name="AlertTriangle" className="h-8 w-8 text-red-600 mt-1 mr-4 flex-shrink-0" size={32} fallback={AlertTriangle} />
               <div>
                 <h2 className="text-2xl font-bold text-gray-900 mb-4">{content.riskTitle}</h2>
                 <div className="space-y-3 text-gray-700 leading-relaxed">
@@ -228,7 +211,7 @@ export default function Education() {
       <section className="py-16 bg-gray-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <HelpCircle className="h-12 w-12 text-blue-900 mx-auto mb-4" />
+            <LucideIcon name="HelpCircle" className="h-12 w-12 text-blue-900 mx-auto mb-4" size={48} fallback={HelpCircle} />
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
             <p className="text-gray-600">
               Common questions from new investors in Nepal's stock market

@@ -1,10 +1,9 @@
-import { Tab } from 'payload/types';
+import type { Tab } from 'payload';
 
 export const ContactPage: Tab = {
     label: 'Contact Page',
     admin: {
         condition: (data) => data?.template === 'contact',
-        group: 'Pages',
     },
     fields: [
         {
@@ -58,13 +57,12 @@ export const ContactPage: Tab = {
                             fields: [
                                 {
                                     name: 'icon',
-                                    type: 'select',
-                                    options: [
-                                        { label: 'Map Pin', value: 'MapPin' },
-                                        { label: 'Phone', value: 'Phone' },
-                                        { label: 'Mail', value: 'Mail' },
-                                        { label: 'Clock', value: 'Clock' },
-                                    ],
+                                    type: 'text',
+                                    admin: {
+                                        components: {
+                                            Field: '@/components/fields/IconPicker',
+                                        },
+                                    },
                                     defaultValue: 'MapPin',
                                 },
                                 {

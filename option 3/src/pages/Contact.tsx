@@ -1,8 +1,13 @@
-import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { MapPin } from "lucide-react";
 import { useState, useEffect } from "react";
+<<<<<<< HEAD
 import { fetchContactPage } from "../lib/cms";
 import { fetchSiteSettings } from "../lib/api/siteSettings";
+=======
+import { fetchContactPage } from '../lib/cms';
+>>>>>>> 8674340a20272e7db23eb0cd37efde7496f29bd6
 import { DynamicForm } from "../components/DynamicForm";
+import { LucideIcon } from "../components/LucideIcon";
 
 interface ContactMethod {
   icon: "MapPin" | "Phone" | "Mail" | "Clock";
@@ -42,8 +47,11 @@ const DEFAULT_DATA: ContactPageData = {
   responseTimeDescription: "We strive to respond to all inquiries within 24-48 business hours. For urgent matters during trading hours, please call us directly.",
 };
 
+<<<<<<< HEAD
 const IconMap: Record<string, any> = { MapPin, Phone, Mail, Clock };
 
+=======
+>>>>>>> 8674340a20272e7db23eb0cd37efde7496f29bd6
 export default function Contact() {
   const [data, setData] = useState<ContactPageData>(DEFAULT_DATA);
 
@@ -121,13 +129,17 @@ export default function Contact() {
             <div>
               <h2 className="text-3xl font-bold text-gray-900 mb-8">{data.contactInfoTitle}</h2>
               <div className="space-y-6 mb-8">
+<<<<<<< HEAD
                 {data.contactMethods.map((method, idx) => {
                   const Icon = IconMap[method.icon] || MapPin;
+=======
+                {content.contactMethods.map((method: any, index: number) => {
+>>>>>>> 8674340a20272e7db23eb0cd37efde7496f29bd6
                   return (
                     <div key={idx} className="flex items-start space-x-4">
                       <div className="flex-shrink-0">
                         <div className="flex items-center justify-center w-12 h-12 bg-blue-100 text-blue-900 rounded-lg">
-                          <Icon className="h-6 w-6" />
+                          <LucideIcon name={method.icon} className="h-6 w-6" size={24} fallback={MapPin} />
                         </div>
                       </div>
                       <div>

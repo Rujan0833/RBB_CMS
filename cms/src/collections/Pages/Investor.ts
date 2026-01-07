@@ -1,4 +1,4 @@
-import { Tab } from 'payload/types';
+import type { Tab } from 'payload';
 
 export const InvestorPage: Tab = {
     label: 'Investor Specifics',
@@ -42,11 +42,12 @@ export const InvestorPage: Tab = {
                                 },
                                 {
                                     name: 'icon',
-                                    type: 'select',
-                                    options: [
-                                        { label: 'BookOpen', value: 'BookOpen' },
-                                        { label: 'TrendingUp', value: 'TrendingUp' },
-                                    ],
+                                    type: 'text',
+                                    admin: {
+                                        components: {
+                                            Field: '@/components/fields/IconPicker',
+                                        },
+                                    },
                                     defaultValue: 'BookOpen',
                                 },
                                 {
