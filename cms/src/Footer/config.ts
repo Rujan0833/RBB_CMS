@@ -3,11 +3,9 @@ import { GlobalConfig } from 'payload'
 export const Footer: GlobalConfig = {
   lockDocuments: false,
   slug: 'footer',
-<<<<<<< HEAD
+
   label: 'Footer',
-=======
-  lockDocuments: false,
->>>>>>> 8674340a20272e7db23eb0cd37efde7496f29bd6
+
   access: {
     read: () => true,
   },

@@ -1,6 +1,7 @@
 import { GlobalConfig } from 'payload'
 
 export const SiteSettings: GlobalConfig = {
+  lockDocuments: false,
   slug: 'site-settings',
   label: 'Site Settings',
   access: {
@@ -18,7 +19,7 @@ export const SiteSettings: GlobalConfig = {
       name: 'branding',
       label: 'Branding',
       fields: [
-        { name: 'siteName', type: 'text'},
+        { name: 'siteName', type: 'text' },
         { name: 'logo', type: 'upload', relationTo: 'media' },
       ],
     },
@@ -31,13 +32,33 @@ export const SiteSettings: GlobalConfig = {
       name: 'office',
       label: 'Office Information',
       fields: [
+        // Address
         {
           name: 'address',
-          type: 'textarea',
-          required: true,
+          type: 'group',
           label: 'Office Address',
-          defaultValue: 'New Baneshwor, Kathmandu\nNepal',
+          fields: [
+            { 
+              name: 'value', 
+              type: 'textarea', 
+              required: true, 
+              defaultValue: 'New Baneshwor, Kathmandu\nNepal' 
+            },
+            { 
+              name: 'icon',
+              type: 'text',
+              label: 'Icon',
+              admin: {
+                components: {
+                  Field: '@/components/fields/IconPicker',
+                },
+              },
+              defaultValue: 'MapPin',
+            },
+          ],
         },
+
+        // Phones
         {
           name: 'phones',
           type: 'array',
@@ -49,7 +70,7 @@ export const SiteSettings: GlobalConfig = {
               type: 'select', 
               options: [
                 { label: 'Landline', value: 'landline' },
-                { label: 'Mobile', value: 'mobile' }
+                { label: 'Mobile', value: 'mobile' },
               ], 
               defaultValue: 'landline' 
             },
@@ -59,6 +80,20 @@ export const SiteSettings: GlobalConfig = {
             { number: '+977-9XXXXXXXXX', type: 'mobile' },
           ],
         },
+        // Single Icon for all phones
+        {
+          name: 'phoneIcon',
+          type: 'text',
+          label: 'Phone Icon',
+          admin: {
+            components: {
+              Field: '@/components/fields/IconPicker',
+            },
+          },
+          defaultValue: 'Phone',
+        },
+
+        // Emails
         {
           name: 'emails',
           type: 'array',
@@ -70,7 +105,7 @@ export const SiteSettings: GlobalConfig = {
               type: 'select', 
               options: [
                 { label: 'General', value: 'general' },
-                { label: 'Support', value: 'support' }
+                { label: 'Support', value: 'support' },
               ], 
               defaultValue: 'general' 
             },
@@ -80,6 +115,19 @@ export const SiteSettings: GlobalConfig = {
             { email: 'support@nepalsecurities.com.np', type: 'support' },
           ],
         },
+        {
+          name: 'emailIcon',
+          type: 'text',
+          label: 'Email Icon',
+          admin: {
+            components: {
+              Field: '@/components/fields/IconPicker',
+            },
+          },
+          defaultValue: 'Mail',
+        },
+
+        // Office Hours
         {
           name: 'officeHours',
           type: 'array',
@@ -92,6 +140,17 @@ export const SiteSettings: GlobalConfig = {
             { day: 'Sunday - Thursday', time: '10:00 AM - 5:00 PM' },
             { day: 'Friday - Saturday', time: 'Closed' },
           ],
+        },
+        {
+          name: 'officeHoursIcon',
+          type: 'text',
+          label: 'Office Hours Icon',
+          admin: {
+            components: {
+              Field: '@/components/fields/IconPicker',
+            },
+          },
+          defaultValue: 'Clock',
         },
       ],
     },

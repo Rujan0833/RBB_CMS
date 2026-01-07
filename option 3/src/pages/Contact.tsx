@@ -1,16 +1,11 @@
-import { MapPin } from "lucide-react";
 import { useState, useEffect } from "react";
-<<<<<<< HEAD
 import { fetchContactPage } from "../lib/cms";
 import { fetchSiteSettings } from "../lib/api/siteSettings";
-=======
-import { fetchContactPage } from '../lib/cms';
->>>>>>> 8674340a20272e7db23eb0cd37efde7496f29bd6
 import { DynamicForm } from "../components/DynamicForm";
 import { LucideIcon } from "../components/LucideIcon";
 
 interface ContactMethod {
-  icon: "MapPin" | "Phone" | "Mail" | "Clock";
+  icon: string;
   title: string;
   content: string;
 }
@@ -47,11 +42,6 @@ const DEFAULT_DATA: ContactPageData = {
   responseTimeDescription: "We strive to respond to all inquiries within 24-48 business hours. For urgent matters during trading hours, please call us directly.",
 };
 
-<<<<<<< HEAD
-const IconMap: Record<string, any> = { MapPin, Phone, Mail, Clock };
-
-=======
->>>>>>> 8674340a20272e7db23eb0cd37efde7496f29bd6
 export default function Contact() {
   const [data, setData] = useState<ContactPageData>(DEFAULT_DATA);
 
@@ -62,34 +52,35 @@ export default function Contact() {
         const siteSettings = await fetchSiteSettings();
         const office = siteSettings?.office;
 
-        const mergedData: ContactPageData = {
+        // map contact methods dynamically with icons from siteSettings
+        const contactMethods: ContactMethod[] = [
+          {
+            icon: office?.address?.icon || "MapPin",
+            title: "Office Address",
+            content: office?.address?.value || DEFAULT_DATA.contactMethods[0].content,
+          },
+          {
+            icon: office?.phones?.[0]?.icon || "Phone",
+            title: "Phone",
+            content: office?.phones?.length ? office.phones.map(p => p.number).join("\n") : DEFAULT_DATA.contactMethods[1].content,
+          },
+          {
+            icon: office?.emails?.[0]?.icon || "Mail",
+            title: "Email",
+            content: office?.emails?.length ? office.emails.map(e => e.email).join("\n") : DEFAULT_DATA.contactMethods[2].content,
+          },
+          {
+            icon: office?.officeHours?.[0]?.icon || "Clock",
+            title: "Office Hours",
+            content: office?.officeHours?.length ? office.officeHours.map(o => `${o.day}: ${o.time}`).join("\n") : DEFAULT_DATA.contactMethods[3].content,
+          },
+        ];
+
+        setData({
           ...DEFAULT_DATA,
           ...cmsData,
-          contactMethods: [
-            {
-              icon: "MapPin",
-              title: "Office Address",
-              content: office?.address || DEFAULT_DATA.contactMethods[0].content,
-            },
-            {
-              icon: "Phone",
-              title: "Phone",
-              content: office?.phones?.length ? office.phones.map(p => p.number).join("\n") : DEFAULT_DATA.contactMethods[1].content,
-            },
-            {
-              icon: "Mail",
-              title: "Email",
-              content: office?.emails?.length ? office.emails.map(e => e.email).join("\n") : DEFAULT_DATA.contactMethods[2].content,
-            },
-            {
-              icon: "Clock",
-              title: "Office Hours",
-              content: office?.officeHours?.length ? office.officeHours.map(o => `${o.day}: ${o.time}`).join("\n") : DEFAULT_DATA.contactMethods[3].content,
-            },
-          ],
-        };
-
-        setData(mergedData);
+          contactMethods,
+        });
       } catch (err) {
         console.error("Failed to fetch contact page data:", err);
         setData(DEFAULT_DATA);
@@ -129,26 +120,19 @@ export default function Contact() {
             <div>
               <h2 className="text-3xl font-bold text-gray-900 mb-8">{data.contactInfoTitle}</h2>
               <div className="space-y-6 mb-8">
-<<<<<<< HEAD
-                {data.contactMethods.map((method, idx) => {
-                  const Icon = IconMap[method.icon] || MapPin;
-=======
-                {content.contactMethods.map((method: any, index: number) => {
->>>>>>> 8674340a20272e7db23eb0cd37efde7496f29bd6
-                  return (
-                    <div key={idx} className="flex items-start space-x-4">
-                      <div className="flex-shrink-0">
-                        <div className="flex items-center justify-center w-12 h-12 bg-blue-100 text-blue-900 rounded-lg">
-                          <LucideIcon name={method.icon} className="h-6 w-6" size={24} fallback={MapPin} />
-                        </div>
-                      </div>
-                      <div>
-                        <h3 className="font-semibold text-gray-900 mb-1">{method.title}</h3>
-                        <p className="text-gray-600 whitespace-pre-line">{method.content}</p>
+                {data.contactMethods.map((method, idx) => (
+                  <div key={idx} className="flex items-start space-x-4">
+                    <div className="flex-shrink-0">
+                      <div className="flex items-center justify-center w-12 h-12 bg-blue-100 text-blue-900 rounded-lg">
+                        <LucideIcon name={method.icon} className="h-6 w-6" />
                       </div>
                     </div>
-                  );
-                })}
+                    <div>
+                      <h3 className="font-semibold text-gray-900 mb-1">{method.title}</h3>
+                      <p className="text-gray-600 whitespace-pre-line">{method.content}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
 
               <div className="bg-gray-50 rounded-xl p-6">

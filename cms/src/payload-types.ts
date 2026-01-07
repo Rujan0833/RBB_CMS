@@ -5588,7 +5588,10 @@ export interface SiteSetting {
     logo?: (number | null) | Media;
   };
   office: {
-    address: string;
+    address: {
+      value: string;
+      icon?: string | null;
+    };
     phones?:
       | {
           number: string;
@@ -5596,6 +5599,7 @@ export interface SiteSetting {
           id?: string | null;
         }[]
       | null;
+    phoneIcon?: string | null;
     emails?:
       | {
           email: string;
@@ -5603,6 +5607,7 @@ export interface SiteSetting {
           id?: string | null;
         }[]
       | null;
+    emailIcon?: string | null;
     officeHours?:
       | {
           day: string;
@@ -5610,6 +5615,7 @@ export interface SiteSetting {
           id?: string | null;
         }[]
       | null;
+    officeHoursIcon?: string | null;
   };
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -5713,7 +5719,12 @@ export interface SiteSettingsSelect<T extends boolean = true> {
   office?:
     | T
     | {
-        address?: T;
+        address?:
+          | T
+          | {
+              value?: T;
+              icon?: T;
+            };
         phones?:
           | T
           | {
@@ -5721,6 +5732,7 @@ export interface SiteSettingsSelect<T extends boolean = true> {
               type?: T;
               id?: T;
             };
+        phoneIcon?: T;
         emails?:
           | T
           | {
@@ -5728,6 +5740,7 @@ export interface SiteSettingsSelect<T extends boolean = true> {
               type?: T;
               id?: T;
             };
+        emailIcon?: T;
         officeHours?:
           | T
           | {
@@ -5735,6 +5748,7 @@ export interface SiteSettingsSelect<T extends boolean = true> {
               time?: T;
               id?: T;
             };
+        officeHoursIcon?: T;
       };
   updatedAt?: T;
   createdAt?: T;
