@@ -248,6 +248,7 @@ export interface HeaderData {
 export interface SiteSettings {
     branding?: {
         siteName?: string;
+        siteTagline?: string;
         logo?: Media;
     };
     office?: {

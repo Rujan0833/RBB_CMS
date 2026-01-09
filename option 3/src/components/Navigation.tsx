@@ -1,20 +1,27 @@
 import { Link, useLocation } from 'react-router-dom';
 import { TrendingUp, Menu, X } from 'lucide-react';
 import { useState, useEffect } from 'react';
-import { getHeader } from '../lib/cms';
-import { NavItem } from '../lib/cms/types';
+import { getHeader, fetchSiteSettings, getImageUrl } from '../lib/cms';
+import { NavItem, SiteSettings } from '../lib/cms/types';
 import { useLocale } from '../context/LocaleContext';
 import { LucideIcon } from './LucideIcon';
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [navLinks, setNavLinks] = useState<{ path: string; label: string }[]>([]);
+  const [settings, setSettings] = useState<SiteSettings | null>(null);
   const { locale, toggleLocale } = useLocale();
   const location = useLocation();
 
   useEffect(() => {
-    const fetchNav = async () => {
-      const header = await getHeader(locale);
+    const fetchData = async () => {
+      const [header, siteSettings] = await Promise.all([
+        getHeader(locale),
+        fetchSiteSettings(locale)
+      ]);
+
+      setSettings(siteSettings);
+
       if (header?.navItems) {
         const mappedLinks = header.navItems.map((item: NavItem) => {
           const { link } = item;
@@ -36,7 +43,7 @@ export default function Navigation() {
         setNavLinks(mappedLinks);
       }
     };
-    fetchNav();
+    fetchData();
   }, [locale]);
 
   const isActive = (path: string) => location.pathname === path;
@@ -45,11 +52,23 @@ export default function Navigation() {
     <nav className="bg-white shadow-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <Link to="/" className="flex items-center space-x-2">
-            <TrendingUp className="h-8 w-8 text-blue-900" />
+          <Link to="/" className="flex items-center space-x-2 text-decoration-none">
+            {settings?.branding?.logo?.url ? (
+              <img
+                src={getImageUrl(settings.branding.logo)}
+                alt={settings.branding.logo.alt || ''}
+                className="h-10 w-auto object-contain"
+              />
+            ) : (
+              <TrendingUp className="h-8 w-8 text-blue-900" />
+            )}
             <div className="flex flex-col">
-              <span className="text-xl font-bold text-blue-900">Nepal Securities</span>
-              <span className="text-xs text-gray-600">SEBON Licensed Broker</span>
+              <span className="text-xl font-bold text-blue-900 leading-tight">
+                {settings?.branding?.siteName || 'Nepal Securities'}
+              </span>
+              <span className="text-[10px] sm:text-xs text-gray-500 font-medium tracking-wide uppercase">
+                {settings?.branding?.siteTagline || 'SEBON Licensed Broker'}
+              </span>
             </div>
           </Link>
 

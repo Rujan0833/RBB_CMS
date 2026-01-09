@@ -19,7 +19,8 @@ export const SiteSettings: GlobalConfig = {
       name: 'branding',
       label: 'Branding',
       fields: [
-        { name: 'siteName', type: 'text', localized: true },
+        { name: 'siteName', type: 'text', localized: true, defaultValue: 'Nepal Securities' },
+        { name: 'siteTagline', type: 'text', localized: true, defaultValue: 'SEBON Licensed Broker' },
         { name: 'logo', type: 'upload', relationTo: 'media' },
       ],
     },
@@ -65,7 +66,7 @@ export const SiteSettings: GlobalConfig = {
           type: 'array',
           label: 'Phone Numbers',
           fields: [
-            { name: 'number', type: 'text', required: true },
+            { name: 'number', type: 'text', localized: true, required: true },
             {
               name: 'type',
               type: 'select',
@@ -100,7 +101,7 @@ export const SiteSettings: GlobalConfig = {
           type: 'array',
           label: 'Emails',
           fields: [
-            { name: 'email', type: 'email', required: true },
+            { name: 'email', type: 'email', localized: true, required: true },
             {
               name: 'type',
               type: 'select',

@@ -5613,6 +5613,7 @@ export interface SiteSetting {
   id: number;
   branding?: {
     siteName?: string | null;
+    siteTagline?: string | null;
     logo?: (number | null) | Media;
   };
   office: {
@@ -5742,6 +5743,7 @@ export interface SiteSettingsSelect<T extends boolean = true> {
     | T
     | {
         siteName?: T;
+        siteTagline?: T;
         logo?: T;
       };
   office?:
