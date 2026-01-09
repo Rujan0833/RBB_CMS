@@ -16,9 +16,10 @@ export class CmsClient {
         return '';
     }
 
-    private async fetchCollection<T>(collection: string, query: string = ''): Promise<T | null> {
+    private async fetchCollection<T>(collection: string, query: string = '', locale?: string): Promise<T | null> {
         try {
-            const res = await fetch(`${this.baseUrl}/api/${collection}${query}`);
+            const localeQuery = locale ? `${query.includes('?') ? '&' : '?'}locale=${locale}` : '';
+            const res = await fetch(`${this.baseUrl}/api/${collection}${query}${localeQuery}`);
             if (!res.ok) throw new Error(`Failed to fetch ${collection}`);
             const json = await res.json() as CmsResponse<T>;
             return json.docs?.[0] || null;
@@ -64,8 +65,8 @@ export class CmsClient {
         }
     }
 
-    public async getServicesPage(): Promise<ServicesPageCmsResponse | null> {
-        const page = await this.fetchCollection<any>('pages', '?where[slug][equals]=services&depth=2');
+    public async getServicesPage(locale?: string): Promise<ServicesPageCmsResponse | null> {
+        const page = await this.fetchCollection<any>('pages', '?where[slug][equals]=services&depth=2', locale);
 
         if (!page) return null;
 
@@ -98,8 +99,8 @@ export class CmsClient {
         };
     }
 
-    public async getAboutPage(): Promise<AboutPage | null> {
-        const page = await this.fetchCollection<any>('pages', '?where[slug][equals]=about&depth=2');
+    public async getAboutPage(locale?: string): Promise<AboutPage | null> {
+        const page = await this.fetchCollection<any>('pages', '?where[slug][equals]=about&depth=2', locale);
 
         if (!page) return null;
 
@@ -137,11 +138,11 @@ export class CmsClient {
         };
     }
 
-    public async getInvestorPage(): Promise<InvestorPage | null> {
+    public async getInvestorPage(locale?: string): Promise<InvestorPage | null> {
         try {
-            const page = await this.fetchCollection<any>('pages', '?where[slug][equals]=investor&depth=2')
-                || await this.fetchCollection<any>('pages', '?where[slug][equals]=education&depth=2')
-                || await this.fetchCollection<any>('pages', '?where[template][equals]=investor&depth=2');
+            const page = await this.fetchCollection<any>('pages', '?where[slug][equals]=investor&depth=2', locale)
+                || await this.fetchCollection<any>('pages', '?where[slug][equals]=education&depth=2', locale)
+                || await this.fetchCollection<any>('pages', '?where[template][equals]=investor&depth=2', locale);
 
             if (!page) return null;
 
@@ -176,10 +177,10 @@ export class CmsClient {
         }
     }
 
-    public async getHomePage(): Promise<HomePage | null> {
+    public async getHomePage(locale?: string): Promise<HomePage | null> {
         try {
-            const page = await this.fetchCollection<any>('pages', '?where[slug][equals]=home&depth=2')
-                || await this.fetchCollection<any>('pages', '?where[template][equals]=home&depth=2');
+            const page = await this.fetchCollection<any>('pages', '?where[slug][equals]=home&depth=2', locale)
+                || await this.fetchCollection<any>('pages', '?where[template][equals]=home&depth=2', locale);
 
             if (!page) return null;
 
@@ -213,10 +214,10 @@ export class CmsClient {
         }
     }
 
-    public async getContactPage(): Promise<ContactPage | null> {
+    public async getContactPage(locale?: string): Promise<ContactPage | null> {
         try {
-            const page = await this.fetchCollection<any>('pages', '?where[slug][equals]=contact&depth=2')
-                || await this.fetchCollection<any>('pages', '?where[template][equals]=contact&depth=2');
+            const page = await this.fetchCollection<any>('pages', '?where[slug][equals]=contact&depth=2', locale)
+                || await this.fetchCollection<any>('pages', '?where[template][equals]=contact&depth=2', locale);
 
             if (!page) return null;
 
@@ -245,8 +246,8 @@ export class CmsClient {
         }
     }
 
-    public async getOpenAccountPage(): Promise<OpenAccountPage | null> {
-        const page = await this.fetchCollection<any>('pages', '?where[slug][equals]=open-account&depth=2');
+    public async getOpenAccountPage(locale?: string): Promise<OpenAccountPage | null> {
+        const page = await this.fetchCollection<any>('pages', '?where[slug][equals]=open-account&depth=2', locale);
 
         if (!page) return null;
 
@@ -298,9 +299,10 @@ export class CmsClient {
         }
     }
 
-    public async getHeader(): Promise<HeaderData | null> {
+    public async getHeader(locale?: string): Promise<HeaderData | null> {
         try {
-            const res = await fetch(`${this.baseUrl}/api/globals/header?depth=2`);
+            const localeQuery = locale ? `?locale=${locale}` : '';
+            const res = await fetch(`${this.baseUrl}/api/globals/header?depth=2${localeQuery.replace('?', '&')}`);
             if (!res.ok) throw new Error('Failed to fetch header');
             const data = await res.json();
             return data as HeaderData;
@@ -310,9 +312,10 @@ export class CmsClient {
         }
     }
 
-    public async getFooter(): Promise<FooterData | null> {
+    public async getFooter(locale?: string): Promise<FooterData | null> {
         try {
-            const res = await fetch(`${this.baseUrl}/api/globals/footer?depth=2`);
+            const localeQuery = locale ? `?locale=${locale}` : '';
+            const res = await fetch(`${this.baseUrl}/api/globals/footer?depth=2${localeQuery.replace('?', '&')}`);
             if (!res.ok) throw new Error('Failed to fetch footer');
             const data = await res.json();
             return data as FooterData;
@@ -322,9 +325,10 @@ export class CmsClient {
         }
     }
 
-    public async getSiteSettings(): Promise<SiteSettings | null> {
+    public async getSiteSettings(locale?: string): Promise<SiteSettings | null> {
         try {
-            const res = await fetch(`${this.baseUrl}/api/globals/site-settings?depth=2`);
+            const localeQuery = locale ? `?locale=${locale}` : '';
+            const res = await fetch(`${this.baseUrl}/api/globals/site-settings?depth=2${localeQuery.replace('?', '&')}`);
             if (!res.ok) throw new Error('Failed to fetch site settings');
             const data = await res.json();
             return data as SiteSettings;

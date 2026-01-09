@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { TrendingUp, Mail, Phone, MapPin } from 'lucide-react'
 import { fetchFooter } from '../lib/cms'
+import { useLocale } from '../context/LocaleContext'
 
 /* =====================
    Fallback Footer Data
@@ -46,11 +47,12 @@ const FALLBACK_FOOTER = {
 
 export default function Footer() {
   const [footer, setFooter] = useState<any>(FALLBACK_FOOTER)
+  const { locale } = useLocale()
 
   useEffect(() => {
     const loadFooter = async () => {   // <-- rename this function
       try {
-        const data = await fetchFooter()   // <-- calls the imported API function
+        const data = await fetchFooter(locale)   // <-- calls the imported API function
         setFooter(data)
       } catch (error) {
         console.error('Error fetching footer data:', error)
@@ -58,7 +60,7 @@ export default function Footer() {
     }
 
     loadFooter()
-  }, [])
+  }, [locale])
 
 
 

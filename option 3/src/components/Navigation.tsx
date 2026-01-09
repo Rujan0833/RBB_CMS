@@ -3,15 +3,18 @@ import { TrendingUp, Menu, X } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { getHeader } from '../lib/cms';
 import { NavItem } from '../lib/cms/types';
+import { useLocale } from '../context/LocaleContext';
+import { LucideIcon } from './LucideIcon';
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [navLinks, setNavLinks] = useState<{ path: string; label: string }[]>([]);
+  const { locale, toggleLocale } = useLocale();
   const location = useLocation();
 
   useEffect(() => {
     const fetchNav = async () => {
-      const header = await getHeader();
+      const header = await getHeader(locale);
       if (header?.navItems) {
         const mappedLinks = header.navItems.map((item: NavItem) => {
           const { link } = item;
@@ -34,7 +37,7 @@ export default function Navigation() {
       }
     };
     fetchNav();
-  }, []);
+  }, [locale]);
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -56,13 +59,22 @@ export default function Navigation() {
                 key={link.path}
                 to={link.path}
                 className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${isActive(link.path)
-                    ? 'bg-blue-900 text-white'
-                    : 'text-gray-700 hover:bg-blue-50 hover:text-blue-900'
+                  ? 'bg-blue-900 text-white'
+                  : 'text-gray-700 hover:bg-blue-50 hover:text-blue-900'
                   }`}
               >
                 {link.label}
               </Link>
             ))}
+
+            <button
+              onClick={toggleLocale}
+              className="ml-4 px-3 py-1.5 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-md text-sm font-medium transition-colors flex items-center gap-2"
+            >
+              <LucideIcon name="Languages" size={16} />
+              {locale === 'en' ? 'नेपाली' : 'English'}
+            </button>
+
             <button className="ml-4 px-6 py-2 bg-green-600 text-white rounded-md font-medium hover:bg-green-700 transition-colors">
               Client Login
             </button>
@@ -86,13 +98,25 @@ export default function Navigation() {
                 to={link.path}
                 onClick={() => setIsMenuOpen(false)}
                 className={`block px-3 py-2 rounded-md text-base font-medium ${isActive(link.path)
-                    ? 'bg-blue-900 text-white'
-                    : 'text-gray-700 hover:bg-blue-50 hover:text-blue-900'
+                  ? 'bg-blue-900 text-white'
+                  : 'text-gray-700 hover:bg-blue-50 hover:text-blue-900'
                   }`}
               >
                 {link.label}
               </Link>
             ))}
+
+            <button
+              onClick={() => {
+                toggleLocale();
+                setIsMenuOpen(false);
+              }}
+              className="w-full mt-2 px-3 py-2 bg-gray-100 text-gray-700 rounded-md text-base font-medium flex items-center justify-center gap-2"
+            >
+              <LucideIcon name="Languages" size={18} />
+              {locale === 'en' ? 'नेपाली' : 'English'}
+            </button>
+
             <button className="w-full mt-2 px-3 py-2 bg-green-600 text-white rounded-md font-medium hover:bg-green-700">
               Client Login
             </button>

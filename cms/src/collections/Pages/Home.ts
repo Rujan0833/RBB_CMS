@@ -15,17 +15,20 @@ export const HomePage: Tab = {
                         {
                             name: 'homeHeroBadge',
                             type: 'text',
+                            localized: true,
                             defaultValue: 'SEBON Licensed & NEPSE Member',
                         },
                         {
                             name: 'homeHeroTitle',
                             type: 'text',
+                            localized: true,
                             defaultValue: "Your Trusted Partner in Nepal's Capital Market",
                             required: false,
                         },
                         {
                             name: 'homeHeroDescription',
                             type: 'textarea',
+                            localized: true,
                             defaultValue: 'Navigate the Nepal Stock Exchange with confidence. Professional brokerage services for retail and institutional investors.',
                             required: false,
                         },
@@ -49,11 +52,13 @@ export const HomePage: Tab = {
                                 {
                                     name: 'title',
                                     type: 'text',
+                                    localized: true,
                                     required: false,
                                 },
                                 {
                                     name: 'subtitle',
                                     type: 'text',
+                                    localized: true,
                                 },
                             ],
                         },
@@ -82,11 +87,13 @@ export const HomePage: Tab = {
                                 {
                                     name: 'title',
                                     type: 'text',
+                                    localized: true,
                                     required: false,
                                 },
                                 {
                                     name: 'description',
                                     type: 'text',
+                                    localized: true,
                                 },
                             ],
                         },
@@ -98,11 +105,13 @@ export const HomePage: Tab = {
                         {
                             name: 'homeServicesTitle',
                             type: 'text',
+                            localized: true,
                             defaultValue: 'Our Services',
                         },
                         {
                             name: 'homeServicesDescription',
                             type: 'textarea',
+                            localized: true,
                             defaultValue: 'Comprehensive brokerage services designed for Nepali investors',
                         },
                         {
@@ -115,11 +124,13 @@ export const HomePage: Tab = {
                                 {
                                     name: 'title',
                                     type: 'text',
+                                    localized: true,
                                     required: false,
                                 },
                                 {
                                     name: 'description',
                                     type: 'textarea',
+                                    localized: true,
                                     required: false,
                                 },
                             ],
@@ -132,16 +143,19 @@ export const HomePage: Tab = {
                         {
                             name: 'homeCtaTitle',
                             type: 'text',
+                            localized: true,
                             defaultValue: 'Ready to Start Trading?',
                         },
                         {
                             name: 'homeCtaDescription',
                             type: 'textarea',
+                            localized: true,
                             defaultValue: 'Open your trading account today and get access to Nepal\'s capital market',
                         },
                         {
                             name: 'homeCtaButtonText',
                             type: 'text',
+                            localized: true,
                             defaultValue: 'Open Trading Account',
                         },
                     ],
