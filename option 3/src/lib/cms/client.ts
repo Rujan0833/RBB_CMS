@@ -164,6 +164,8 @@ export class CmsClient {
                     question: f.question,
                     answer: f.answer
                 })) || [],
+                faqTitle: page.investorFaqTitle,
+                faqDescription: page.investorFaqDescription,
                 practicesTitle: page.practicesTitle,
                 practicesDos: page.practicesDos?.map((d: any) => d.text) || [],
                 practicesDonts: page.practicesDonts?.map((d: any) => d.text) || [],
@@ -216,21 +218,66 @@ export class CmsClient {
 
     public async getContactPage(locale?: string): Promise<ContactPage | null> {
         try {
-            const page = await this.fetchCollection<any>('pages', '?where[slug][equals]=contact&depth=2', locale)
-                || await this.fetchCollection<any>('pages', '?where[template][equals]=contact&depth=2', locale);
+            const [page, settings] = await Promise.all([
+                this.fetchCollection<any>('pages', '?where[slug][equals]=contact&depth=2', locale)
+                || this.fetchCollection<any>('pages', '?where[template][equals]=contact&depth=2', locale),
+                this.getSiteSettings(locale)
+            ]);
 
             if (!page) return null;
+
+            // Map Site Settings office info to contact methods
+            const contactMethods = [];
+            if (settings?.office) {
+                const { office } = settings;
+
+                // Address
+                if (office.address) {
+                    contactMethods.push({
+                        icon: office.address.icon || 'MapPin',
+                        title: locale === 'ne' ? 'कार्यालयको ठेगाना' : 'Office Address',
+                        content: office.address.value
+                    });
+                }
+
+                // Phone
+                if (office.phones?.length && office.phones.length > 0) {
+                    contactMethods.push({
+                        icon: office.phoneIcon || 'Phone',
+                        title: locale === 'ne' ? 'फोन' : 'Phone',
+                        content: office.phones.map((p: any) => p.number).join('\n')
+                    });
+                }
+
+                // Email
+                if (office.emails?.length && office.emails.length > 0) {
+                    contactMethods.push({
+                        icon: office.emailIcon || 'Mail',
+                        title: locale === 'ne' ? 'इमेल' : 'Email',
+                        content: office.emails.map((e: any) => e.email).join('\n')
+                    });
+                }
+
+                // Office Hours
+                if (office.officeHours?.length && office.officeHours.length > 0) {
+                    contactMethods.push({
+                        icon: office.officeHoursIcon || 'Clock',
+                        title: locale === 'ne' ? 'कार्यालय समय' : 'Office Hours',
+                        content: office.officeHours.map((h: any) => `${h.day}: ${h.time}`).join('\n')
+                    });
+                }
+            }
 
             return {
                 heroTitle: page.contactHeroTitle,
                 heroDescription: page.contactHeroDescription,
                 formTitle: page.contactFormTitle,
                 contactInfoTitle: page.contactInfoTitle,
-                contactMethods: page.contactMethods?.map((m: any) => ({
+                contactMethods: contactMethods.length > 0 ? contactMethods : (page.contactMethods?.map((m: any) => ({
                     icon: m.icon,
                     title: m.title,
                     content: m.content
-                })) || [],
+                })) || []),
                 visitOfficeTitle: page.visitOfficeTitle,
                 visitOfficeDescription: page.visitOfficeDescription,
                 visitOfficeMapUrl: page.visitOfficeMapUrl,
@@ -288,9 +335,10 @@ export class CmsClient {
         };
     }
 
-    public async getForm(id: string): Promise<any> {
+    public async getForm(id: string, locale?: string): Promise<any> {
         try {
-            const res = await fetch(`${this.baseUrl}/api/forms/${id}`);
+            const localeQuery = locale ? `?locale=${locale}` : '';
+            const res = await fetch(`${this.baseUrl}/api/forms/${id}${localeQuery}`);
             if (!res.ok) throw new Error('Failed to fetch form');
             return await res.json();
         } catch (error) {

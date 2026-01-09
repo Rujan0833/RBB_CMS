@@ -2,6 +2,7 @@ import { BookOpen, AlertTriangle, TrendingUp, HelpCircle } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { fetchInvestorPage } from '../lib/cms';
 import { LucideIcon } from '../components/LucideIcon';
+import { useLocale } from '../context/LocaleContext';
 
 const DEFAULT_DATA = {
   heroTitle: "Investor Education",
@@ -94,10 +95,11 @@ const DEFAULT_DATA = {
 export default function Education() {
   const [data, setData] = useState<any>(null);
   const [openFAQ, setOpenFAQ] = useState<number | null>(0);
+  const { locale } = useLocale();
 
   useEffect(() => {
     const loadData = async () => {
-      const cmsData = await fetchInvestorPage();
+      const cmsData = await fetchInvestorPage(locale);
       if (cmsData) {
         setData({ ...DEFAULT_DATA, ...cmsData });
       } else {
@@ -105,7 +107,7 @@ export default function Education() {
       }
     };
     loadData();
-  }, []);
+  }, [locale]);
 
   const content = data || DEFAULT_DATA;
 
@@ -212,9 +214,11 @@ export default function Education() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <LucideIcon name="HelpCircle" className="h-12 w-12 text-blue-900 mx-auto mb-4" size={48} fallback={HelpCircle} />
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              {content.faqTitle || "Frequently Asked Questions"}
+            </h2>
             <p className="text-gray-600">
-              Common questions from new investors in Nepal's stock market
+              {content.faqDescription || "Common questions from new investors in Nepal's stock market"}
             </p>
           </div>
 

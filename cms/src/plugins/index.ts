@@ -66,9 +66,16 @@ export const plugins: Plugin[] = [
     formOverrides: {
       fields: ({ defaultFields }) => {
         return defaultFields.map((field) => {
+          if ('name' in field && ['title', 'submitButtonLabel'].includes(field.name)) {
+            return {
+              ...field,
+              localized: true,
+            }
+          }
           if ('name' in field && field.name === 'confirmationMessage') {
             return {
               ...field,
+              localized: true,
               editor: lexicalEditor({
                 features: ({ rootFeatures }) => {
                   return [
@@ -78,6 +85,37 @@ export const plugins: Plugin[] = [
                   ]
                 },
               }),
+            }
+          }
+          if ('name' in field && field.name === 'fields') {
+            return {
+              ...field,
+              blocks: field.blocks?.map((block: any) => ({
+                ...block,
+                fields: block.fields?.map((f: any) => {
+                  if (['label', 'placeholder', 'defaultValue', 'errorMessage'].includes(f.name)) {
+                    return {
+                      ...f,
+                      localized: true,
+                    }
+                  }
+                  if (f.name === 'options') {
+                    return {
+                      ...f,
+                      fields: f.fields?.map((optionField: any) => {
+                        if (optionField.name === 'label') {
+                          return {
+                            ...optionField,
+                            localized: true,
+                          }
+                        }
+                        return optionField
+                      })
+                    }
+                  }
+                  return f
+                })
+              }))
             }
           }
           return field

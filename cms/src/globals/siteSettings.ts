@@ -19,7 +19,7 @@ export const SiteSettings: GlobalConfig = {
       name: 'branding',
       label: 'Branding',
       fields: [
-        { name: 'siteName', type: 'text' },
+        { name: 'siteName', type: 'text', localized: true },
         { name: 'logo', type: 'upload', relationTo: 'media' },
       ],
     },
@@ -38,13 +38,14 @@ export const SiteSettings: GlobalConfig = {
           type: 'group',
           label: 'Office Address',
           fields: [
-            { 
-              name: 'value', 
-              type: 'textarea', 
-              required: true, 
-              defaultValue: 'New Baneshwor, Kathmandu\nNepal' 
+            {
+              name: 'value',
+              type: 'textarea',
+              localized: true,
+              required: true,
+              defaultValue: 'New Baneshwor, Kathmandu\nNepal'
             },
-            { 
+            {
               name: 'icon',
               type: 'text',
               label: 'Icon',
@@ -65,14 +66,14 @@ export const SiteSettings: GlobalConfig = {
           label: 'Phone Numbers',
           fields: [
             { name: 'number', type: 'text', required: true },
-            { 
-              name: 'type', 
-              type: 'select', 
+            {
+              name: 'type',
+              type: 'select',
               options: [
                 { label: 'Landline', value: 'landline' },
                 { label: 'Mobile', value: 'mobile' },
-              ], 
-              defaultValue: 'landline' 
+              ],
+              defaultValue: 'landline'
             },
           ],
           defaultValue: [
@@ -100,14 +101,14 @@ export const SiteSettings: GlobalConfig = {
           label: 'Emails',
           fields: [
             { name: 'email', type: 'email', required: true },
-            { 
-              name: 'type', 
-              type: 'select', 
+            {
+              name: 'type',
+              type: 'select',
               options: [
                 { label: 'General', value: 'general' },
                 { label: 'Support', value: 'support' },
-              ], 
-              defaultValue: 'general' 
+              ],
+              defaultValue: 'general'
             },
           ],
           defaultValue: [
@@ -133,8 +134,8 @@ export const SiteSettings: GlobalConfig = {
           type: 'array',
           label: 'Office Hours',
           fields: [
-            { name: 'day', type: 'text', required: true },
-            { name: 'time', type: 'text', required: true },
+            { name: 'day', type: 'text', localized: true, required: true },
+            { name: 'time', type: 'text', localized: true, required: true },
           ],
           defaultValue: [
             { day: 'Sunday - Thursday', time: '10:00 AM - 5:00 PM' },

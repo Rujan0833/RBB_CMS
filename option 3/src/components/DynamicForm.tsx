@@ -1,6 +1,7 @@
 import React, { useState, useEffect, FormEvent } from 'react';
 import { Send, AlertCircle } from 'lucide-react';
 import { getForm, submitForm } from '../lib/cms';
+import { useLocale } from '../context/LocaleContext';
 
 interface DynamicFormProps {
     formId: string;
@@ -18,10 +19,11 @@ export const DynamicForm: React.FC<DynamicFormProps> = ({ formId, onSuccess }) =
     const [errors, setErrors] = useState<Record<string, string>>({});
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+    const { locale } = useLocale();
 
     useEffect(() => {
         const loadForm = async () => {
-            const config = await getForm(formId);
+            const config = await getForm(formId, locale);
             if (config) {
                 setFormConfig(config);
                 const initialData: Record<string, any> = {};
@@ -32,7 +34,7 @@ export const DynamicForm: React.FC<DynamicFormProps> = ({ formId, onSuccess }) =
             }
         };
         loadForm();
-    }, [formId]);
+    }, [formId, locale]);
 
     const validate = () => {
         const newErrors: Record<string, string> = {};
@@ -42,13 +44,17 @@ export const DynamicForm: React.FC<DynamicFormProps> = ({ formId, onSuccess }) =
 
             // Required check
             if (field.required && !value) {
-                newErrors[field.name] = `${field.label} is required`;
+                newErrors[field.name] = locale === 'ne'
+                    ? `${field.label} अनिवार्य छ`
+                    : `${field.label} is required`;
             }
             // Nepali Phone validation
             else if (isPhone && value) {
                 const cleanValue = value.replace(/\s+/g, ''); // Remove spaces for raw check
                 if (!NEPAL_PHONE_REGEX.test(cleanValue)) {
-                    newErrors[field.name] = 'Please enter a valid Nepali phone number (e.g., 98XXXXXXXX or 01XXXXXXX)';
+                    newErrors[field.name] = locale === 'ne'
+                        ? 'कृपया एक मान्य नेपाली फोन नम्बर प्रविष्ट गर्नुहोस् (उदा: ९८XXXXXXXX वा ०१XXXXXXX)'
+                        : 'Please enter a valid Nepali phone number (e.g., 98XXXXXXXX or 01XXXXXXX)';
                 }
             }
         });
@@ -127,8 +133,8 @@ export const DynamicForm: React.FC<DynamicFormProps> = ({ formId, onSuccess }) =
                     value: formData[field.name] || '',
                     onChange: handleChange,
                     className: `w-full px-4 py-3 border rounded-lg outline-none transition-colors ${hasError
-                            ? 'border-red-500 focus:ring-2 focus:ring-red-200'
-                            : 'border-gray-300 focus:ring-2 focus:ring-blue-900 focus:border-transparent'
+                        ? 'border-red-500 focus:ring-2 focus:ring-red-200'
+                        : 'border-gray-300 focus:ring-2 focus:ring-blue-900 focus:border-transparent'
                         }`,
                     placeholder: field.placeholder,
                 };
@@ -140,7 +146,7 @@ export const DynamicForm: React.FC<DynamicFormProps> = ({ formId, onSuccess }) =
                             <textarea {...commonProps} rows={6} className={`${commonProps.className} resize-none`} />
                         ) : field.blockType === 'select' ? (
                             <select {...commonProps}>
-                                <option value="">Select an option</option>
+                                <option value="">{locale === 'ne' ? 'एउटा विकल्प छान्नुहोस्' : 'Select an option'}</option>
                                 {field.options?.map((opt: any) => (
                                     <option key={opt.value} value={opt.value}>
                                         {opt.label}
@@ -173,7 +179,7 @@ export const DynamicForm: React.FC<DynamicFormProps> = ({ formId, onSuccess }) =
                     <p className="text-green-800 font-medium">
                         {typeof formConfig.confirmationMessage === 'string'
                             ? formConfig.confirmationMessage
-                            : "Thank you! Your submission has been received."}
+                            : (locale === 'ne' ? "धन्यवाद! तपाईंको विवरण प्राप्त भयो।" : "Thank you! Your submission has been received.")}
                     </p>
                 </div>
             )}
@@ -181,7 +187,9 @@ export const DynamicForm: React.FC<DynamicFormProps> = ({ formId, onSuccess }) =
             {submitStatus === "error" && (
                 <div className="bg-red-50 border border-red-200 rounded-lg p-4">
                     <p className="text-red-800 font-medium">
-                        Something went wrong. Please try again or contact us directly.
+                        {locale === 'ne'
+                            ? "केही गलत भयो। कृपया फेरि प्रयास गर्नुहोस् वा हामीलाई सिधै सम्पर्क गर्नुहोस्।"
+                            : "Something went wrong. Please try again or contact us directly."}
                     </p>
                 </div>
             )}
@@ -192,11 +200,11 @@ export const DynamicForm: React.FC<DynamicFormProps> = ({ formId, onSuccess }) =
                 className="w-full flex items-center justify-center px-8 py-4 bg-blue-900 text-white font-semibold rounded-lg hover:bg-blue-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
                 {isSubmitting ? (
-                    "Sending..."
+                    locale === 'ne' ? "पठाउँदै..." : "Sending..."
                 ) : (
                     <>
                         <Send className="mr-2 h-5 w-5" />
-                        {formConfig.submitButtonLabel || "Send Message"}
+                        {formConfig.submitButtonLabel || (locale === 'ne' ? "सन्देश पठाउनुहोस्" : "Send Message")}
                     </>
                 )}
             </button>

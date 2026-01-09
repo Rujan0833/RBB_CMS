@@ -15,12 +15,14 @@ export const InvestorPage: Tab = {
                         {
                             name: 'investorHeroTitle',
                             type: 'text',
+                            localized: true,
                             defaultValue: 'Investor Education',
                             required: false,
                         },
                         {
                             name: 'investorHeroDescription',
                             type: 'textarea',
+                            localized: true,
                             defaultValue: 'Learn the basics of stock market investing in Nepal and make informed decisions',
                             required: false,
                         },
@@ -38,6 +40,7 @@ export const InvestorPage: Tab = {
                                 {
                                     name: 'title',
                                     type: 'text',
+                                    localized: true,
                                     required: false,
                                 },
                                 {
@@ -62,6 +65,7 @@ export const InvestorPage: Tab = {
                                 {
                                     name: 'content',
                                     type: 'richText',
+                                    localized: true,
                                     label: 'Content',
                                 },
                             ],
@@ -74,6 +78,7 @@ export const InvestorPage: Tab = {
                         {
                             name: 'riskTitle',
                             type: 'text',
+                            localized: true,
                             defaultValue: 'Risk Disclaimer',
                         },
                         {
@@ -84,11 +89,13 @@ export const InvestorPage: Tab = {
                                 {
                                     name: 'title',
                                     type: 'text',
+                                    localized: true,
                                     label: 'Bold Title (Optional)',
                                 },
                                 {
                                     name: 'text',
                                     type: 'textarea',
+                                    localized: true,
                                     required: false,
                                 },
                             ],
@@ -99,6 +106,18 @@ export const InvestorPage: Tab = {
                     label: 'FAQs',
                     fields: [
                         {
+                            name: 'investorFaqTitle',
+                            type: 'text',
+                            localized: true,
+                            defaultValue: 'Frequently Asked Questions',
+                        },
+                        {
+                            name: 'investorFaqDescription',
+                            type: 'textarea',
+                            localized: true,
+                            defaultValue: "Common questions from new investors in Nepal's stock market",
+                        },
+                        {
                             name: 'investorFaqs',
                             type: 'array',
                             label: 'Frequently Asked Questions',
@@ -106,11 +125,13 @@ export const InvestorPage: Tab = {
                                 {
                                     name: 'question',
                                     type: 'text',
+                                    localized: true,
                                     required: false,
                                 },
                                 {
                                     name: 'answer',
                                     type: 'textarea',
+                                    localized: true,
                                     required: false,
                                 },
                             ],
@@ -123,6 +144,7 @@ export const InvestorPage: Tab = {
                         {
                             name: 'practicesTitle',
                             type: 'text',
+                            localized: true,
                             defaultValue: 'Investment Best Practices',
                         },
                         {
@@ -133,6 +155,7 @@ export const InvestorPage: Tab = {
                                 {
                                     name: 'text',
                                     type: 'text',
+                                    localized: true,
                                 },
                             ],
                         },
@@ -144,6 +167,7 @@ export const InvestorPage: Tab = {
                                 {
                                     name: 'text',
                                     type: 'text',
+                                    localized: true,
                                 },
                             ],
                         },
@@ -155,15 +179,18 @@ export const InvestorPage: Tab = {
                         {
                             name: 'investorCommitmentTitle',
                             type: 'text',
+                            localized: true,
                             defaultValue: 'Our Educational Commitment',
                         },
                         {
                             name: 'investorCommitmentText1',
                             type: 'textarea',
+                            localized: true,
                         },
                         {
                             name: 'investorCommitmentText2',
                             type: 'textarea',
+                            localized: true,
                         },
                     ],
                 },

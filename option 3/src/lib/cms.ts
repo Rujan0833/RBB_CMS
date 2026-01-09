@@ -31,9 +31,7 @@ export const fetchHomePage = async (locale?: string) => {
 };
 
 
-export const getForm = async (id: string) => {
-    return cmsClient.getForm(id);
-};
+export const getForm = (id: string, locale?: string) => cmsClient.getForm(id, locale);
 
 export const getHeader = async (locale?: string) => {
     return cmsClient.getHeader(locale);
