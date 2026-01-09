@@ -164,6 +164,8 @@ export class CmsClient {
                     question: f.question,
                     answer: f.answer
                 })) || [],
+                faqTitle: page.investorFaqTitle,
+                faqDescription: page.investorFaqDescription,
                 practicesTitle: page.practicesTitle,
                 practicesDos: page.practicesDos?.map((d: any) => d.text) || [],
                 practicesDonts: page.practicesDonts?.map((d: any) => d.text) || [],

@@ -215,6 +215,8 @@ export interface InvestorPage {
     riskTitle: string;
     riskItems: RiskItem[];
     faqs: InvestorFAQ[];
+    faqTitle?: string;
+    faqDescription?: string;
     practicesTitle: string;
     practicesDos: string[];
     practicesDonts: string[];

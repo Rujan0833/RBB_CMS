@@ -400,6 +400,8 @@ export interface Page {
         id?: string | null;
       }[]
     | null;
+  investorFaqTitle?: string | null;
+  investorFaqDescription?: string | null;
   investorFaqs?:
     | {
         question?: string | null;
@@ -1288,6 +1290,8 @@ export interface HomePage {
         id?: string | null;
       }[]
     | null;
+  investorFaqTitle?: string | null;
+  investorFaqDescription?: string | null;
   investorFaqs?:
     | {
         question?: string | null;
@@ -1589,6 +1593,8 @@ export interface AboutPage {
         id?: string | null;
       }[]
     | null;
+  investorFaqTitle?: string | null;
+  investorFaqDescription?: string | null;
   investorFaqs?:
     | {
         question?: string | null;
@@ -1890,6 +1896,8 @@ export interface ServicesPage {
         id?: string | null;
       }[]
     | null;
+  investorFaqTitle?: string | null;
+  investorFaqDescription?: string | null;
   investorFaqs?:
     | {
         question?: string | null;
@@ -2191,6 +2199,8 @@ export interface ContactPage {
         id?: string | null;
       }[]
     | null;
+  investorFaqTitle?: string | null;
+  investorFaqDescription?: string | null;
   investorFaqs?:
     | {
         question?: string | null;
@@ -2492,6 +2502,8 @@ export interface InvestorPage {
         id?: string | null;
       }[]
     | null;
+  investorFaqTitle?: string | null;
+  investorFaqDescription?: string | null;
   investorFaqs?:
     | {
         question?: string | null;
@@ -2793,6 +2805,8 @@ export interface OpenAccountPage {
         id?: string | null;
       }[]
     | null;
+  investorFaqTitle?: string | null;
+  investorFaqDescription?: string | null;
   investorFaqs?:
     | {
         question?: string | null;
@@ -3344,6 +3358,8 @@ export interface PagesSelect<T extends boolean = true> {
         text?: T;
         id?: T;
       };
+  investorFaqTitle?: T;
+  investorFaqDescription?: T;
   investorFaqs?:
     | T
     | {
@@ -3683,6 +3699,8 @@ export interface HomePageSelect<T extends boolean = true> {
         text?: T;
         id?: T;
       };
+  investorFaqTitle?: T;
+  investorFaqDescription?: T;
   investorFaqs?:
     | T
     | {
@@ -3938,6 +3956,8 @@ export interface AboutPageSelect<T extends boolean = true> {
         text?: T;
         id?: T;
       };
+  investorFaqTitle?: T;
+  investorFaqDescription?: T;
   investorFaqs?:
     | T
     | {
@@ -4193,6 +4213,8 @@ export interface ServicesPageSelect<T extends boolean = true> {
         text?: T;
         id?: T;
       };
+  investorFaqTitle?: T;
+  investorFaqDescription?: T;
   investorFaqs?:
     | T
     | {
@@ -4448,6 +4470,8 @@ export interface ContactPageSelect<T extends boolean = true> {
         text?: T;
         id?: T;
       };
+  investorFaqTitle?: T;
+  investorFaqDescription?: T;
   investorFaqs?:
     | T
     | {
@@ -4703,6 +4727,8 @@ export interface InvestorPageSelect<T extends boolean = true> {
         text?: T;
         id?: T;
       };
+  investorFaqTitle?: T;
+  investorFaqDescription?: T;
   investorFaqs?:
     | T
     | {
@@ -4958,6 +4984,8 @@ export interface OpenAccountPageSelect<T extends boolean = true> {
         text?: T;
         id?: T;
       };
+  investorFaqTitle?: T;
+  investorFaqDescription?: T;
   investorFaqs?:
     | T
     | {

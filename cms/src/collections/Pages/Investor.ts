@@ -106,6 +106,18 @@ export const InvestorPage: Tab = {
                     label: 'FAQs',
                     fields: [
                         {
+                            name: 'investorFaqTitle',
+                            type: 'text',
+                            localized: true,
+                            defaultValue: 'Frequently Asked Questions',
+                        },
+                        {
+                            name: 'investorFaqDescription',
+                            type: 'textarea',
+                            localized: true,
+                            defaultValue: "Common questions from new investors in Nepal's stock market",
+                        },
+                        {
                             name: 'investorFaqs',
                             type: 'array',
                             label: 'Frequently Asked Questions',
