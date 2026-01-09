@@ -25,9 +25,9 @@ export const Footer: GlobalConfig = {
               name: 'brand',
               type: 'group',
               fields: [
-                { name: 'companyName', type: 'text', required: true },
-                { name: 'tagline', type: 'text' },
-                { name: 'description', type: 'textarea' },
+                { name: 'companyName', type: 'text', localized: true, required: true },
+                { name: 'tagline', type: 'text', localized: true },
+                { name: 'description', type: 'textarea', localized: true },
               ],
             },
           ],
@@ -61,7 +61,7 @@ export const Footer: GlobalConfig = {
               name: 'quickLinks',
               type: 'array',
               fields: [
-                { name: 'label', type: 'text', required: true },
+                { name: 'label', type: 'text', localized: true, required: true },
                 { name: 'url', type: 'text', required: true },
               ],
             },
@@ -78,7 +78,7 @@ export const Footer: GlobalConfig = {
               name: 'legalLinks',
               type: 'array',
               fields: [
-                { name: 'label', type: 'text', required: true },
+                { name: 'label', type: 'text', localized: true, required: true },
                 { name: 'url', type: 'text', required: true },
               ],
             },
@@ -98,11 +98,13 @@ export const Footer: GlobalConfig = {
                 {
                   name: 'title',
                   type: 'text',
+                  localized: true,
                   defaultValue: 'Risk Disclaimer',
                 },
                 {
                   name: 'content',
                   type: 'textarea',
+                  localized: true,
                 },
               ],
             },
@@ -119,8 +121,8 @@ export const Footer: GlobalConfig = {
               name: 'bottom',
               type: 'group',
               fields: [
-                { name: 'copyright', type: 'text' },
-                { name: 'licenseInfo', type: 'text' },
+                { name: 'copyright', type: 'text', localized: true },
+                { name: 'licenseInfo', type: 'text', localized: true },
               ],
             },
           ],

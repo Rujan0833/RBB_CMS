@@ -16,6 +16,7 @@ export const AboutPage: Tab = {
                             name: 'heroTitle',
                             type: 'text',
                             label: 'Hero Title',
+                            localized: true,
                             defaultValue: 'About Nepal Securities',
                             required: true,
                         },
@@ -23,6 +24,7 @@ export const AboutPage: Tab = {
                             name: 'heroDescription',
                             type: 'textarea',
                             label: 'Hero Description',
+                            localized: true,
                             defaultValue: "A trusted name in Nepal's capital market, dedicated to empowering investors with professional brokerage services.",
                             required: true,
                         },
@@ -35,12 +37,14 @@ export const AboutPage: Tab = {
                             name: 'whoWeAreTitle',
                             type: 'text',
                             label: 'Section Title',
+                            localized: true,
                             defaultValue: 'Who We Are',
                         },
                         {
                             name: 'whoWeAreContent',
                             type: 'richText', // Using RichText to allow multiple paragraphs/formatting
                             label: 'Content',
+                            localized: true,
                         },
                     ],
                 },
@@ -51,6 +55,7 @@ export const AboutPage: Tab = {
                             name: 'valuesTitle',
                             type: 'text',
                             label: 'Section Title',
+                            localized: true,
                             defaultValue: 'Our Values',
                         },
                         {
@@ -74,11 +79,13 @@ export const AboutPage: Tab = {
                                 {
                                     name: 'title',
                                     type: 'text',
+                                    localized: true,
                                     required: true,
                                 },
                                 {
                                     name: 'description',
                                     type: 'textarea',
+                                    localized: true,
                                     required: true,
                                 },
                             ],
@@ -92,6 +99,7 @@ export const AboutPage: Tab = {
                             name: 'complianceTitle',
                             type: 'text',
                             label: 'Section Title',
+                            localized: true,
                             defaultValue: 'License & Regulatory Compliance',
                         },
                         {
@@ -112,20 +120,24 @@ export const AboutPage: Tab = {
                                 {
                                     name: 'title',
                                     type: 'text',
+                                    localized: true,
                                     required: true,
                                 },
                                 {
                                     name: 'description',
                                     type: 'textarea',
+                                    localized: true,
                                     required: true,
                                 },
                                 {
                                     name: 'licenseIdLabel', // e.g. "License No" or "Member ID"
                                     type: 'text',
+                                    localized: true,
                                 },
                                 {
                                     name: 'licenseIdValue', // e.g. "XXX/XXX"
                                     type: 'text',
+                                    localized: true,
                                 },
                             ],
                         },
@@ -138,6 +150,7 @@ export const AboutPage: Tab = {
                             name: 'leadershipTitle',
                             type: 'text',
                             label: 'Section Title',
+                            localized: true,
                             defaultValue: 'Our Leadership',
                         },
                         {
@@ -154,16 +167,19 @@ export const AboutPage: Tab = {
                                 {
                                     name: 'name',
                                     type: 'text',
+                                    localized: true,
                                     required: true,
                                 },
                                 {
                                     name: 'role',
                                     type: 'text',
+                                    localized: true,
                                     required: true,
                                 },
                                 {
                                     name: 'description',
                                     type: 'textarea',
+                                    localized: true,
                                 },
                             ],
                         },
@@ -175,11 +191,13 @@ export const AboutPage: Tab = {
                         {
                             name: 'commitmentTitle',
                             type: 'text',
+                            localized: true,
                             defaultValue: 'Our Commitment to You',
                         },
                         {
                             name: 'commitmentDescription',
                             type: 'textarea',
+                            localized: true,
                             required: false,
                         },
                     ],

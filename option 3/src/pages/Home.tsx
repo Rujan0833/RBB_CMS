@@ -3,6 +3,7 @@ import { ArrowRight, Shield, CheckCircle2 } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { fetchHomePage } from '../lib/cms';
 import { LucideIcon } from '../components/LucideIcon';
+import { useLocale } from '../context/LocaleContext';
 
 const DEFAULT_DATA = {
   heroBadge: "SEBON Licensed & NEPSE Member",
@@ -70,10 +71,11 @@ const DEFAULT_DATA = {
 
 export default function Home() {
   const [data, setData] = useState<any>(null);
+  const { locale } = useLocale();
 
   useEffect(() => {
     const loadData = async () => {
-      const cmsData = await fetchHomePage();
+      const cmsData = await fetchHomePage(locale);
       if (cmsData) {
         setData({ ...DEFAULT_DATA, ...cmsData });
       } else {
@@ -81,7 +83,7 @@ export default function Home() {
       }
     };
     loadData();
-  }, []);
+  }, [locale]);
 
   const content = data || DEFAULT_DATA;
 

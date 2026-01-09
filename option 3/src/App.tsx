@@ -8,24 +8,28 @@ import OpenAccount from './pages/OpenAccount';
 import Education from './pages/Education';
 import Contact from './pages/Contact';
 
+import { LocaleProvider } from './context/LocaleContext';
+
 function App() {
   return (
-    <Router>
-      <div className="min-h-screen flex flex-col">
-        <Navigation />
-        <main className="flex-grow">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/open-account" element={<OpenAccount />} />
-            <Route path="/investor" element={<Education />} />
-            <Route path="/contact" element={<Contact />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
-    </Router>
+    <LocaleProvider>
+      <Router>
+        <div className="min-h-screen flex flex-col">
+          <Navigation />
+          <main className="flex-grow">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/open-account" element={<OpenAccount />} />
+              <Route path="/investor" element={<Education />} />
+              <Route path="/contact" element={<Contact />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
+      </Router>
+    </LocaleProvider>
   );
 }
 
