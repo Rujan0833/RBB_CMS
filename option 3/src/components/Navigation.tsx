@@ -16,7 +16,7 @@ export default function Navigation() {
  useEffect(() => {
   const fetchNav = async () => {
     //important
-    const sitedata = await fetchSiteSettings();
+    const sitedata = await fetchSiteSettings(locale);
     setSitename(sitedata);
     document.title = sitedata?.branding?.siteName || 'Nepal Securities';
 

@@ -1,9 +1,15 @@
 // lib/api/siteSettings.ts
 import axios from "axios";
 
-export const fetchSiteSettings = async () => {
+export const fetchSiteSettings = async (locale = 'en') => {
   const res = await axios.get(
-    `${import.meta.env.VITE_CMS_URL}/api/globals/site-settings`
+    `${import.meta.env.VITE_CMS_URL}/api/globals/site-settings`,
+    {
+      params: {
+        locale,
+        'fallback-locale': 'en',
+      },
+    }
   );
   return res.data;
 };

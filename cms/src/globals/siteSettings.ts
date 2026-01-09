@@ -19,8 +19,8 @@ export const SiteSettings: GlobalConfig = {
       name: 'branding',
       label: 'Branding',
       fields: [
-        { name: 'siteName', type: 'text' },
-        { name: 'subSiteName', type: 'text'},
+        { name: 'siteName', type: 'text', localized: true },
+        { name: 'subSiteName', type: 'text', localized: true },
         { name: 'logo', type: 'upload', relationTo: 'media' },
       ],
     },
@@ -43,7 +43,8 @@ export const SiteSettings: GlobalConfig = {
               name: 'value', 
               type: 'textarea', 
               required: true, 
-              defaultValue: 'New Baneshwor, Kathmandu\nNepal' 
+              defaultValue: 'New Baneshwor, Kathmandu\nNepal',
+              localized: true 
             },
             { 
               name: 'icon',

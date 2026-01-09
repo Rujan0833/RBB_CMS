@@ -10,12 +10,12 @@ export const fetchAboutPage = async () => {
     return cmsClient.getAboutPage();
 };
 
-export const fetchServicesPage = async () => {
-    return cmsClient.getServicesPage();
+export const fetchServicesPage = async (locale: 'en' | 'ne') => {
+    return cmsClient.getServicesPage(locale);
 };
 
-export const fetchOpenAccountPage = async () => {
-    return cmsClient.getOpenAccountPage();
+export const fetchOpenAccountPage = async (locale: 'en' | 'ne') => {
+    return cmsClient.getOpenAccountPage(locale);
 };
 
 export const fetchInvestorPage = async () => {

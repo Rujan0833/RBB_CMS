@@ -64,8 +64,8 @@ export class CmsClient {
         }
     }
 
-    public async getServicesPage(): Promise<ServicesPageCmsResponse | null> {
-        const page = await this.fetchCollection<any>('pages', '?where[slug][equals]=services&depth=2');
+    public async getServicesPage(locale?: string): Promise<ServicesPageCmsResponse | null> {
+        const page = await this.fetchCollection<any>('pages', `?where[slug][equals]=services&depth=2&locale=${locale}&fallback-locale=en`);
 
         if (!page) return null;
 
@@ -258,8 +258,8 @@ export class CmsClient {
         }
     }
 
-    public async getOpenAccountPage(): Promise<OpenAccountPage | null> {
-        const page = await this.fetchCollection<any>('pages', '?where[slug][equals]=open-account&depth=2');
+    public async getOpenAccountPage(locale: 'en' | 'ne'): Promise<OpenAccountPage | null> {
+        const page = await this.fetchCollection<any>('pages', `?where[slug][equals]=open-account&depth=2&locale=${locale}&fallback-locale=en`);
 
         if (!page) return null;
 
