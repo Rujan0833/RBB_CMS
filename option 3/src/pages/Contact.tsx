@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { fetchContactPage } from '../lib/cms';
 import { DynamicForm } from "../components/DynamicForm";
 import { LucideIcon } from "../components/LucideIcon";
+import { useLocale } from "../context/LocaleContext";
 
 const DEFAULT_DATA = {
   heroTitle: "Contact Us",
@@ -40,10 +41,11 @@ const DEFAULT_DATA = {
 
 export default function Contact() {
   const [data, setData] = useState<any>(null);
+  const { locale } = useLocale();
 
   useEffect(() => {
     const loadData = async () => {
-      const cmsData = await fetchContactPage();
+      const cmsData = await fetchContactPage(locale);
       if (cmsData) {
         setData({ ...DEFAULT_DATA, ...cmsData });
       } else {
@@ -51,7 +53,7 @@ export default function Contact() {
       }
     };
     loadData();
-  }, []);
+  }, [locale]);
 
   const content = data || DEFAULT_DATA;
 

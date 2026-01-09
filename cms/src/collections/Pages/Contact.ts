@@ -15,12 +15,14 @@ export const ContactPage: Tab = {
                         {
                             name: 'contactHeroTitle',
                             type: 'text',
+                            localized: true,
                             defaultValue: 'Contact Us',
                             required: true,
                         },
                         {
                             name: 'contactHeroDescription',
                             type: 'textarea',
+                            localized: true,
                             defaultValue: 'Get in touch with our team for any queries or assistance',
                             required: true,
                         },
@@ -32,6 +34,7 @@ export const ContactPage: Tab = {
                         {
                             name: 'contactFormTitle',
                             type: 'text',
+                            localized: true,
                             defaultValue: 'Send us a Message',
                         },
                         {
@@ -48,12 +51,16 @@ export const ContactPage: Tab = {
                         {
                             name: 'contactInfoTitle',
                             type: 'text',
+                            localized: true,
                             defaultValue: 'Contact Information',
                         },
                         {
                             name: 'contactMethods',
                             type: 'array',
-                            label: 'Contact Details',
+                            label: 'Contact Details (Managed in Site Settings)',
+                            admin: {
+                                hidden: true,
+                            },
                             fields: [
                                 {
                                     name: 'icon',
@@ -68,6 +75,7 @@ export const ContactPage: Tab = {
                                 {
                                     name: 'title',
                                     type: 'text',
+                                    localized: true,
                                     required: true,
                                 },
                                 {
@@ -82,6 +90,7 @@ export const ContactPage: Tab = {
                                     // Nepal
                                     // simple textarea is fine, we can render newlines.
                                     type: 'textarea',
+                                    localized: true,
                                     required: true,
                                 },
                             ],
@@ -94,11 +103,13 @@ export const ContactPage: Tab = {
                         {
                             name: 'visitOfficeTitle',
                             type: 'text',
+                            localized: true,
                             defaultValue: 'Visit Our Office',
                         },
                         {
                             name: 'visitOfficeDescription',
                             type: 'textarea',
+                            localized: true,
                             defaultValue: 'We welcome you to visit our office for account opening, document submission, or any queries. Our team is ready to assist you.',
                         },
                         {
@@ -114,11 +125,13 @@ export const ContactPage: Tab = {
                         {
                             name: 'responseTimeTitle',
                             type: 'text',
+                            localized: true,
                             defaultValue: 'Response Time',
                         },
                         {
                             name: 'responseTimeDescription',
                             type: 'textarea',
+                            localized: true,
                             defaultValue: 'We strive to respond to all inquiries within 24-48 business hours. For urgent matters during trading hours, please call us directly.',
                         },
                     ],

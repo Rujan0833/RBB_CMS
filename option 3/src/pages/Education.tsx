@@ -2,6 +2,7 @@ import { BookOpen, AlertTriangle, TrendingUp, HelpCircle } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { fetchInvestorPage } from '../lib/cms';
 import { LucideIcon } from '../components/LucideIcon';
+import { useLocale } from '../context/LocaleContext';
 
 const DEFAULT_DATA = {
   heroTitle: "Investor Education",
@@ -94,10 +95,11 @@ const DEFAULT_DATA = {
 export default function Education() {
   const [data, setData] = useState<any>(null);
   const [openFAQ, setOpenFAQ] = useState<number | null>(0);
+  const { locale } = useLocale();
 
   useEffect(() => {
     const loadData = async () => {
-      const cmsData = await fetchInvestorPage();
+      const cmsData = await fetchInvestorPage(locale);
       if (cmsData) {
         setData({ ...DEFAULT_DATA, ...cmsData });
       } else {
@@ -105,7 +107,7 @@ export default function Education() {
       }
     };
     loadData();
-  }, []);
+  }, [locale]);
 
   const content = data || DEFAULT_DATA;
 
