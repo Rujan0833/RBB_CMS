@@ -9,10 +9,18 @@ export const fetchSiteSettings = async () => {
 };
 
 
-export const fetchFooter = async () => {
-   const res = await axios.get(
-     `${import.meta.env.VITE_CMS_URL}/api/globals/footer?depth=2`
-        );
-        return res.data;
-};
+export const fetchFooter = async (locale = 'en') => {
+  const res = await axios.get(
+    `${import.meta.env.VITE_CMS_URL}/api/globals/footer`,
+    {
+      params: {
+        depth: 2,
+        locale,
+        'fallback-locale': 'en',
+      },
+    }
+  )
+  return res.data
+}
+
 

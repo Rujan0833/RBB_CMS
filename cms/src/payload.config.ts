@@ -31,9 +31,40 @@ import { setting } from './globals/config'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
+
+const iconUrl= process.env.ICON_URL || 'http://localhost:3000/api/media/file/light.png'
+const darkIconUrl= process.env.DARK_ICON_URL || 'http://localhost:3000/api/media/file/dark.png'
+
+
 export default buildConfig({
+
+  localization: {
+    locales: ['en', 'ne'], // English + Nepali
+    defaultLocale: 'en',
+    fallback: true,
+  },
+
   admin: {
+
+
+      meta: {
+      title: 'Nepal Securities',
+      titleSuffix: 'welcome',
+
+      icons: [
+        {
+          fetchPriority: 'high',
+          sizes: '32x32',
+          rel: 'icon',
+          type: 'image/png',
+          url: iconUrl,
+        },
+      ],
+    },
+
     components: {
+      graphics: { Logo: '/graphics/logo/index.tsx#Logos',
+                  Icon: '/graphics/icon/index.tsx#Icons' },
       // The `BeforeLogin` component renders a message that you see while logging into your admin panel.
       // Feel free to delete this at any time. Simply remove the line below.
       beforeLogin: ['@/components/BeforeLogin'],

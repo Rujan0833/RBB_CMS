@@ -1,6 +1,7 @@
 import type { Tab } from 'payload';
 
 export const HomePage: Tab = {
+
     label: 'Home Page',
     admin: {
         condition: (data) => data?.template === 'home',
@@ -15,17 +16,20 @@ export const HomePage: Tab = {
                         {
                             name: 'homeHeroBadge',
                             type: 'text',
+                        
                             defaultValue: 'SEBON Licensed & NEPSE Member',
                         },
                         {
                             name: 'homeHeroTitle',
                             type: 'text',
+
                             defaultValue: "Your Trusted Partner in Nepal's Capital Market",
                             required: false,
                         },
                         {
                             name: 'homeHeroDescription',
                             type: 'textarea',
+                            
                             defaultValue: 'Navigate the Nepal Stock Exchange with confidence. Professional brokerage services for retail and institutional investors.',
                             required: false,
                         },

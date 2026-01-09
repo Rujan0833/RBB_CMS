@@ -26,8 +26,8 @@ export const fetchContactPage = async () => {
     return cmsClient.getContactPage();
 };
 
-export const fetchHomePage = async () => {
-    return cmsClient.getHomePage();
+export const fetchHomePage = async (locale: 'en' | 'ne') => {
+  return cmsClient.getHomePage(locale);
 };
 
 
@@ -35,8 +35,8 @@ export const getForm = async (id: string) => {
     return cmsClient.getForm(id);
 };
 
-export const getHeader = async () => {
-    return cmsClient.getHeader();
+export const getHeader = async (locale: 'en' | 'ne') => {
+    return cmsClient.getHeader(locale);
 };
 
 

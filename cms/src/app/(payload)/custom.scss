@@ -1,0 +1,29 @@
+/* 1. Set the size for ALL logos/icons regardless of theme */
+.light-mode-logo, .dark-mode-logo {
+  width: 150px !important; /* Set your desired Login Logo width */
+  height: 80px !important;
+}
+
+.light-mode-icon, .dark-mode-icon {
+  width: 0px !important; /* Set your desired Sidebar Icon width */
+  height: auto !important;
+}
+
+/* 2. Toggle visibility based on theme */
+/* Hide Light Logo when in Dark Mode */
+html[data-theme='dark'] .light-mode-logo,
+html[data-theme='dark'] .light-mode-icon {
+  display: none !important;
+}
+
+/* Hide Dark Logo when in Light Mode */
+html[data-theme='light'] .dark-mode-logo,
+html[data-theme='light'] .dark-mode-icon {
+  display: none !important;
+}
+
+/* Fallback: Hide Dark Logo if no theme is detected yet */
+html:not([data-theme]) .dark-mode-logo {
+  display: none !important;
+}
+

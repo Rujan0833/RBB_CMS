@@ -176,42 +176,55 @@ export class CmsClient {
         }
     }
 
-    public async getHomePage(): Promise<HomePage | null> {
+    //home
+    public async getHomePage(locale: string = 'en'): Promise<HomePage | null> {
         try {
-            const page = await this.fetchCollection<any>('pages', '?where[slug][equals]=home&depth=2')
-                || await this.fetchCollection<any>('pages', '?where[template][equals]=home&depth=2');
+            // Include the locale and fallback-locale in query params
+            const queryParams = `?where[slug][equals]=home&depth=2&locale=${locale}&fallback-locale=en`;
 
-            if (!page) return null;
+            // Fetch page by slug
+            let page = await this.fetchCollection<any>('pages', queryParams);
+
+            // Fallback: fetch by template if slug doesn't exist
+            if (!page || page.length === 0) {
+                const templateQuery = `?where[template][equals]=home&depth=2&locale=${locale}&fallback-locale=en`;
+                page = await this.fetchCollection<any>('pages', templateQuery);
+            }
+
+            if (!page || page.length === 0) return null;
+
+            const homePage = page[0]; // Payload returns an array
 
             return {
-                heroBadge: page.homeHeroBadge,
-                heroTitle: page.homeHeroTitle,
-                heroDescription: page.homeHeroDescription,
-                heroFeatures: page.homeHeroFeatures?.map((f: any) => ({
+                heroBadge: homePage.homeHeroBadge,
+                heroTitle: homePage.homeHeroTitle,
+                heroDescription: homePage.homeHeroDescription,
+                heroFeatures: homePage.homeHeroFeatures?.map((f: any) => ({
                     icon: f.icon,
                     title: f.title,
                     subtitle: f.subtitle
                 })) || [],
-                trustIndicators: page.homeTrustIndicators?.map((t: any) => ({
+                trustIndicators: homePage.homeTrustIndicators?.map((t: any) => ({
                     icon: t.icon,
                     title: t.title,
                     description: t.description
                 })) || [],
-                servicesTitle: page.homeServicesTitle,
-                servicesDescription: page.homeServicesDescription,
-                servicePreviews: page.homeServicePreviews?.map((s: any) => ({
+                servicesTitle: homePage.homeServicesTitle,
+                servicesDescription: homePage.homeServicesDescription,
+                servicePreviews: homePage.homeServicePreviews?.map((s: any) => ({
                     title: s.title,
                     description: s.description
                 })) || [],
-                ctaTitle: page.homeCtaTitle,
-                ctaDescription: page.homeCtaDescription,
-                ctaButtonText: page.homeCtaButtonText
+                ctaTitle: homePage.homeCtaTitle,
+                ctaDescription: homePage.homeCtaDescription,
+                ctaButtonText: homePage.homeCtaButtonText
             };
         } catch (error) {
             console.error('Error fetching Home page:', error);
             return null;
         }
     }
+
 
     public async getContactPage(): Promise<ContactPage | null> {
         try {
@@ -298,9 +311,9 @@ export class CmsClient {
         }
     }
 
-    public async getHeader(): Promise<HeaderData | null> {
+    public async getHeader(locale: 'en' | 'ne'): Promise<HeaderData | null> {
         try {
-            const res = await fetch(`${this.baseUrl}/api/globals/header?depth=2`);
+            const res = await fetch(`${this.baseUrl}/api/globals/header?depth=2&locale=${locale}&fallback-locale=en`);
             if (!res.ok) throw new Error('Failed to fetch header');
             const data = await res.json();
             return data as HeaderData;
@@ -309,6 +322,9 @@ export class CmsClient {
             return null;
         }
     }
+
+    
+
 
     public async getFooter(): Promise<FooterData | null> {
         try {

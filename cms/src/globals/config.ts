@@ -2,6 +2,7 @@ import { GlobalConfig } from "payload";
 
 
 export const setting: GlobalConfig = {
+  lockDocuments: false,
   slug: "setting",
   label: "Icon Settings",
   admin: {

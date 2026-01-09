@@ -2,6 +2,7 @@ import { Shield, Users } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { fetchAboutPage, getImageUrl } from '../lib/cms';
 import { LucideIcon } from '../components/LucideIcon';
+import { useLocale } from '../context/LocaleContext';
 
 // Fallback data (existing hardcoded content)
 const DEFAULT_DATA = {
@@ -37,6 +38,7 @@ const DEFAULT_DATA = {
 
 export default function About() {
   const [data, setData] = useState<any>(null);
+  
 
   useEffect(() => {
     const loadData = async () => {

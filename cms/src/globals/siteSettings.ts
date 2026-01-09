@@ -20,6 +20,7 @@ export const SiteSettings: GlobalConfig = {
       label: 'Branding',
       fields: [
         { name: 'siteName', type: 'text' },
+        { name: 'subSiteName', type: 'text'},
         { name: 'logo', type: 'upload', relationTo: 'media' },
       ],
     },
@@ -63,6 +64,7 @@ export const SiteSettings: GlobalConfig = {
           name: 'phones',
           type: 'array',
           label: 'Phone Numbers',
+          
           fields: [
             { name: 'number', type: 'text', required: true },
             { 
