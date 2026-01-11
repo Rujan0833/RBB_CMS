@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { fetchServicesPage } from '../lib/cms';
 import { LucideIcon } from '../components/LucideIcon';
+import { useLocale } from '../context/LocaleContext';
 
 const DEFAULT_DATA = {
   heroTitle: "Our Services",
@@ -86,10 +87,11 @@ const DEFAULT_DATA = {
 
 export default function Services() {
   const [data, setData] = useState<any>(null);
+  const { locale } = useLocale();
 
   useEffect(() => {
     const loadData = async () => {
-      const cmsData = await fetchServicesPage();
+      const cmsData = await fetchServicesPage(locale);
       if (cmsData) {
         setData({
           heroTitle: cmsData.heroTitle || DEFAULT_DATA.heroTitle,
@@ -103,7 +105,7 @@ export default function Services() {
       }
     };
     loadData();
-  }, []);
+  }, [locale]);
 
   const content = data || DEFAULT_DATA;
 
