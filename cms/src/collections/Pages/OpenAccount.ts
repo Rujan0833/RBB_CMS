@@ -15,12 +15,14 @@ export const OpenAccountPage: Tab = {
                         {
                             name: 'openAccountHeroTitle',
                             type: 'text',
+                            localized: true,
                             defaultValue: 'Open a Trading Account',
                             required: false,
                         },
                         {
                             name: 'openAccountHeroDescription',
                             type: 'textarea',
+                            localized: true,
                             defaultValue: 'Start your investment journey with a simple, straightforward account opening process',
                             required: false,
                         },
@@ -32,11 +34,13 @@ export const OpenAccountPage: Tab = {
                         {
                             name: 'openAccountProcessTitle',
                             type: 'text',
+                            localized: true,
                             defaultValue: 'Step-by-Step Process',
                         },
                         {
                             name: 'openAccountProcessDescription',
                             type: 'textarea',
+                            localized: true,
                             defaultValue: "Follow these simple steps to open your trading account and start investing in Nepal's stock market",
                         },
                         {
@@ -48,16 +52,19 @@ export const OpenAccountPage: Tab = {
                                 {
                                     name: 'stepNumber',
                                     type: 'text',
+                                    localized: true,
                                     required: false,
                                 },
                                 {
                                     name: 'title',
                                     type: 'text',
+                                    localized: true,
                                     required: false,
                                 },
                                 {
                                     name: 'description',
                                     type: 'textarea',
+                                    localized: true,
                                     required: false,
                                 },
                                 {
@@ -78,6 +85,7 @@ export const OpenAccountPage: Tab = {
                                         {
                                             name: 'text',
                                             type: 'text',
+                                            localized: true,
                                         }
                                     ]
                                 }
@@ -91,11 +99,13 @@ export const OpenAccountPage: Tab = {
                         {
                             name: 'downloadsTitle',
                             type: 'text',
+                            localized: true,
                             defaultValue: 'Download Forms',
                         },
                         {
                             name: 'downloadsDescription',
                             type: 'textarea',
+                            localized: true,
                             defaultValue: 'Download and review our account opening forms before your visit',
                         },
                         {
@@ -106,11 +116,13 @@ export const OpenAccountPage: Tab = {
                                 {
                                     name: 'title',
                                     type: 'text',
+                                    localized: true,
                                     required: false,
                                 },
                                 {
                                     name: 'description',
                                     type: 'text',
+                                    localized: true,
                                 },
                                 {
                                     name: 'link',
@@ -137,16 +149,19 @@ export const OpenAccountPage: Tab = {
                         {
                             name: 'contactTitle',
                             type: 'text',
+                            localized: true,
                             defaultValue: 'Have Questions?',
                         },
                         {
                             name: 'contactDescription',
                             type: 'textarea',
+                            localized: true,
                             defaultValue: 'Our team is ready to help you through the account opening process. Contact us today!',
                         },
                         {
                             name: 'contactCtaText',
                             type: 'text',
+                            localized: true,
                             defaultValue: 'Contact Us',
                         },
                         {
@@ -157,6 +172,7 @@ export const OpenAccountPage: Tab = {
                         {
                             name: 'learnMoreText',
                             type: 'text',
+                            localized: true,
                             defaultValue: 'Learn More',
                         },
                         {
@@ -167,6 +183,7 @@ export const OpenAccountPage: Tab = {
                         {
                             name: 'infoTitle',
                             type: 'text',
+                            localized: true,
                             defaultValue: 'Important Information',
                         },
                         {
@@ -177,6 +194,7 @@ export const OpenAccountPage: Tab = {
                                 {
                                     name: 'text',
                                     type: 'textarea',
+                                    localized: true,
                                 }
                             ]
                         }

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { fetchOpenAccountPage } from '../lib/cms';
 import { LucideIcon } from '../components/LucideIcon';
+import { useLocale } from '../context/LocaleContext';
 
 const DEFAULT_DATA = {
   heroTitle: "Open a Trading Account",
@@ -99,10 +100,11 @@ const DEFAULT_DATA = {
 
 export default function OpenAccount() {
   const [data, setData] = useState<any>(null);
+  const { locale } = useLocale();
 
   useEffect(() => {
     const loadData = async () => {
-      const cmsData = await fetchOpenAccountPage();
+      const cmsData = await fetchOpenAccountPage(locale);
       if (cmsData) {
         setData({
           ...DEFAULT_DATA,
@@ -113,7 +115,7 @@ export default function OpenAccount() {
       }
     };
     loadData();
-  }, []);
+  }, [locale]);
 
   const content = data || DEFAULT_DATA;
 
